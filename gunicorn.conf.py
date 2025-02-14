@@ -31,7 +31,7 @@ secure_scheme_headers = {
 limit_request_line = 4094
 limit_request_fields = 100
 limit_request_field_size = 8190
-proxy_allow_ips = ['127.0.0.1', '*']
+proxy_allow_ips = '127.0.0.1,*'
 proxy_protocol = False
 
 # Налаштування для файлової системи

@@ -302,11 +302,12 @@ if not DEBUG:
     
     # Optimize database
     DATABASES['default']['CONN_MAX_AGE'] = 60
-    DATABASES['default']['OPTIONS'] = {
-        'connect_timeout': 10,
-        'client_encoding': 'UTF8',
-        'application_name': 'meditation_app'
-    }
+    if DATABASES['default']['ENGINE'] != 'django.db.backends.sqlite3':
+        DATABASES['default']['OPTIONS'] = {
+            'connect_timeout': 10,
+            'client_encoding': 'UTF8',
+            'application_name': 'meditation_app'
+        }
 
 # Additional security headers
 SECURE_REFERRER_POLICY = 'same-origin'
