@@ -84,14 +84,25 @@ WSGI_APPLICATION = 'meditation_app.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        conn_max_age=60
+        conn_max_age=60,
+        ssl_require=True,
+        conn_health_checks=True,
     )
 }
 
 # Connection pool settings
 if not DEBUG:
-    DATABASES['default']['CONN_MAX_AGE'] = 60
-    DATABASES['default']['ATOMIC_REQUESTS'] = True
+    DATABASES['default'].update({
+        'ATOMIC_REQUESTS': True,
+        'OPTIONS': {
+            'sslmode': 'require',
+            'client_encoding': 'UTF8',
+            'application_name': 'meditation_app',
+            'sslcert': os.environ.get('POSTGRES_SSL_CERT', None),
+            'sslkey': os.environ.get('POSTGRES_SSL_KEY', None),
+            'sslrootcert': os.environ.get('POSTGRES_SSL_ROOT_CERT', None),
+        }
+    })
 
 
 # Password validation
