@@ -26,19 +26,7 @@ python manage.py migrate --noinput
 
 # Запуск Gunicorn
 echo "Starting Gunicorn..."
-gunicorn meditation_app.wsgi:application \
-    --bind "0.0.0.0:${PORT:-8080}" \
-    --workers 2 \
-    --threads 2 \
-    --worker-class gthread \
-    --worker-tmp-dir /dev/shm \
-    --log-level debug \
-    --access-logfile - \
-    --error-logfile - \
-    --capture-output \
-    --enable-stdio-inheritance \
-    --timeout 120 \
-    --forwarded-allow-ips '*' &
+gunicorn meditation_app.wsgi:application -c ./gunicorn.conf.py &
 
 child=$!
 wait "$child" 
