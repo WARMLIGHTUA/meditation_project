@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+# Виведення інформації про змінні середовища
+echo "Environment variables:"
+echo "PORT: $PORT"
+echo "DJANGO_SETTINGS_MODULE: $DJANGO_SETTINGS_MODULE"
+
 # Встановлення порту за замовчуванням, якщо не вказано
 if [ -z "$PORT" ]; then
     export PORT=8000
@@ -19,15 +24,6 @@ else
     echo "Warning: Port $PORT might be in use"
 fi
 
-# Запуск Gunicorn
-echo "Starting Gunicorn on port $PORT..."
-exec gunicorn meditation_app.wsgi:application \
-    --bind "0.0.0.0:$PORT" \
-    --workers 2 \
-    --threads 2 \
-    --log-level debug \
-    --access-logfile - \
-    --error-logfile - \
-    --capture-output \
-    --enable-stdio-inheritance \
-    --timeout 120 
+# Запуск Gunicorn з файлом конфігурації
+echo "Starting Gunicorn with config file..."
+exec gunicorn meditation_app.wsgi:application -c gunicorn.conf.py 
