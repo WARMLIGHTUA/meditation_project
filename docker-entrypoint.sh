@@ -32,9 +32,18 @@ echo "Environment name: ${ENVIRONMENT_NAME:-Not set}"
 echo "Django debug mode: ${DJANGO_DEBUG:-Not set}"
 echo "Gunicorn log level: ${GUNICORN_LOG_LEVEL:-info}"
 
-# Перевірка DATABASE_URL
+# Очікування DATABASE_URL
+max_attempts=5
+attempt=1
+while [ -z "$DATABASE_URL" ] && [ $attempt -le $max_attempts ]; do
+    echo "Attempt $attempt: Waiting for DATABASE_URL to be set..."
+    env | grep -i "database\|db\|pg"
+    sleep 5
+    attempt=$((attempt + 1))
+done
+
 if [ -z "$DATABASE_URL" ]; then
-    echo "ERROR: DATABASE_URL is not set!"
+    echo "ERROR: DATABASE_URL is not set after $max_attempts attempts!"
     echo "Available database-related variables:"
     env | grep -i "database\|db\|pg"
     exit 1
