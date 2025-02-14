@@ -17,6 +17,10 @@ trap cleanup SIGTERM SIGINT SIGQUIT
 
 echo "Starting application setup..."
 
+# Виведення всіх змінних середовища
+echo "All environment variables:"
+env | sort
+
 # Виведення діагностичної інформації
 echo "Environment information:"
 echo "PORT: $PORT"
@@ -31,6 +35,8 @@ echo "Gunicorn log level: ${GUNICORN_LOG_LEVEL:-info}"
 # Перевірка DATABASE_URL
 if [ -z "$DATABASE_URL" ]; then
     echo "ERROR: DATABASE_URL is not set!"
+    echo "Available database-related variables:"
+    env | grep -i "database\|db\|pg"
     exit 1
 fi
 
