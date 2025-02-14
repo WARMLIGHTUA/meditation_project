@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'meditation_app.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        conn_max_age=60,
+        conn_max_age=20,
         ssl_require=True,
         conn_health_checks=True,
     )
@@ -98,9 +98,10 @@ if not DEBUG:
             'sslmode': 'require',
             'client_encoding': 'UTF8',
             'application_name': 'meditation_app',
-            'sslcert': os.environ.get('POSTGRES_SSL_CERT', None),
-            'sslkey': os.environ.get('POSTGRES_SSL_KEY', None),
-            'sslrootcert': os.environ.get('POSTGRES_SSL_ROOT_CERT', None),
+            'keepalives': 1,
+            'keepalives_idle': 30,
+            'keepalives_interval': 10,
+            'keepalives_count': 5
         }
     })
 
@@ -186,24 +187,12 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message} {pathname} {lineno}',
+            'format': '[{levelname}] {asctime} {module} {process:d} {thread:d} {message}',
             'style': '{',
         },
         'simple': {
-            'format': '{levelname} {message}',
+            'format': '[{levelname}] {message}',
             'style': '{',
-        },
-        'gunicorn': {
-            'format': '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(L)s',
-            'class': 'logging.Formatter',
-        },
-    },
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse',
-        },
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue',
         },
     },
     'handlers': {
@@ -212,16 +201,6 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler',
-            'include_html': True,
-        },
-        'gunicorn': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'gunicorn',
-        },
     },
     'root': {
         'handlers': ['console'],
@@ -229,33 +208,13 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'mail_admins'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-            'propagate': False,
-        },
-        'django.server': {
             'handlers': ['console'],
-            'level': 'INFO',
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
             'propagate': False,
         },
         'django.db.backends': {
             'handlers': ['console'],
             'level': os.getenv('DB_LOG_LEVEL', 'INFO'),
-            'propagate': False,
-        },
-        'meditation_app': {
-            'handlers': ['console', 'mail_admins'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'gunicorn.access': {
-            'handlers': ['gunicorn'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'gunicorn.error': {
-            'handlers': ['console', 'mail_admins'],
-            'level': 'INFO',
             'propagate': False,
         },
     },
