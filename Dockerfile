@@ -21,8 +21,7 @@ COPY . .
 
 # Змінні середовища
 ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PORT=8000
+    PYTHONDONTWRITEBYTECODE=1
 
 # Створення скрипту для запуску
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
