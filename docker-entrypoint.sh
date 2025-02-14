@@ -23,28 +23,41 @@ echo "PORT: $PORT"
 echo "Current directory: $(pwd)"
 echo "Python version: $(python --version)"
 echo "Pip version: $(pip --version)"
-echo "Database URL: ${DATABASE_URL:-Not set}"
 echo "Django settings module: ${DJANGO_SETTINGS_MODULE:-Not set}"
+echo "Environment name: ${ENVIRONMENT_NAME:-Not set}"
+echo "Django debug mode: ${DJANGO_DEBUG:-Not set}"
+echo "Gunicorn log level: ${GUNICORN_LOG_LEVEL:-Not set}"
+
+# Перевірка наявності змінних середовища PostgreSQL
+if [ -z "$PGHOST" ] || [ -z "$PGPORT" ] || [ -z "$PGUSER" ] || [ -z "$PGPASSWORD" ] || [ -z "$PGDATABASE" ]; then
+    echo "ERROR: Required PostgreSQL environment variables are not set!"
+    echo "PGHOST: ${PGHOST:-Not set}"
+    echo "PGPORT: ${PGPORT:-Not set}"
+    echo "PGUSER: ${PGUSER:-Not set}"
+    echo "PGDATABASE: ${PGDATABASE:-Not set}"
+    echo "DATABASE_URL type: $(echo $DATABASE_URL | cut -d: -f1)"
+    exit 1
+fi
 
 # Перевірка доступності бази даних
 echo "Checking database connection..."
 python << END
 import sys
 import time
+import os
 import psycopg2
-from urllib.parse import urlparse
-url = urlparse("${DATABASE_URL}")
+
 for i in range(5):
     try:
         conn = psycopg2.connect(
-            dbname=url.path[1:],
-            user=url.username,
-            password=url.password,
-            host=url.hostname,
-            port=url.port
+            dbname=os.getenv('PGDATABASE'),
+            user=os.getenv('PGUSER'),
+            password=os.getenv('PGPASSWORD'),
+            host=os.getenv('PGHOST'),
+            port=os.getenv('PGPORT')
         )
         conn.close()
-        print("Database connection successful")
+        print(f"Database connection successful to {os.getenv('PGHOST')}:{os.getenv('PGPORT')}")
         sys.exit(0)
     except psycopg2.OperationalError as e:
         print(f"Attempt {i+1}: Database connection failed - {str(e)}")
@@ -55,6 +68,7 @@ END
 
 if [ $? -ne 0 ]; then
     echo "Failed to connect to database after 5 attempts"
+    echo "Check if the database service is properly configured in Railway"
     exit 1
 fi
 
@@ -62,8 +76,13 @@ fi
 echo "Running migrations..."
 python manage.py migrate --noinput
 
+# Збір статичних файлів
+echo "Collecting static files..."
+python manage.py collectstatic --noinput
+
 # Запуск Gunicorn
 echo "Starting Gunicorn..."
+echo "Using log level: ${GUNICORN_LOG_LEVEL:-info}"
 exec gunicorn meditation_app.wsgi:application -c ./gunicorn.conf.py
 
 child=$!
