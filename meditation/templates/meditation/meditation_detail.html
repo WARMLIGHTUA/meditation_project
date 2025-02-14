@@ -1,0 +1,389 @@
+{% extends 'meditation/base.html' %}
+{% load i18n %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    #fractalCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 2s;
+    }
+    
+    .meditation-content {
+        position: relative;
+        z-index: 1;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        margin-top: 2rem;
+        color: white;
+    }
+    
+    .timer-display {
+        font-size: 4rem;
+        font-weight: 300;
+        text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+    
+    .controls {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 1rem;
+        border-radius: 10px;
+        margin-top: 1rem;
+    }
+    
+    .btn-meditation {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: white;
+        transition: all 0.3s;
+    }
+    
+    .btn-meditation:hover {
+        background: rgba(255,255,255,0.2);
+        border-color: rgba(255,255,255,0.3);
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<canvas id="fractalCanvas"></canvas>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="meditation-content text-center">
+                <h2 class="mb-4">{{ object.title }}</h2>
+                <p class="mb-4">{{ object.description }}</p>
+                
+                <div class="timer-display mb-4" id="timer">00:00</div>
+                
+                <div class="controls">
+                    <div class="audio-controls mb-3">
+                        <label for="volume" class="form-label">{% trans "Volume" %}</label>
+                        <input type="range" class="form-range" id="volume" min="0" max="1" step="0.1" value="1">
+                    </div>
+                    <div class="btn-group">
+                        <button id="startBtn" class="btn btn-meditation btn-lg">
+                            <i class="fas fa-play"></i> {% trans "Start" %}
+                        </button>
+                        <button id="pauseBtn" class="btn btn-meditation btn-lg" disabled>
+                            <i class="fas fa-pause"></i> {% trans "Pause" %}
+                        </button>
+                        <button id="resetBtn" class="btn btn-meditation btn-lg" disabled>
+                            <i class="fas fa-undo"></i> {% trans "Reset" %}
+                        </button>
+                    </div>
+                </div>
+
+                <audio id="meditationAudio" src="{{ object.audio_file.url }}" preload="auto"></audio>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('fractalCanvas');
+    const ctx = canvas.getContext('2d');
+    const audio = document.getElementById('meditationAudio');
+    const timer = document.getElementById('timer');
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const volumeControl = document.getElementById('volume');
+    
+    let duration = {{ object.duration }};
+    let timeLeft = duration;
+    let timerInterval = null;
+    let animationId = null;
+    let meditationActive = false;
+    let currentVisualization = 0;
+    
+    // Налаштування розміру canvas
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Функції для різних типів візуалізацій
+    const visualizations = [
+        // 1. Спіральна галактика
+        function drawSpiralGalaxy(time) {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const maxRadius = Math.min(canvas.width, canvas.height) * 0.4;
+            
+            for (let i = 0; i < 4; i++) {
+                const angle = (time * 0.0001 + i * Math.PI * 0.5) % (Math.PI * 2);
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.rotate(angle);
+                
+                ctx.beginPath();
+                for (let j = 0; j < 500; j++) {
+                    const t = j * 0.05;
+                    const r = t * maxRadius / 100;
+                    const x = r * Math.cos(t * 2);
+                    const y = r * Math.sin(t * 2);
+                    
+                    if (j === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                
+                const gradient = ctx.createLinearGradient(-maxRadius, 0, maxRadius, 0);
+                gradient.addColorStop(0, `hsla(${(time * 0.02 + i * 60) % 360}, 70%, 60%, 0.1)`);
+                gradient.addColorStop(0.5, `hsla(${(time * 0.02 + (i + 2) * 60) % 360}, 80%, 70%, 0.2)`);
+                gradient.addColorStop(1, `hsla(${(time * 0.02 + i * 60) % 360}, 70%, 60%, 0.1)`);
+                
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.restore();
+            }
+        },
+        
+        // 2. Мандала
+        function drawMandala(time) {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(canvas.width, canvas.height) * 0.3;
+            const petals = 12;
+            
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(time * 0.0001);
+            
+            for (let i = 0; i < petals; i++) {
+                ctx.save();
+                ctx.rotate((i * 2 * Math.PI) / petals);
+                
+                // Малюємо пелюстки
+                ctx.beginPath();
+                for (let j = 0; j < 100; j++) {
+                    const t = j / 100;
+                    const scale = 1 + Math.sin(time * 0.001) * 0.2;
+                    const x = radius * t * Math.cos(t * Math.PI * 4) * scale;
+                    const y = radius * t * Math.sin(t * Math.PI * 4) * scale;
+                    
+                    if (j === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                
+                const gradient = ctx.createLinearGradient(0, -radius, 0, radius);
+                gradient.addColorStop(0, `hsla(${(time * 0.02 + i * 30) % 360}, 100%, 50%, 0.2)`);
+                gradient.addColorStop(0.5, `hsla(${(time * 0.02 + i * 30 + 180) % 360}, 100%, 70%, 0.3)`);
+                gradient.addColorStop(1, `hsla(${(time * 0.02 + i * 30) % 360}, 100%, 50%, 0.2)`);
+                
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 3;
+                ctx.stroke();
+                ctx.restore();
+            }
+            ctx.restore();
+        },
+        
+        // 3. Фрактальне дерево
+        function drawFractalTree(time) {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const startY = canvas.height * 0.8;
+            const length = Math.min(canvas.width, canvas.height) * 0.2;
+            
+            function branch(x, y, len, angle, depth) {
+                if (depth <= 0) return;
+                
+                const endX = x + len * Math.cos(angle);
+                const endY = y - len * Math.sin(angle);
+                
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(endX, endY);
+                
+                const hue = (time * 0.02 + depth * 30) % 360;
+                ctx.strokeStyle = `hsla(${hue}, 100%, 60%, 0.3)`;
+                ctx.lineWidth = depth;
+                ctx.stroke();
+                
+                const branchAngle = 0.5 + Math.sin(time * 0.001) * 0.2;
+                branch(endX, endY, len * 0.7, angle + branchAngle, depth - 1);
+                branch(endX, endY, len * 0.7, angle - branchAngle, depth - 1);
+            }
+            
+            ctx.save();
+            const baseAngle = Math.PI / 2 + Math.sin(time * 0.0005) * 0.2;
+            branch(centerX, startY, length, baseAngle, 8);
+            ctx.restore();
+        },
+        
+        // 4. Космічна спіраль
+        function drawCosmicSpiral(time) {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const maxRadius = Math.min(canvas.width, canvas.height) * 0.45;
+            
+            // Малюємо зірки
+            for (let i = 0; i < 100; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const size = Math.random() * 2;
+                const alpha = 0.5 + Math.sin(time * 0.001 + i) * 0.5;
+                
+                ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+                ctx.fillRect(x, y, size, size);
+            }
+            
+            // Малюємо спіраль
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(time * 0.0001);
+            
+            for (let i = 0; i < 3; i++) {
+                ctx.beginPath();
+                for (let j = 0; j < 1000; j++) {
+                    const t = j * 0.01;
+                    const r = t * maxRadius / 10;
+                    const x = r * Math.cos(t * 10 + time * 0.001 + i * Math.PI * 2/3);
+                    const y = r * Math.sin(t * 10 + time * 0.001 + i * Math.PI * 2/3);
+                    
+                    if (j === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                
+                const gradient = ctx.createLinearGradient(-maxRadius, 0, maxRadius, 0);
+                gradient.addColorStop(0, `hsla(${(time * 0.02 + i * 120) % 360}, 100%, 60%, 0.2)`);
+                gradient.addColorStop(0.5, `hsla(${(time * 0.02 + i * 120 + 60) % 360}, 100%, 70%, 0.3)`);
+                gradient.addColorStop(1, `hsla(${(time * 0.02 + i * 120 + 120) % 360}, 100%, 60%, 0.2)`);
+                
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+    ];
+    
+    // Функція для вибору випадкової візуалізації
+    function selectRandomVisualization() {
+        let newVisualization;
+        do {
+            newVisualization = Math.floor(Math.random() * visualizations.length);
+        } while (newVisualization === currentVisualization);
+        
+        currentVisualization = newVisualization;
+        return visualizations[currentVisualization];
+    }
+    
+    // Функція анімації
+    function animate(time) {
+        if (!meditationActive) return;
+        visualizations[currentVisualization](time);
+        animationId = requestAnimationFrame(animate);
+    }
+    
+    // Оновлення таймера
+    function updateTimer() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    // Початок медитації
+    function startMeditation() {
+        meditationActive = true;
+        canvas.style.opacity = '1';
+        startBtn.disabled = true;
+        pauseBtn.disabled = false;
+        resetBtn.disabled = false;
+        
+        // Вибір нової випадкової візуалізації
+        currentVisualization = Math.floor(Math.random() * visualizations.length);
+        
+        audio.play();
+        
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            updateTimer();
+            
+            if (timeLeft <= 0) {
+                stopMeditation();
+            }
+        }, 1000);
+        
+        animationId = requestAnimationFrame(animate);
+    }
+    
+    // Пауза медитації
+    function pauseMeditation() {
+        meditationActive = false;
+        audio.pause();
+        clearInterval(timerInterval);
+        cancelAnimationFrame(animationId);
+        
+        startBtn.disabled = false;
+        pauseBtn.disabled = true;
+    }
+    
+    // Скидання медитації
+    function resetMeditation() {
+        meditationActive = false;
+        audio.pause();
+        audio.currentTime = 0;
+        clearInterval(timerInterval);
+        cancelAnimationFrame(animationId);
+        
+        timeLeft = duration;
+        updateTimer();
+        
+        canvas.style.opacity = '0';
+        startBtn.disabled = false;
+        pauseBtn.disabled = true;
+        resetBtn.disabled = true;
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    // Зупинка медитації
+    function stopMeditation() {
+        resetMeditation();
+    }
+    
+    // Налаштування гучності
+    volumeControl.addEventListener('input', function() {
+        audio.volume = this.value;
+    });
+    
+    startBtn.addEventListener('click', startMeditation);
+    pauseBtn.addEventListener('click', pauseMeditation);
+    resetBtn.addEventListener('click', resetMeditation);
+    
+    updateTimer();
+});
+</script>
+{% endblock %} 

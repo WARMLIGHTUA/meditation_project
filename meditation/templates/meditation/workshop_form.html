@@ -1,0 +1,10 @@
+{% extends 'meditation/form_base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% if object %}
+        {% trans "Edit Workshop" %}
+    {% else %}
+        {% trans "Create New Workshop" %}
+    {% endif %}
+{% endblock %} 

@@ -1,0 +1,125 @@
+{% extends 'meditation/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">{{ title|default:_("Edit Content") }}</h2>
+                    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <div class="mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            {% if field.field.widget.input_type == 'file' %}
+                                <div class="input-group">
+                                    {{ field }}
+                                    {% if field.value %}
+                                    <span class="input-group-text">
+                                        {% if 'image' in field.name %}
+                                            <img src="{{ field.value.url }}" alt="Current image" style="height: 38px;">
+                                        {% else %}
+                                            <i class="fas fa-file"></i> {{ field.value.name }}
+                                        {% endif %}
+                                    </span>
+                                    {% endif %}
+                                </div>
+                            {% else %}
+                                {{ field }}
+                            {% endif %}
+                            {% if field.help_text %}
+                                <div class="form-text text-muted">{{ field.help_text }}</div>
+                            {% endif %}
+                            {% if field.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in field.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> {% trans "Save" %}
+                            </button>
+                            <a href="{{ view.success_url }}" class="btn btn-outline-light">
+                                <i class="fas fa-times"></i> {% trans "Cancel" %}
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-control, .form-select {
+        background-color: #2d2d2d;
+        border-color: #3d3d3d;
+        color: white;
+    }
+    .form-control:focus, .form-select:focus {
+        background-color: #2d2d2d;
+        border-color: #5d5d5d;
+        color: white;
+        box-shadow: 0 0 0 0.25rem rgba(255,255,255,0.1);
+    }
+    .form-control::placeholder {
+        color: #8d8d8d;
+    }
+    .input-group-text {
+        background-color: #3d3d3d;
+        border-color: #3d3d3d;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Form validation
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+
+    // File input preview
+    document.querySelectorAll('input[type="file"]').forEach(function(input) {
+        input.addEventListener('change', function(e) {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                var preview = this.parentElement.querySelector('.input-group-text');
+                
+                reader.onload = function(e) {
+                    if (preview) {
+                        if (input.accept.includes('image')) {
+                            preview.innerHTML = '<img src="' + e.target.result + '" alt="Preview" style="height: 38px;">';
+                        } else {
+                            preview.innerHTML = '<i class="fas fa-file"></i> ' + input.files[0].name;
+                        }
+                    }
+                }
+                
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+</script>
+{% endblock %} 

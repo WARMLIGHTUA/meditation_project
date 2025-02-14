@@ -1,0 +1,64 @@
+{% extends 'meditation/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Top Content" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">{% trans "Top Content" %}</h1>
+    
+    <div class="row">
+        {% for item in content %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 bg-dark text-white">
+                <div class="position-relative">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                    <img src="{% static 'meditation/default-content.jpg' %}" class="card-img-top" alt="{{ item.title }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    {% if item.featured %}
+                    <span class="position-absolute top-0 start-0 badge bg-warning m-2">
+                        {% trans "Featured" %}
+                    </span>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="me-2">{{ item.rating }}</span>
+                        <i class="fas fa-star text-warning"></i>
+                    </div>
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.description|truncatewords:30 }}</p>
+                    <p class="card-text"><small class="text-muted">{{ item.author }}</small></p>
+                </div>
+                {% if item.video_url %}
+                <div class="card-footer bg-dark">
+                    <a href="{{ item.video_url }}" class="btn btn-outline-light" target="_blank">
+                        <i class="fas fa-play-circle"></i> {% trans "Watch Video" %}
+                    </a>
+                </div>
+                {% endif %}
+                <a href="{% url 'meditation:top_detail' item.pk %}" class="stretched-link"></a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center">{% trans "No top content available at the moment." %}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.2s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %} 

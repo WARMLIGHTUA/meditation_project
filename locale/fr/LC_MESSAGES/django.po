@@ -1,0 +1,579 @@
+# French translations for meditation project.
+# Copyright (C) 2024
+# This file is distributed under the same license as the meditation package.
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-20 12:00+0000\n"
+"PO-Revision-Date: 2024-03-20 12:00+0000\n"
+"Last-Translator: Your Name <your.email@example.com>\n"
+"Language-Team: French <fr@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+# Model fields
+msgid "Title"
+msgstr "Titre"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Image"
+msgstr "Image"
+
+msgid "Video URL"
+msgstr "URL de la vidéo"
+
+msgid "Created at"
+msgstr "Créé le"
+
+msgid "Rating"
+msgstr "Note"
+
+msgid "Author"
+msgstr "Auteur"
+
+msgid "Audio File"
+msgstr "Fichier audio"
+
+msgid "Upload MP3 or WAV file"
+msgstr "Télécharger un fichier MP3 ou WAV"
+
+msgid "Duration"
+msgstr "Durée"
+
+msgid "Duration in minutes"
+msgstr "Durée en minutes"
+
+msgid "Featured"
+msgstr "En vedette"
+
+msgid "Duration in weeks"
+msgstr "Durée en semaines"
+
+msgid "Price"
+msgstr "Prix"
+
+msgid "Date and Time"
+msgstr "Date et heure"
+
+msgid "Location"
+msgstr "Lieu"
+
+msgid "Maximum Participants"
+msgstr "Nombre maximum de participants"
+
+msgid "Members Count"
+msgstr "Nombre de membres"
+
+msgid "Private Group"
+msgstr "Groupe privé"
+
+msgid "Online Event"
+msgstr "Événement en ligne"
+
+msgid "User"
+msgstr "Utilisateur"
+
+msgid "First Name"
+msgstr "Prénom"
+
+msgid "Last Name"
+msgstr "Nom"
+
+msgid "Birth Year"
+msgstr "Année de naissance"
+
+msgid "Gender"
+msgstr "Genre"
+
+msgid "Male"
+msgstr "Homme"
+
+msgid "Female"
+msgstr "Femme"
+
+msgid "Other"
+msgstr "Autre"
+
+msgid "User Profile"
+msgstr "Profil utilisateur"
+
+msgid "User Profiles"
+msgstr "Profils utilisateurs"
+
+msgid "Favorite Meditation"
+msgstr "Méditation favorite"
+
+msgid "Favorite Meditations"
+msgstr "Méditations favorites"
+
+msgid "Added at"
+msgstr "Ajouté le"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "Theme"
+msgstr "Thème"
+
+msgid "Background Image"
+msgstr "Image de fond"
+
+msgid "Background Video"
+msgstr "Vidéo de fond"
+
+msgid "Upload MP4 or WebM file"
+msgstr "Télécharger un fichier MP4 ou WebM"
+
+msgid "Background Color"
+msgstr "Couleur de fond"
+
+msgid "HEX color code (e.g. #FFFFFF)"
+msgstr "Code couleur HEX (ex. #FFFFFF)"
+
+msgid "Background Opacity"
+msgstr "Opacité du fond"
+
+msgid "Page Background"
+msgstr "Fond de page"
+
+msgid "Page Backgrounds"
+msgstr "Fonds de page"
+
+# Form validation messages
+msgid "Username or Email"
+msgstr "Nom d'utilisateur ou Email"
+
+msgid "Enter your username or email"
+msgstr "Entrez votre nom d'utilisateur ou email"
+
+msgid "Password"
+msgstr "Mot de passe"
+
+msgid "Enter your password"
+msgstr "Entrez votre mot de passe"
+
+msgid "Both username and password are required."
+msgstr "Le nom d'utilisateur et le mot de passe sont requis."
+
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Confirm Password"
+msgstr "Confirmez le mot de passe"
+
+msgid "Username can only contain letters, numbers, and @/./+/-/_ characters."
+msgstr "Le nom d'utilisateur ne peut contenir que des lettres, des chiffres et les caractères @/./+/-/_"
+
+msgid "This username is already taken."
+msgstr "Ce nom d'utilisateur est déjà pris."
+
+msgid "This email is already registered."
+msgstr "Cet email est déjà enregistré."
+
+msgid "Passwords do not match."
+msgstr "Les mots de passe ne correspondent pas."
+
+msgid "Password must be at least 8 characters long."
+msgstr "Le mot de passe doit contenir au moins 8 caractères."
+
+msgid "Password must contain at least one uppercase letter."
+msgstr "Le mot de passe doit contenir au moins une lettre majuscule."
+
+msgid "Password must contain at least one lowercase letter."
+msgstr "Le mot de passe doit contenir au moins une lettre minuscule."
+
+msgid "Password must contain at least one digit."
+msgstr "Le mot de passe doit contenir au moins un chiffre."
+
+msgid "Password must contain at least one special character."
+msgstr "Le mot de passe doit contenir au moins un caractère spécial."
+
+msgid "Enter your first name"
+msgstr "Entrez votre prénom"
+
+msgid "Enter your last name"
+msgstr "Entrez votre nom"
+
+msgid "Enter your birth year"
+msgstr "Entrez votre année de naissance"
+
+msgid "First name should contain only letters."
+msgstr "Le prénom ne doit contenir que des lettres."
+
+msgid "Last name should contain only letters."
+msgstr "Le nom ne doit contenir que des lettres."
+
+msgid "Please enter a valid birth year between 1900 and 2100."
+msgstr "Veuillez entrer une année de naissance valide entre 1900 et 2100."
+
+msgid "Don't have an account?"
+msgstr "Vous n'avez pas de compte ?"
+
+msgid "Register here"
+msgstr "Inscrivez-vous ici"
+
+msgid "Already have an account?"
+msgstr "Vous avez déjà un compte ?"
+
+msgid "Login here"
+msgstr "Connectez-vous ici"
+
+msgid "Account Information"
+msgstr "Informations du compte"
+
+msgid "Profile Information"
+msgstr "Informations du profil"
+
+msgid "Meditation App"
+msgstr "Application de Méditation"
+
+msgid "Tracks"
+msgstr "Méditations"
+
+msgid "Courses"
+msgstr "Cours"
+
+msgid "Workshops"
+msgstr "Ateliers"
+
+msgid "Groups"
+msgstr "Groupes"
+
+msgid "Events"
+msgstr "Événements"
+
+msgid "Favorites"
+msgstr "Favoris"
+
+msgid "Login"
+msgstr "Se connecter"
+
+msgid "Register"
+msgstr "S'inscrire"
+
+msgid "Logout"
+msgstr "Déconnexion"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Search"
+msgstr "Rechercher"
+
+msgid "Light"
+msgstr "Clair"
+
+msgid "Dark"
+msgstr "Sombre"
+
+msgid "Meditation track was created successfully"
+msgstr "La piste de méditation a été créée avec succès"
+
+msgid "Meditation track was updated successfully"
+msgstr "La piste de méditation a été mise à jour avec succès"
+
+msgid "Course was created successfully"
+msgstr "Le cours a été créé avec succès"
+
+msgid "Course was updated successfully"
+msgstr "Le cours a été mis à jour avec succès"
+
+msgid "Workshop was created successfully"
+msgstr "L'atelier a été créé avec succès"
+
+msgid "Workshop was updated successfully"
+msgstr "L'atelier a été mis à jour avec succès"
+
+msgid "Group was created successfully"
+msgstr "Le groupe a été créé avec succès"
+
+msgid "Group was updated successfully"
+msgstr "Le groupe a été mis à jour avec succès"
+
+msgid "Event was created successfully"
+msgstr "L'événement a été créé avec succès"
+
+msgid "Event was updated successfully"
+msgstr "L'événement a été mis à jour avec succès"
+
+msgid "Successfully logged in!"
+msgstr "Connexion réussie !"
+
+msgid "Invalid username or password."
+msgstr "Nom d'utilisateur ou mot de passe invalide."
+
+msgid "Registration successful! Welcome to our community!"
+msgstr "Inscription réussie ! Bienvenue dans notre communauté !"
+
+msgid "Please correct the errors below."
+msgstr "Veuillez corriger les erreurs ci-dessous."
+
+msgid "Meditation track not found"
+msgstr "Piste de méditation introuvable"
+
+msgid "Meditation"
+msgstr "Méditation"
+
+msgid "Meditation List"
+msgstr "Liste des méditations"
+
+msgid "Meditations"
+msgstr "Méditations"
+
+msgid "Duration"
+msgstr "Durée"
+
+msgid "min."
+msgstr "min."
+
+msgid "Start Meditation"
+msgstr "Commencer la méditation"
+
+msgid "No meditations available at the moment."
+msgstr "Aucune méditation disponible pour le moment."
+
+msgid "Volume"
+msgstr "Volume"
+
+msgid "Start"
+msgstr "Commencer"
+
+msgid "Pause"
+msgstr "Pause"
+
+msgid "Reset"
+msgstr "Réinitialiser"
+
+msgid "Top"
+msgstr "Top"
+
+msgid "Sort"
+msgstr "Trier"
+
+msgid "Filters"
+msgstr "Filtres"
+
+msgid "MEDITATION"
+msgstr "MÉDITATION"
+
+msgid "Home"
+msgstr "Accueil"
+
+msgid "Learn"
+msgstr "Apprendre"
+
+msgid "Practice"
+msgstr "Pratiquer"
+
+msgid "Community"
+msgstr "Communauté"
+
+msgid "Content management is available in the admin panel"
+msgstr "La gestion du contenu est disponible dans le panneau d'administration"
+
+msgid "Max participants"
+msgstr "Nombre maximum de participants"
+
+msgid "Watch Preview"
+msgstr "Voir l'aperçu"
+
+msgid "No workshops available at the moment."
+msgstr "Aucun atelier disponible pour le moment."
+
+msgid "Edit Workshop"
+msgstr "Modifier l'atelier"
+
+msgid "Create New Workshop"
+msgstr "Créer un nouvel atelier"
+
+msgid "Meditation Tracks"
+msgstr "Pistes de méditation"
+
+msgid "Search tracks..."
+msgstr "Rechercher des pistes..."
+
+msgid "Your browser does not support the audio element."
+msgstr "Votre navigateur ne prend pas en charge l'élément audio."
+
+msgid "Filter Tracks"
+msgstr "Filtrer les pistes"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "All"
+msgstr "Tout"
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Apply"
+msgstr "Appliquer"
+
+msgid "Top Content"
+msgstr "Contenu populaire"
+
+msgid "Watch Video"
+msgstr "Regarder la vidéo"
+
+msgid "No top content available at the moment."
+msgstr "Aucun contenu populaire disponible pour le moment."
+
+msgid "Created"
+msgstr "Créé"
+
+msgid "Like"
+msgstr "J'aime"
+
+msgid "Share"
+msgstr "Partager"
+
+msgid "Comments"
+msgstr "Commentaires"
+
+msgid "Add a comment..."
+msgstr "Ajouter un commentaire..."
+
+msgid "Post Comment"
+msgstr "Publier le commentaire"
+
+msgid "User Name"
+msgstr "Nom d'utilisateur"
+
+msgid "This is a sample comment."
+msgstr "Ceci est un exemple de commentaire."
+
+msgid "hours ago"
+msgstr "heures"
+
+msgid "Rules and Terms of Use"
+msgstr "Règles et conditions d'utilisation"
+
+msgid "1. General Provisions"
+msgstr "1. Dispositions générales"
+
+msgid "These rules govern the use of the Meditation App platform and establish the rights and obligations of users."
+msgstr "Ces règles régissent l'utilisation de la plateforme Meditation App et établissent les droits et obligations des utilisateurs."
+
+msgid "2. User Rights and Responsibilities"
+msgstr "2. Droits et responsabilités des utilisateurs"
+
+msgid "Users must be at least 13 years old"
+msgstr "Les utilisateurs doivent avoir au moins 13 ans"
+
+msgid "Users are responsible for maintaining the confidentiality of their account"
+msgstr "Les utilisateurs sont responsables de la confidentialité de leur compte"
+
+msgid "Users must not share inappropriate or harmful content"
+msgstr "Les utilisateurs ne doivent pas partager de contenu inapproprié ou nuisible"
+
+msgid "3. Privacy Policy"
+msgstr "3. Politique de confidentialité"
+
+msgid "We respect your privacy and protect your personal data according to GDPR and other applicable laws."
+msgstr "Nous respectons votre vie privée et protégeons vos données personnelles conformément au RGPD et aux autres lois applicables."
+
+msgid "4. Content Usage"
+msgstr "4. Utilisation du contenu"
+
+msgid "All content on the platform is protected by copyright and may not be used without permission."
+msgstr "Tout le contenu de la plateforme est protégé par des droits d'auteur et ne peut être utilisé sans autorisation."
+
+msgid "5. Technical Support"
+msgstr "5. Support technique"
+
+msgid "For technical support, please contact us at:"
+msgstr "Pour le support technique, veuillez nous contacter à :"
+
+msgid "Featured Content"
+msgstr "Contenu en vedette"
+
+msgid "Edit Meditation Track"
+msgstr "Modifier la piste de méditation"
+
+msgid "Create New Meditation Track"
+msgstr "Créer une nouvelle piste de méditation"
+
+msgid "Private"
+msgstr "Privé"
+
+msgid "Public"
+msgstr "Public"
+
+msgid "Join Group"
+msgstr "Rejoindre le groupe"
+
+msgid "No groups available at the moment."
+msgstr "Aucun groupe disponible pour le moment."
+
+msgid "Edit Group"
+msgstr "Modifier le groupe"
+
+msgid "Create New Group"
+msgstr "Créer un nouveau groupe"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "My Favorite Meditations"
+msgstr "Mes méditations favorites"
+
+msgid "Search favorites..."
+msgstr "Rechercher dans les favoris..."
+
+msgid "Date Added"
+msgstr "Date d'ajout"
+
+msgid "Technical Support"
+msgstr "Support technique"
+
+msgid "Rules"
+msgstr "Règles"
+
+msgid "All rights reserved"
+msgstr "Tous droits réservés"
+
+msgid "Admin Panel"
+msgstr "Panneau d'administration"
+
+msgid "Successfully registered!"
+msgstr "Inscription réussie !"
+
+msgid "Registration failed. Please check the form for errors."
+msgstr "L'inscription a échoué. Veuillez vérifier le formulaire pour les erreurs."
+
+msgid "First name can only contain letters, spaces, hyphens and apostrophes."
+msgstr "Le prénom ne peut contenir que des lettres, des espaces, des traits d'union et des apostrophes."
+
+msgid "Last name can only contain letters, spaces, hyphens and apostrophes."
+msgstr "Le nom ne peut contenir que des lettres, des espaces, des traits d'union et des apostrophes."
+
+msgid "Please enter a valid birth year between 1900 and current year."
+msgstr "Veuillez entrer une année de naissance valide entre 1900 et l'année en cours."
+
+msgid "Please select your gender."
+msgstr "Veuillez sélectionner votre genre."
+
+msgid "Invalid gender selection."
+msgstr "Sélection de genre invalide."
+
+msgid "Registration failed. Please try again."
+msgstr "L'inscription a échoué. Veuillez réessayer." 

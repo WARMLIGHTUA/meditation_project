@@ -1,0 +1,253 @@
+# English translations for meditation project.
+# Copyright (C) 2024
+# This file is distributed under the same license as the meditation package.
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-20 12:00+0000\n"
+"PO-Revision-Date: 2024-03-20 12:00+0000\n"
+"Last-Translator: Your Name <your.email@example.com>\n"
+"Language-Team: English <en@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Username or Email"
+msgstr "Username or Email"
+
+msgid "Enter your username or email"
+msgstr "Enter your username or email"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Enter your password"
+msgstr "Enter your password"
+
+msgid "Both username and password are required."
+msgstr "Both username and password are required."
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Confirm Password"
+msgstr "Confirm Password"
+
+msgid "Username can only contain letters, numbers, and @/./+/-/_ characters."
+msgstr "Username can only contain letters, numbers, and @/./+/-/_ characters."
+
+msgid "This username is already taken."
+msgstr "This username is already taken."
+
+msgid "This email is already registered."
+msgstr "This email is already registered."
+
+msgid "Passwords do not match."
+msgstr "Passwords do not match."
+
+msgid "Password must be at least 8 characters long."
+msgstr "Password must be at least 8 characters long."
+
+msgid "Password must contain at least one uppercase letter."
+msgstr "Password must contain at least one uppercase letter."
+
+msgid "Password must contain at least one lowercase letter."
+msgstr "Password must contain at least one lowercase letter."
+
+msgid "Password must contain at least one digit."
+msgstr "Password must contain at least one digit."
+
+msgid "Password must contain at least one special character."
+msgstr "Password must contain at least one special character."
+
+msgid "Enter your first name"
+msgstr "Enter your first name"
+
+msgid "Enter your last name"
+msgstr "Enter your last name"
+
+msgid "Enter your birth year"
+msgstr "Enter your birth year"
+
+msgid "First name should contain only letters."
+msgstr "First name should contain only letters."
+
+msgid "Last name should contain only letters."
+msgstr "Last name should contain only letters."
+
+msgid "Please enter a valid birth year between 1900 and 2100."
+msgstr "Please enter a valid birth year between 1900 and 2100."
+
+msgid "Don't have an account?"
+msgstr "Don't have an account?"
+
+msgid "Register here"
+msgstr "Register here"
+
+msgid "Already have an account?"
+msgstr "Already have an account?"
+
+msgid "Login here"
+msgstr "Login here"
+
+msgid "Account Information"
+msgstr "Account Information"
+
+msgid "Profile Information"
+msgstr "Profile Information"
+
+msgid "Meditation App"
+msgstr "Meditation App"
+
+msgid "Tracks"
+msgstr "Tracks"
+
+msgid "Courses"
+msgstr "Courses"
+
+msgid "Workshops"
+msgstr "Workshops"
+
+msgid "Groups"
+msgstr "Groups"
+
+msgid "Events"
+msgstr "Events"
+
+msgid "Favorites"
+msgstr "Favorites"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Register"
+msgstr "Register"
+
+msgid "Logout"
+msgstr "Logout"
+
+msgid "Profile"
+msgstr "Profile"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Theme"
+msgstr "Theme"
+
+msgid "Light"
+msgstr "Light"
+
+msgid "Dark"
+msgstr "Dark"
+
+msgid "Meditation track was created successfully"
+msgstr "Meditation track was created successfully"
+
+msgid "Meditation track was updated successfully"
+msgstr "Meditation track was updated successfully"
+
+msgid "Course was created successfully"
+msgstr "Course was created successfully"
+
+msgid "Course was updated successfully"
+msgstr "Course was updated successfully"
+
+msgid "Workshop was created successfully"
+msgstr "Workshop was created successfully"
+
+msgid "Workshop was updated successfully"
+msgstr "Workshop was updated successfully"
+
+msgid "Group was created successfully"
+msgstr "Group was created successfully"
+
+msgid "Group was updated successfully"
+msgstr "Group was updated successfully"
+
+msgid "Event was created successfully"
+msgstr "Event was created successfully"
+
+msgid "Event was updated successfully"
+msgstr "Event was updated successfully"
+
+msgid "Successfully logged in!"
+msgstr "Successfully logged in!"
+
+msgid "Invalid username or password."
+msgstr "Invalid username or password."
+
+msgid "Registration successful! Welcome to our community!"
+msgstr "Registration successful! Welcome to our community!"
+
+msgid "Please correct the errors below."
+msgstr "Please correct the errors below."
+
+msgid "Meditation track not found"
+msgstr "Meditation track not found"
+
+msgid "Meditation"
+msgstr "Meditation"
+
+msgid "Meditation List"
+msgstr "Meditation List"
+
+msgid "Meditations"
+msgstr "Meditations"
+
+msgid "Duration"
+msgstr "Duration"
+
+msgid "min."
+msgstr "min."
+
+msgid "Start Meditation"
+msgstr "Start Meditation"
+
+msgid "No meditations available at the moment."
+msgstr "No meditations available at the moment."
+
+msgid "Volume"
+msgstr "Volume"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Pause"
+msgstr "Pause"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Top"
+msgstr "Top"
+
+msgid "Sort"
+msgstr "Sort"
+
+msgid "Filters"
+msgstr "Filters"
+
+msgid "MEDITATION"
+msgstr "MEDITATION"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Learn"
+msgstr "Learn"
+
+msgid "Practice"
+msgstr "Practice"
+
+msgid "Community"
+msgstr "Community" 

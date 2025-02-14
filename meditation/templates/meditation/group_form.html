@@ -1,0 +1,10 @@
+{% extends 'meditation/form_base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% if object %}
+        {% trans "Edit Group" %}
+    {% else %}
+        {% trans "Create New Group" %}
+    {% endif %}
+{% endblock %} 

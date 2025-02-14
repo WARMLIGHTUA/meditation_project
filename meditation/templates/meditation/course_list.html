@@ -1,0 +1,74 @@
+{% extends 'meditation/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Courses" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>{% trans "Courses" %}</h1>
+    </div>
+    
+    <div class="row">
+        {% for course in courses %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 bg-dark text-white">
+                <div class="position-relative">
+                    {% if course.image %}
+                    <img src="{{ course.image.url }}" class="card-img-top" alt="{{ course.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                    <img src="{% static 'meditation/default-course.jpg' %}" class="card-img-top" alt="{{ course.title }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="position-absolute bottom-0 start-0 p-3">
+                        <h5 class="mb-0">{{ course.duration_weeks }} {% trans "weeks" %}</h5>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="position-absolute top-0 end-0 p-2">
+                        <a href="{% url 'meditation:course_edit' course.pk %}" class="btn btn-sm btn-outline-light me-1">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="me-2">{{ course.rating }}</span>
+                        <i class="fas fa-star text-warning"></i>
+                        <span class="ms-auto">{{ course.price }} €</span>
+                    </div>
+                    <h5 class="card-title">{{ course.title }}</h5>
+                    <p class="card-text">{{ course.description|truncatewords:30 }}</p>
+                    <p class="card-text"><small class="text-muted">{{ course.author }}</small></p>
+                </div>
+                {% if course.video_url %}
+                <div class="card-footer bg-dark">
+                    <a href="{{ course.video_url }}" class="btn btn-outline-light" target="_blank">
+                        <i class="fas fa-play-circle"></i> {% trans "Watch Preview" %}
+                    </a>
+                </div>
+                {% endif %}
+                <a href="{% url 'meditation:course_detail' course.pk %}" class="stretched-link"></a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                {% trans "No courses available at the moment." %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.2s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %} 

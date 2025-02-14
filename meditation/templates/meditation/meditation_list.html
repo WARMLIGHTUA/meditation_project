@@ -1,0 +1,195 @@
+{% extends 'meditation/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Meditation List" %}{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+<div class="container">
+    {% if top_content %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="mb-3">{% trans "Featured Content" %}</h2>
+            <div class="row">
+                {% for item in top_content %}
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="position-relative">
+                            {% if item.image %}
+                            <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.title }}" style="height: 200px; object-fit: cover;">
+                            {% else %}
+                            <img src="{% static 'meditation/default-content.jpg' %}" class="card-img-top" alt="{{ item.title }}" style="height: 200px; object-fit: cover;">
+                            {% endif %}
+                            <span class="position-absolute top-0 start-0 badge bg-primary m-2">
+                                {% trans "Featured" %}
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.title }}</h5>
+                            <p class="card-text">{{ item.description|truncatewords:20 }}</p>
+                        </div>
+                        <a href="{% url 'meditation:top_detail' item.pk %}" class="stretched-link"></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        {% for track in tracks %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="card meditation-card h-100">
+                <div class="position-relative">
+                    {% if track.image %}
+                    <img src="{{ track.image.url }}" class="card-img-top" alt="{{ track.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                    <img src="{% static 'meditation/default-meditation.jpg' %}" class="card-img-top" alt="{{ track.title }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="position-absolute bottom-0 start-0 p-3">
+                        <h5 class="mb-0">{{ track.duration }} {% trans "min." %}</h5>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <button class="btn btn-link position-absolute top-0 end-0 p-3 favorite-btn" 
+                            data-track-id="{{ track.id }}"
+                            data-is-favorite="{% if track.id in favorite_tracks %}true{% else %}false{% endif %}">
+                        <i class="fas fa-heart {% if track.id in favorite_tracks %}text-danger{% endif %}"></i>
+                    </button>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="me-2">{{ track.rating }}</span>
+                        <i class="fas fa-star text-warning"></i>
+                        <span class="ms-2">• {% trans "MEDITATION" %}</span>
+                    </div>
+                    <h5 class="card-title">{{ track.title }}</h5>
+                    <p class="card-text">{{ track.author }}</p>
+                    <a href="{% url 'meditation:track_detail' track.pk %}" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center">{% trans "No meditations available at the moment." %}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Обробка кліків по кнопці улюблених
+    const favoriteButtons = document.querySelectorAll('.favorite-btn');
+    favoriteButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const trackId = this.dataset.trackId;
+            const icon = this.querySelector('i');
+            
+            fetch(`{% url 'meditation:home' %}track/${trackId}/favorite/`, {
+                method: 'POST',  // Змінюємо на POST метод
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    if (data.is_favorite) {
+                        icon.classList.add('text-danger');
+                        this.dataset.isFavorite = 'true';
+                    } else {
+                        icon.classList.remove('text-danger');
+                        this.dataset.isFavorite = 'false';
+                    }
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+});
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+        transition: transform 0.2s;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px var(--shadow-color);
+    }
+    
+    .favorite-btn {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        z-index: 10;
+    }
+    
+    .favorite-btn:hover {
+        transform: scale(1.1);
+        background: rgba(255, 255, 255, 1);
+    }
+    
+    .favorite-btn i {
+        font-size: 1.2rem;
+        color: #adb5bd;
+        transition: all 0.3s ease;
+    }
+    
+    .favorite-btn i.text-danger {
+        color: #dc3545;
+    }
+    
+    .btn-theme {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-theme:hover {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+    }
+    
+    .btn-link {
+        color: var(--text-color);
+    }
+    
+    .btn-link:hover {
+        color: var(--primary-color);
+    }
+    
+    .card-title {
+        color: var(--heading-color);
+    }
+    
+    .card-text {
+        color: var(--text-color);
+    }
+</style>
+{% endblock %} 

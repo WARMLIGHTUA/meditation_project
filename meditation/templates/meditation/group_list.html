@@ -1,0 +1,83 @@
+{% extends 'meditation/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Groups" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>{% trans "Groups" %}</h1>
+    </div>
+    
+    <div class="row">
+        {% for group in groups %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 bg-dark text-white">
+                <div class="position-relative">
+                    {% if group.image %}
+                    <img src="{{ group.image.url }}" class="card-img-top" alt="{{ group.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                    <img src="{% static 'meditation/default-group.jpg' %}" class="card-img-top" alt="{{ group.title }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="position-absolute bottom-0 start-0 p-3">
+                        <span class="badge {% if group.is_private %}bg-warning{% else %}bg-success{% endif %}">
+                            {% if group.is_private %}
+                                <i class="fas fa-lock"></i> {% trans "Private" %}
+                            {% else %}
+                                <i class="fas fa-globe"></i> {% trans "Public" %}
+                            {% endif %}
+                        </span>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="position-absolute top-0 end-0 p-2">
+                        <a href="{% url 'meditation:group_edit' group.pk %}" class="btn btn-sm btn-outline-light me-1">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="me-2">{{ group.rating }}</span>
+                        <i class="fas fa-star text-warning"></i>
+                        <span class="ms-2">
+                            <i class="fas fa-users"></i> {{ group.members_count }}
+                        </span>
+                    </div>
+                    <h5 class="card-title">{{ group.title }}</h5>
+                    <p class="card-text">{{ group.description|truncatewords:30 }}</p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <i class="fas fa-user"></i> {{ group.author }}
+                        </small>
+                    </p>
+                </div>
+                <div class="card-footer bg-dark">
+                    <a href="{% url 'meditation:group_detail' group.pk %}" class="btn btn-primary w-100">
+                        {% trans "Join Group" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                {% trans "No groups available at the moment." %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.2s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %} 

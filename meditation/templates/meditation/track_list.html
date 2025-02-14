@@ -1,0 +1,344 @@
+{% extends 'meditation/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Meditation Tracks" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>{% trans "Meditation Tracks" %}</h1>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <div class="btn-group">
+                    <button class="btn btn-theme" data-sort="duration">
+                        <i class="fas fa-clock"></i> {% trans "Duration" %}
+                    </button>
+                    <button class="btn btn-theme" data-sort="rating">
+                        <i class="fas fa-star"></i> {% trans "Rating" %}
+                    </button>
+                    <button class="btn btn-theme" data-sort="date">
+                        <i class="fas fa-calendar"></i> {% trans "Date" %}
+                    </button>
+                </div>
+                <div class="d-flex gap-2">
+                    <div class="btn-group me-2" role="group" aria-label="View options">
+                        <button type="button" class="btn btn-theme view-btn" data-view="table">
+                            <i class="fas fa-table"></i>
+                        </button>
+                        <button type="button" class="btn btn-theme view-btn" data-view="small">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button type="button" class="btn btn-theme view-btn active" data-view="large">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" class="form-control" id="searchInput" placeholder="{% trans 'Search tracks...' %}">
+                    </div>
+                    <button class="btn btn-theme" data-bs-toggle="modal" data-bs-target="#filterModal">
+                        <i class="fas fa-filter"></i> {% trans "Filters" %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row" id="tracksList">
+        {% for track in tracks %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4 track-item" 
+             data-duration="{{ track.duration }}"
+             data-rating="{{ track.rating }}"
+             data-date="{{ track.created_at|date:'Y-m-d' }}">
+            <div class="card h-100">
+                <div class="position-relative">
+                    {% if track.image %}
+                    <img src="{{ track.image.url }}" class="card-img-top track-image" alt="{{ track.title }}">
+                    {% else %}
+                    <img src="{% static 'meditation/default-meditation.jpg' %}" class="card-img-top track-image" alt="{{ track.title }}">
+                    {% endif %}
+                    <div class="position-absolute bottom-0 start-0 p-3">
+                        <h5 class="mb-0">{{ track.duration }} {% trans "min." %}</h5>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="position-absolute top-0 end-0 p-2">
+                        <a href="{% url 'meditation:track_update' track.pk %}" class="btn btn-sm btn-theme me-1">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="me-2">{{ track.rating }}</span>
+                        <i class="fas fa-star text-warning"></i>
+                        <span class="ms-2">• {% trans "MEDITATION" %}</span>
+                    </div>
+                    <h5 class="card-title">{{ track.title }}</h5>
+                    <p class="card-text track-description">{{ track.description|truncatewords:30 }}</p>
+                    <p class="card-text">
+                        <small>
+                            <i class="fas fa-user"></i> {{ track.author }}
+                        </small>
+                    </p>
+                    {% if track.audio_file %}
+                    <audio controls class="w-100 mb-3 track-audio">
+                        <source src="{{ track.audio_file.url }}" type="audio/mpeg">
+                        {% trans "Your browser does not support the audio element." %}
+                    </audio>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'meditation:track_detail' track.pk %}" class="btn btn-primary w-100">
+                        {% trans "Start Meditation" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                {% trans "No meditation tracks available at the moment." %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Filter Modal -->
+<div class="modal fade" id="filterModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{% trans "Filter Tracks" %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">{% trans "Duration" %}</label>
+                    <div class="d-flex gap-2">
+                        <input type="number" class="form-control" id="minDuration" placeholder="{% trans 'Min' %}">
+                        <input type="number" class="form-control" id="maxDuration" placeholder="{% trans 'Max' %}">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">{% trans "Rating" %}</label>
+                    <select class="form-select" id="ratingFilter">
+                        <option value="">{% trans "All" %}</option>
+                        <option value="4.5">4.5+</option>
+                        <option value="4.0">4.0+</option>
+                        <option value="3.5">3.5+</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
+                <button type="button" class="btn btn-primary" id="applyFilters">{% trans "Apply" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tracksList = document.getElementById('tracksList');
+    const searchInput = document.getElementById('searchInput');
+    const sortButtons = document.querySelectorAll('[data-sort]');
+    const applyFiltersBtn = document.getElementById('applyFilters');
+    
+    // Пошук
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const tracks = document.querySelectorAll('.track-item');
+        
+        tracks.forEach(track => {
+            const title = track.querySelector('.card-title').textContent.toLowerCase();
+            const description = track.querySelector('.card-text').textContent.toLowerCase();
+            const shouldShow = title.includes(searchTerm) || description.includes(searchTerm);
+            track.style.display = shouldShow ? '' : 'none';
+        });
+    });
+    
+    // Сортування
+    sortButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const sortBy = this.dataset.sort;
+            const tracks = Array.from(document.querySelectorAll('.track-item'));
+            
+            tracks.sort((a, b) => {
+                const aValue = a.dataset[sortBy];
+                const bValue = b.dataset[sortBy];
+                return bValue.localeCompare(aValue);
+            });
+            
+            tracks.forEach(track => tracksList.appendChild(track));
+        });
+    });
+    
+    // Фільтри
+    applyFiltersBtn.addEventListener('click', function() {
+        const minDuration = document.getElementById('minDuration').value;
+        const maxDuration = document.getElementById('maxDuration').value;
+        const minRating = document.getElementById('ratingFilter').value;
+        
+        const tracks = document.querySelectorAll('.track-item');
+        tracks.forEach(track => {
+            const duration = parseInt(track.dataset.duration);
+            const rating = parseFloat(track.dataset.rating);
+            
+            let shouldShow = true;
+            
+            if (minDuration && duration < parseInt(minDuration)) shouldShow = false;
+            if (maxDuration && duration > parseInt(maxDuration)) shouldShow = false;
+            if (minRating && rating < parseFloat(minRating)) shouldShow = false;
+            
+            track.style.display = shouldShow ? '' : 'none';
+        });
+        
+        bootstrap.Modal.getInstance(document.getElementById('filterModal')).hide();
+    });
+    
+    // Обране
+    const favoriteButtons = document.querySelectorAll('.favorite-btn');
+    favoriteButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const icon = this.querySelector('i');
+            icon.classList.toggle('text-danger');
+        });
+    });
+    
+    // View switching
+    const viewButtons = document.querySelectorAll('.view-btn');
+    
+    viewButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const view = this.dataset.view;
+            
+            // Remove active class from all buttons
+            viewButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Remove all view classes
+            tracksList.classList.remove('view-table', 'view-small', 'view-large');
+            // Add new view class
+            tracksList.classList.add(`view-${view}`);
+            
+            // Update track items layout
+            const trackItems = document.querySelectorAll('.track-item');
+            trackItems.forEach(item => {
+                item.className = 'track-item'; // Reset classes
+                switch(view) {
+                    case 'table':
+                        item.classList.add('col-12', 'mb-2');
+                        break;
+                    case 'small':
+                        item.classList.add('col-6', 'col-md-4', 'col-lg-3', 'mb-3');
+                        break;
+                    case 'large':
+                        item.classList.add('col-12', 'col-md-6', 'col-lg-4', 'mb-4');
+                        break;
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.2s;
+        background-color: var(--card-bg);
+        color: var(--text-color);
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .btn-theme {
+        background-color: var(--card-bg);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+    }
+    .btn-theme:hover {
+        background-color: var(--hover-bg);
+        color: var(--text-color);
+    }
+    .input-group-text {
+        background-color: var(--card-bg);
+        color: var(--text-color);
+        border-color: var(--border-color);
+    }
+    .form-control {
+        background-color: var(--card-bg);
+        color: var(--text-color);
+        border-color: var(--border-color);
+    }
+    .form-control:focus {
+        background-color: var(--card-bg);
+        color: var(--text-color);
+    }
+    .modal-content {
+        background-color: var(--card-bg);
+        color: var(--text-color);
+    }
+    .modal-header, .modal-footer {
+        border-color: var(--border-color);
+    }
+    
+    /* View styles */
+    .view-table .track-item .card {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .view-table .track-item .card-img-top {
+        width: 150px;
+        height: 100px;
+        object-fit: cover;
+    }
+    
+    .view-table .track-item .card-body {
+        padding: 1rem;
+        flex: 1;
+    }
+    
+    .view-table .track-description {
+        max-height: 3em;
+        overflow: hidden;
+    }
+    
+    .view-small .track-image {
+        height: 150px;
+    }
+    
+    .view-large .track-image {
+        height: 200px;
+    }
+    
+    .view-small .track-description {
+        max-height: 4.5em;
+        overflow: hidden;
+    }
+    
+    .view-small .track-audio {
+        display: none;
+    }
+    
+    .btn-theme.active {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+</style>
+{% endblock %} 

@@ -1,0 +1,400 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>{% block title %}Meditation App{% endblock %}</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Meditation App - Your daily meditation companion">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Meditation">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="{% static 'meditation/manifest.json' %}">
+    
+    <!-- PWA Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://placehold.co/32x32?text=M">
+    <link rel="icon" type="image/png" sizes="72x72" href="https://placehold.co/72x72?text=M">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://placehold.co/96x96?text=M">
+    <link rel="icon" type="image/png" sizes="144x144" href="https://placehold.co/144x144?text=M">
+    <link rel="icon" type="image/png" sizes="152x152" href="https://placehold.co/152x152?text=M">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://placehold.co/192x192?text=M">
+    <link rel="icon" type="image/png" sizes="384x384" href="https://placehold.co/384x384?text=M">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://placehold.co/512x512?text=M">
+    
+    <!-- iOS Icons -->
+    <link rel="apple-touch-icon" sizes="72x72" href="https://placehold.co/72x72?text=M">
+    <link rel="apple-touch-icon" sizes="96x96" href="https://placehold.co/96x96?text=M">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://placehold.co/144x144?text=M">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://placehold.co/152x152?text=M">
+    <link rel="apple-touch-icon" sizes="192x192" href="https://placehold.co/192x192?text=M">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link href="{% static 'meditation/css/styles.css' %}" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Light Theme Variables */
+            --primary-color: #007bff;
+            --text-color: #212529;
+            --background-color: #ffffff;
+            --nav-bg: #343a40;
+            --nav-text: #ffffff;
+            --card-bg: #ffffff;
+            --card-bg-rgb: 255, 255, 255;
+            --border-color: #dee2e6;
+            --content-bg-rgb: 255, 255, 255;
+            --nav-height: 56px;
+            --footer-height: 60px;
+            --page-bg-color: {{ page_background.color }};
+            --page-bg-opacity: {{ page_background.opacity }};
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme Variables */
+            --primary-color: #0d6efd;
+            --text-color: #f8f9fa;
+            --background-color: #121212;
+            --nav-bg: #1a1a1a;
+            --nav-text: #ffffff;
+            --card-bg: #2d2d2d;
+            --card-bg-rgb: 45, 45, 45;
+            --border-color: #404040;
+            --content-bg-rgb: 18, 18, 18;
+        }
+        
+        /* Page background styles */
+        .page-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background-color: var(--page-bg-color, var(--background-color));
+        }
+        
+        .page-background-image,
+        .page-background-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: var(--page-bg-opacity, 1);
+        }
+        
+        .page-background-color {
+            width: 100%;
+            height: 100%;
+            background-color: var(--page-bg-color, var(--background-color));
+            opacity: var(--page-bg-opacity, 1);
+        }
+        
+        .content-wrapper {
+            position: relative;
+            min-height: calc(100vh - var(--nav-height));
+            background-color: rgba(var(--content-bg-rgb), var(--page-bg-opacity, 0.95));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1;
+        }
+        
+        /* Navigation styles */
+        .navbar {
+            background-color: var(--nav-bg) !important;
+            z-index: 1030;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link,
+        .navbar-dark .navbar-brand {
+            color: var(--nav-text) !important;
+        }
+        
+        .dropdown-menu {
+            background-color: var(--card-bg);
+            border-color: var(--border-color);
+        }
+        
+        .dropdown-item {
+            color: var(--text-color);
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--background-color);
+            color: var(--primary-color);
+        }
+        
+        .alert {
+            background-color: var(--card-bg);
+            border-color: var(--border-color);
+            color: var(--text-color);
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: var(--nav-bg);
+            color: var(--nav-text);
+            padding: 1rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--nav-text);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        /* Theme switcher */
+        .theme-switcher {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+
+        .theme-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Language switcher styles */
+        .language-form {
+            margin: 0;
+            padding: 0;
+        }
+
+        .language-form button.dropdown-item {
+            width: 100%;
+            text-align: left;
+            padding: 0.5rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .language-form button.dropdown-item.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .language-form button.dropdown-item:hover {
+            background-color: rgba(var(--primary-color-rgb), 0.1);
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .dropdown-menu {
+                position: static !important;
+                float: none;
+                width: auto;
+                margin-top: 0;
+                background-color: transparent;
+                border: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="{% if request.path|slice:':6' == '/admin' %}admin-interface{% endif %}{% if 'add' in request.path %} add-page{% endif %}{% if 'change' in request.path %} change-page{% endif %}{% if 'upload' in request.path %} upload-page{% endif %}">
+    <!-- Page Background -->
+    <div class="page-background">
+        {% if page_background.image %}
+            <img class="page-background-image" src="{{ page_background.image }}" alt="">
+        {% elif page_background.video %}
+            <video class="page-background-video" autoplay muted loop playsinline>
+                <source src="{{ page_background.video }}" type="video/mp4">
+            </video>
+        {% else %}
+            <div class="page-background-color"></div>
+        {% endif %}
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'meditation:home' %}">{% trans "Meditation App" %}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'meditation:track_list' %}">{% trans "Tracks" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'meditation:course_list' %}">{% trans "Courses" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'meditation:workshop_list' %}">{% trans "Workshops" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'meditation:group_list' %}">{% trans "Groups" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'meditation:event_list' %}">{% trans "Events" %}</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'meditation:favorite_tracks' %}">
+                            <i class="fas fa-heart"></i> {% trans "Favorites" %}
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <button class="theme-switcher nav-link" aria-label="Toggle theme">
+                            <span class="theme-icon">🌙</span>
+                        </button>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                {% if user.is_staff %}
+                                    <li><a class="dropdown-item" href="{% url 'admin:index' %}">{% trans "Admin Panel" %}</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                {% endif %}
+                                <li>
+                                    <form method="post" action="{% url 'meditation:logout' %}" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="dropdown-item text-danger" style="border: none; background: none; width: 100%; text-align: left;">
+                                            <i class="fas fa-sign-out-alt"></i> {% trans "Logout" %}
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'meditation:login' %}">{% trans "Login" %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'meditation:register' %}">{% trans "Register" %}</a>
+                        </li>
+                    {% endif %}
+                    <!-- Language Switcher -->
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-globe"></i> {% trans "Language" %}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <form action="{% url 'set_language' %}" method="post" class="language-form">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ request.path }}">
+                                {% get_current_language as CURRENT_LANGUAGE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% for lang_code, lang_name in LANGUAGES %}
+                                    <button type="submit" name="language" value="{{ lang_code }}" 
+                                            class="dropdown-item {% if lang_code == CURRENT_LANGUAGE %}active{% endif %}">
+                                        {{ lang_name }}
+                                    </button>
+                                {% endfor %}
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End Language Switcher -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="container mt-4">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <div class="social-links">
+                    <a href="https://instagram.com" target="_blank" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" title="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="mailto:support@meditation.app" title="{% trans 'Technical Support' %}">
+                        <i class="fas fa-headset"></i>
+                    </a>
+                    <a href="{% url 'meditation:rules' %}" title="{% trans 'Rules' %}">
+                        <i class="fas fa-book"></i>
+                    </a>
+                </div>
+            </div>
+            <p class="footer-text">&copy; {% now "Y" %} Meditation App. {% trans "All rights reserved" %}.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="{% static 'meditation/js/main.js' %}"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('{% static "meditation/sw.js" %}')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 

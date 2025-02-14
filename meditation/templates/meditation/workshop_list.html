@@ -1,0 +1,84 @@
+{% extends 'meditation/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Workshops" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>{% trans "Workshops" %}</h1>
+    </div>
+    
+    <div class="row">
+        {% for workshop in workshops %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 bg-dark text-white">
+                <div class="position-relative">
+                    {% if workshop.image %}
+                    <img src="{{ workshop.image.url }}" class="card-img-top" alt="{{ workshop.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                    <img src="{% static 'meditation/default-workshop.jpg' %}" class="card-img-top" alt="{{ workshop.title }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="position-absolute bottom-0 start-0 p-3">
+                        <h5 class="mb-0">{{ workshop.date|date:"d M Y" }}</h5>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="position-absolute top-0 end-0 p-2">
+                        <a href="{% url 'meditation:workshop_edit' workshop.pk %}" class="btn btn-sm btn-outline-light me-1">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="me-2">
+                            <i class="fas fa-map-marker-alt"></i> {{ workshop.location }}
+                        </span>
+                        <span class="ms-auto">{{ workshop.price }} €</span>
+                    </div>
+                    <h5 class="card-title">{{ workshop.title }}</h5>
+                    <p class="card-text">{{ workshop.description|truncatewords:30 }}</p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <i class="fas fa-users"></i> {% trans "Max participants" %}: {{ workshop.max_participants }}
+                        </small>
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <i class="fas fa-user"></i> {{ workshop.author }}
+                        </small>
+                    </p>
+                </div>
+                {% if workshop.video_url %}
+                <div class="card-footer bg-dark">
+                    <a href="{{ workshop.video_url }}" class="btn btn-outline-light" target="_blank">
+                        <i class="fas fa-play-circle"></i> {% trans "Watch Preview" %}
+                    </a>
+                </div>
+                {% endif %}
+                <a href="{% url 'meditation:workshop_detail' workshop.pk %}" class="stretched-link"></a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                {% trans "No workshops available at the moment." %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.2s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %} 

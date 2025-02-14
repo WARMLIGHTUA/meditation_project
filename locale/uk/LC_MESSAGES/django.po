@@ -1,0 +1,591 @@
+# Ukrainian translations for meditation project.
+# Copyright (C) 2024
+# This file is distributed under the same license as the meditation package.
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-20 12:00+0000\n"
+"PO-Revision-Date: 2024-03-20 12:00+0000\n"
+"Last-Translator: Your Name <your.email@example.com>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+# Model fields
+msgid "Title"
+msgstr "Назва"
+
+msgid "Description"
+msgstr "Опис"
+
+msgid "Image"
+msgstr "Зображення"
+
+msgid "Video URL"
+msgstr "URL відео"
+
+msgid "Created at"
+msgstr "Створено"
+
+msgid "Rating"
+msgstr "Рейтинг"
+
+msgid "Author"
+msgstr "Автор"
+
+msgid "Audio File"
+msgstr "Аудіо файл"
+
+msgid "Upload MP3 or WAV file"
+msgstr "Завантажте файл MP3 або WAV"
+
+msgid "Duration"
+msgstr "Тривалість"
+
+msgid "Duration in minutes"
+msgstr "Тривалість у хвилинах"
+
+msgid "Featured"
+msgstr "Рекомендовані"
+
+msgid "Duration in weeks"
+msgstr "Тривалість у тижнях"
+
+msgid "Price"
+msgstr "Ціна"
+
+msgid "Date and Time"
+msgstr "Дата та час"
+
+msgid "Location"
+msgstr "Місце проведення"
+
+msgid "Maximum Participants"
+msgstr "Максимальна кількість учасників"
+
+msgid "Members Count"
+msgstr "Кількість учасників"
+
+msgid "Private Group"
+msgstr "Приватна група"
+
+msgid "Online Event"
+msgstr "Онлайн подія"
+
+msgid "User"
+msgstr "Користувач"
+
+msgid "First Name"
+msgstr "Ім'я"
+
+msgid "Last Name"
+msgstr "Прізвище"
+
+msgid "Birth Year"
+msgstr "Рік народження"
+
+msgid "Gender"
+msgstr "Стать"
+
+msgid "Male"
+msgstr "Чоловіча"
+
+msgid "Female"
+msgstr "Жіноча"
+
+msgid "Other"
+msgstr "Інше"
+
+msgid "User Profile"
+msgstr "Профіль користувача"
+
+msgid "User Profiles"
+msgstr "Профілі користувачів"
+
+msgid "Favorite Meditation"
+msgstr "Улюблена медитація"
+
+msgid "Favorite Meditations"
+msgstr "Улюблені медитації"
+
+msgid "Added at"
+msgstr "Додано"
+
+msgid "Page"
+msgstr "Сторінка"
+
+msgid "Theme"
+msgstr "Тема"
+
+msgid "Background Image"
+msgstr "Фонове зображення"
+
+msgid "Background Video"
+msgstr "Фонове відео"
+
+msgid "Upload MP4 or WebM file"
+msgstr "Завантажте файл MP4 або WebM"
+
+msgid "Background Color"
+msgstr "Колір фону"
+
+msgid "HEX color code (e.g. #FFFFFF)"
+msgstr "HEX код кольору (напр. #FFFFFF)"
+
+msgid "Background Opacity"
+msgstr "Прозорість фону"
+
+msgid "Page Background"
+msgstr "Фон сторінки"
+
+msgid "Page Backgrounds"
+msgstr "Фони сторінок"
+
+# Form validation messages
+msgid "Username or Email"
+msgstr "Ім'я користувача або Email"
+
+msgid "Enter your username or email"
+msgstr "Введіть ім'я користувача або email"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Enter your password"
+msgstr "Введіть пароль"
+
+msgid "Both username and password are required."
+msgstr "Необхідно ввести ім'я користувача та пароль."
+
+msgid "Username"
+msgstr "Ім'я користувача"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Confirm Password"
+msgstr "Підтвердіть пароль"
+
+msgid "Username can only contain letters, numbers, and @/./+/-/_ characters."
+msgstr "Ім'я користувача може містити лише літери, цифри та символи @/./+/-/_"
+
+msgid "This username is already taken."
+msgstr "Це ім'я користувача вже зайняте."
+
+msgid "This email is already registered."
+msgstr "Цей email вже зареєстрований."
+
+msgid "Passwords do not match."
+msgstr "Паролі не співпадають."
+
+msgid "Password must be at least 8 characters long."
+msgstr "Пароль повинен містити щонайменше 8 символів."
+
+msgid "Password must contain at least one uppercase letter."
+msgstr "Пароль повинен містити хоча б одну велику літеру."
+
+msgid "Password must contain at least one lowercase letter."
+msgstr "Пароль повинен містити хоча б одну малу літеру."
+
+msgid "Password must contain at least one digit."
+msgstr "Пароль повинен містити хоча б одну цифру."
+
+msgid "Password must contain at least one special character."
+msgstr "Пароль повинен містити хоча б один спеціальний символ."
+
+msgid "Enter your first name"
+msgstr "Введіть ваше ім'я"
+
+msgid "Enter your last name"
+msgstr "Введіть ваше прізвище"
+
+msgid "Enter your birth year"
+msgstr "Введіть рік народження"
+
+msgid "First name should contain only letters."
+msgstr "Ім'я повинно містити лише літери."
+
+msgid "Last name should contain only letters."
+msgstr "Прізвище повинно містити лише літери."
+
+msgid "Please enter a valid birth year between 1900 and 2100."
+msgstr "Будь ласка, введіть дійсний рік народження між 1900 та 2100."
+
+msgid "Don't have an account?"
+msgstr "Не маєте облікового запису?"
+
+msgid "Register here"
+msgstr "Зареєструватися тут"
+
+msgid "Already have an account?"
+msgstr "Вже маєте обліковий запис?"
+
+msgid "Login here"
+msgstr "Увійти тут"
+
+msgid "Account Information"
+msgstr "Інформація про обліковий запис"
+
+msgid "Profile Information"
+msgstr "Інформація профілю"
+
+msgid "Meditation App"
+msgstr "Додаток для медитації"
+
+msgid "Tracks"
+msgstr "Медитації"
+
+msgid "Courses"
+msgstr "Курси"
+
+msgid "Workshops"
+msgstr "Воркшопи"
+
+msgid "Groups"
+msgstr "Групи"
+
+msgid "Events"
+msgstr "Події"
+
+msgid "Favorites"
+msgstr "Улюблені"
+
+msgid "Login"
+msgstr "Увійти"
+
+msgid "Register"
+msgstr "Зареєструватися"
+
+msgid "Logout"
+msgstr "Вийти"
+
+msgid "Profile"
+msgstr "Профіль"
+
+msgid "Admin"
+msgstr "Адмін"
+
+msgid "Search"
+msgstr "Пошук"
+
+msgid "Light"
+msgstr "Світла"
+
+msgid "Dark"
+msgstr "Темна"
+
+msgid "Meditation track was created successfully"
+msgstr "Медитацію успішно створено"
+
+msgid "Meditation track was updated successfully"
+msgstr "Медитацію успішно оновлено"
+
+msgid "Course was created successfully"
+msgstr "Курс успішно створено"
+
+msgid "Course was updated successfully"
+msgstr "Курс успішно оновлено"
+
+msgid "Workshop was created successfully"
+msgstr "Воркшоп успішно створено"
+
+msgid "Workshop was updated successfully"
+msgstr "Воркшоп успішно оновлено"
+
+msgid "Group was created successfully"
+msgstr "Групу успішно створено"
+
+msgid "Group was updated successfully"
+msgstr "Групу успішно оновлено"
+
+msgid "Event was created successfully"
+msgstr "Подію успішно створено"
+
+msgid "Event was updated successfully"
+msgstr "Подію успішно оновлено"
+
+msgid "Successfully logged in!"
+msgstr "Успішний вхід!"
+
+msgid "Invalid username or password."
+msgstr "Невірне ім'я користувача або пароль."
+
+msgid "Registration successful! Welcome to our community!"
+msgstr "Реєстрація успішна! Ласкаво просимо до нашої спільноти!"
+
+msgid "Please correct the errors below."
+msgstr "Будь ласка, виправте помилки нижче."
+
+msgid "Meditation track not found"
+msgstr "Медитацію не знайдено"
+
+msgid "Meditation"
+msgstr "Медитація"
+
+msgid "Meditation List"
+msgstr "Список медитацій"
+
+msgid "Meditations"
+msgstr "Медитації"
+
+msgid "Duration"
+msgstr "Тривалість"
+
+msgid "min."
+msgstr "хв."
+
+msgid "Start Meditation"
+msgstr "Почати медитацію"
+
+msgid "No meditations available at the moment."
+msgstr "Наразі немає доступних медитацій."
+
+msgid "Volume"
+msgstr "Гучність"
+
+msgid "Start"
+msgstr "Почати"
+
+msgid "Pause"
+msgstr "Пауза"
+
+msgid "Reset"
+msgstr "Скинути"
+
+msgid "Top"
+msgstr "Топ"
+
+msgid "Sort"
+msgstr "Сортування"
+
+msgid "Filters"
+msgstr "Фільтри"
+
+msgid "MEDITATION"
+msgstr "МЕДИТАЦІЯ"
+
+msgid "Home"
+msgstr "Головна"
+
+msgid "Learn"
+msgstr "Вивчати"
+
+msgid "Practice"
+msgstr "Практика"
+
+msgid "Community"
+msgstr "Спільнота"
+
+msgid "Content management is available in the admin panel"
+msgstr "Управління контентом доступне в панелі адміністратора"
+
+msgid "Max participants"
+msgstr "Максимальна кількість учасників"
+
+msgid "Watch Preview"
+msgstr "Дивитись прев'ю"
+
+msgid "No workshops available at the moment."
+msgstr "На даний момент воркшопи відсутні."
+
+msgid "Edit Workshop"
+msgstr "Редагувати воркшоп"
+
+msgid "Create New Workshop"
+msgstr "Створити новий воркшоп"
+
+msgid "Meditation Tracks"
+msgstr "Медитації"
+
+msgid "Search tracks..."
+msgstr "Пошук медитацій..."
+
+msgid "Your browser does not support the audio element."
+msgstr "Ваш браузер не підтримує аудіо елемент."
+
+msgid "Filter Tracks"
+msgstr "Фільтрувати медитації"
+
+msgid "Min"
+msgstr "Мін"
+
+msgid "Max"
+msgstr "Макс"
+
+msgid "All"
+msgstr "Всі"
+
+msgid "Close"
+msgstr "Закрити"
+
+msgid "Apply"
+msgstr "Застосувати"
+
+msgid "Top Content"
+msgstr "Топ контент"
+
+msgid "Watch Video"
+msgstr "Дивитись відео"
+
+msgid "No top content available at the moment."
+msgstr "На даний момент топ контент відсутній."
+
+msgid "Created"
+msgstr "Створено"
+
+msgid "Like"
+msgstr "Вподобати"
+
+msgid "Share"
+msgstr "Поділитися"
+
+msgid "Comments"
+msgstr "Коментарі"
+
+msgid "Add a comment..."
+msgstr "Додати коментар..."
+
+msgid "Post Comment"
+msgstr "Опублікувати коментар"
+
+msgid "User Name"
+msgstr "Ім'я користувача"
+
+msgid "This is a sample comment."
+msgstr "Це приклад коментаря."
+
+msgid "hours ago"
+msgstr "годин тому"
+
+msgid "Rules and Terms of Use"
+msgstr "Правила та умови використання"
+
+msgid "1. General Provisions"
+msgstr "1. Загальні положення"
+
+msgid "These rules govern the use of the Meditation App platform and establish the rights and obligations of users."
+msgstr "Ці правила регулюють використання платформи Meditation App та встановлюють права та обов'язки користувачів."
+
+msgid "2. User Rights and Responsibilities"
+msgstr "2. Права та обов'язки користувачів"
+
+msgid "Users must be at least 13 years old"
+msgstr "Користувачі повинні бути не молодше 13 років"
+
+msgid "Users are responsible for maintaining the confidentiality of their account"
+msgstr "Користувачі відповідають за збереження конфіденційності свого облікового запису"
+
+msgid "Users must not share inappropriate or harmful content"
+msgstr "Користувачі не повинні поширювати неприйнятний або шкідливий контент"
+
+msgid "3. Privacy Policy"
+msgstr "3. Політика конфіденційності"
+
+msgid "We respect your privacy and protect your personal data according to GDPR and other applicable laws."
+msgstr "Ми поважаємо вашу конфіденційність та захищаємо ваші персональні дані відповідно до GDPR та інших застосовних законів."
+
+msgid "4. Content Usage"
+msgstr "4. Використання контенту"
+
+msgid "All content on the platform is protected by copyright and may not be used without permission."
+msgstr "Весь контент на платформі захищений авторським правом і не може бути використаний без дозволу."
+
+msgid "5. Technical Support"
+msgstr "5. Технічна підтримка"
+
+msgid "For technical support, please contact us at:"
+msgstr "Для технічної підтримки, будь ласка, зв'яжіться з нами за адресою:"
+
+msgid "Featured Content"
+msgstr "Рекомендований контент"
+
+msgid "Edit Meditation Track"
+msgstr "Редагувати медитацію"
+
+msgid "Create New Meditation Track"
+msgstr "Створити нову медитацію"
+
+msgid "Private"
+msgstr "Приватна"
+
+msgid "Public"
+msgstr "Публічна"
+
+msgid "Join Group"
+msgstr "Приєднатися до групи"
+
+msgid "No groups available at the moment."
+msgstr "На даний момент групи відсутні."
+
+msgid "Edit Group"
+msgstr "Редагувати групу"
+
+msgid "Create New Group"
+msgstr "Створити нову групу"
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "My Favorite Meditations"
+msgstr "Мої улюблені медитації"
+
+msgid "Search favorites..."
+msgstr "Пошук улюблених..."
+
+msgid "Date Added"
+msgstr "Дата додавання"
+
+msgid "Technical Support"
+msgstr "Технічна підтримка"
+
+msgid "Rules"
+msgstr "Правила"
+
+msgid "All rights reserved"
+msgstr "Всі права захищені"
+
+msgid "Admin Panel"
+msgstr "Панель адміністратора"
+
+msgid "Successfully registered!"
+msgstr "Успішно зареєстровано!"
+
+msgid "Registration failed. Please check the form for errors."
+msgstr "Помилка реєстрації. Будь ласка, перевірте форму на наявність помилок."
+
+msgid "First name can only contain letters, spaces, hyphens and apostrophes."
+msgstr "Ім'я може містити лише літери, пробіли, дефіси та апострофи."
+
+msgid "Last name can only contain letters, spaces, hyphens and apostrophes."
+msgstr "Прізвище може містити лише літери, пробіли, дефіси та апострофи."
+
+msgid "Please enter a valid birth year between 1900 and current year."
+msgstr "Будь ласка, введіть дійсний рік народження між 1900 та поточним роком."
+
+msgid "Please select your gender."
+msgstr "Будь ласка, виберіть вашу стать."
+
+msgid "Invalid gender selection."
+msgstr "Невірний вибір статі."
+
+msgid "Registration failed. Please try again."
+msgstr "Помилка реєстрації. Будь ласка, спробуйте ще раз."
+
+msgid "Language"
+msgstr "Мова"
+
+msgid "Ukrainian"
+msgstr "Українська"
+
+msgid "English"
+msgstr "Англійська"
+
+msgid "French"
+msgstr "Французька" 

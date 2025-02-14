@@ -1,0 +1,38 @@
+:root {
+    --light-bg: #ffffff;
+    --light-text: #333333;
+    --dark-bg: #1a1a1a;
+    --dark-text: #ffffff;
+}
+
+/* Theme transitions */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light theme */
+[data-theme="light"] {
+    background-color: var(--light-bg);
+    color: var(--light-text);
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+/* Theme switcher styles */
+.theme-switcher {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 1.2rem;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.theme-switcher:hover {
+    opacity: 1;
+} 
