@@ -4,6 +4,7 @@ FROM python:3.11-slim
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
+    procps \
     && rm -rf /var/lib/apt/lists/*
 
 # Встановлення робочої директорії
@@ -16,18 +17,16 @@ RUN pip install --no-cache-dir --upgrade pip setuptools wheel
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копіювання конфігурації Gunicorn
-COPY gunicorn.conf.py .
-
 # Копіювання файлів проекту
 COPY . .
 
 # Змінні середовища
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    DJANGO_SETTINGS_MODULE=meditation_app.settings
+    DJANGO_SETTINGS_MODULE=meditation_app.settings \
+    PORT=8080
 
-# Створення скрипту для запуску
+# Створення та налаштування entrypoint
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
@@ -35,7 +34,7 @@ RUN chmod +x /docker-entrypoint.sh
 RUN python manage.py collectstatic --noinput
 
 # Відкриття порту
-EXPOSE 8000
+EXPOSE 8080
 
-# Запуск додатку через entrypoint скрипт
+# Запуск додатку
 ENTRYPOINT ["/docker-entrypoint.sh"] 
