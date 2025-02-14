@@ -26,18 +26,15 @@ echo "Pip version: $(pip --version)"
 echo "Django settings module: ${DJANGO_SETTINGS_MODULE:-Not set}"
 echo "Environment name: ${ENVIRONMENT_NAME:-Not set}"
 echo "Django debug mode: ${DJANGO_DEBUG:-Not set}"
-echo "Gunicorn log level: ${GUNICORN_LOG_LEVEL:-Not set}"
+echo "Gunicorn log level: ${GUNICORN_LOG_LEVEL:-info}"
 
-# Перевірка наявності змінних середовища PostgreSQL
-if [ -z "$PGHOST" ] || [ -z "$PGPORT" ] || [ -z "$PGUSER" ] || [ -z "$PGPASSWORD" ] || [ -z "$PGDATABASE" ]; then
-    echo "ERROR: Required PostgreSQL environment variables are not set!"
-    echo "PGHOST: ${PGHOST:-Not set}"
-    echo "PGPORT: ${PGPORT:-Not set}"
-    echo "PGUSER: ${PGUSER:-Not set}"
-    echo "PGDATABASE: ${PGDATABASE:-Not set}"
-    echo "DATABASE_URL type: $(echo $DATABASE_URL | cut -d: -f1)"
+# Перевірка DATABASE_URL
+if [ -z "$DATABASE_URL" ]; then
+    echo "ERROR: DATABASE_URL is not set!"
     exit 1
 fi
+
+echo "Database URL type: $(echo $DATABASE_URL | cut -d: -f1)"
 
 # Перевірка доступності бази даних
 echo "Checking database connection..."
@@ -45,19 +42,23 @@ python << END
 import sys
 import time
 import os
+from urllib.parse import urlparse
 import psycopg2
+
+db_url = os.getenv('DATABASE_URL')
+url = urlparse(db_url)
 
 for i in range(5):
     try:
         conn = psycopg2.connect(
-            dbname=os.getenv('PGDATABASE'),
-            user=os.getenv('PGUSER'),
-            password=os.getenv('PGPASSWORD'),
-            host=os.getenv('PGHOST'),
-            port=os.getenv('PGPORT')
+            dbname=url.path[1:],
+            user=url.username,
+            password=url.password,
+            host=url.hostname,
+            port=url.port
         )
         conn.close()
-        print(f"Database connection successful to {os.getenv('PGHOST')}:{os.getenv('PGPORT')}")
+        print(f"Database connection successful to {url.hostname}:{url.port}")
         sys.exit(0)
     except psycopg2.OperationalError as e:
         print(f"Attempt {i+1}: Database connection failed - {str(e)}")
