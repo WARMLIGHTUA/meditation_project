@@ -1,23 +1,24 @@
 import os
+import multiprocessing
 
-# Основні налаштування
+# Базові налаштування
 bind = f"0.0.0.0:{os.getenv('PORT', '8080')}"
-workers = 1  # Зменшуємо кількість воркерів
-worker_class = 'sync'  # Використовуємо простіший воркер
+workers = 1
+worker_class = 'sync'
 timeout = 30
 
-# Налаштування логування
+# Логування
 accesslog = '-'
 errorlog = '-'
 loglevel = 'info'
 
-# Налаштування для проксі
+# Проксі
 forwarded_allow_ips = '*'
 proxy_allow_ips = '*'
 
-# Налаштування процесу
-proc_name = 'meditation_app'
+# Додатково
 wsgi_app = 'meditation_app.wsgi:application'
+reload = False
 
 # Налаштування користувача
 user = None
@@ -35,9 +36,6 @@ suppress_ragged_eofs = True
 do_handshake_on_connect = False
 ciphers = None
 
-# Додаткові налаштування продуктивності
-reload = False
-
 # Налаштування для статистики
 statsd_host = os.getenv('STATSD_HOST', None)
 statsd_prefix = 'meditation_app'
@@ -47,9 +45,6 @@ def on_starting(server):
     server.log.info("Starting Meditation App")
 
 def worker_exit(server, worker):
-    try:
-        from django.db import connections
-        for conn in connections.all():
-            conn.close()
-    except:
-        pass 
+    from django.db import connections
+    for conn in connections.all():
+        conn.close() 

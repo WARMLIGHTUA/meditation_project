@@ -88,14 +88,11 @@ DATABASES = {
     )
 }
 
-# Connection pool settings
-if not DEBUG:
+# Налаштування для PostgreSQL в продакшені
+if not DEBUG and 'postgres' in DATABASES['default'].get('ENGINE', ''):
     DATABASES['default'].update({
-        'ATOMIC_REQUESTS': True,
         'OPTIONS': {
             'sslmode': 'require',
-            'client_encoding': 'UTF8',
-            'application_name': 'meditation_app',
             'keepalives': 1,
             'keepalives_idle': 30,
             'keepalives_interval': 10,
