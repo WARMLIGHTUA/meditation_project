@@ -38,9 +38,7 @@ gunicorn meditation_app.wsgi:application \
     --capture-output \
     --enable-stdio-inheritance \
     --timeout 120 \
-    --forwarded-allow-ips="*" \
-    --proxy-protocol \
-    --proxy-allow-ips="*" &
+    --forwarded-allow-ips '*' &
 
 child=$!
 wait "$child" 
