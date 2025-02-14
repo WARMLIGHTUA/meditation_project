@@ -30,8 +30,8 @@ secure_scheme_headers = {
     'X-FORWARDED-PROTO': 'https',
     'X-FORWARDED-SSL': 'on'
 }
-forwarded_allow_ips = ['*']
-proxy_allow_ips = ['127.0.0.1']
+forwarded_allow_ips = '*'
+proxy_allow_ips = '127.0.0.1'
 proxy_protocol = False
 
 # Логування
