@@ -1,6 +1,6 @@
-Django==5.0.2
-python-dotenv==1.0.1
-Pillow==10.2.0
+Django==4.2.9
+python-dotenv==1.0.0
+Pillow==9.5.0
 django-crispy-forms==2.1
 crispy-bootstrap4==2024.1
 gunicorn==21.2.0
