@@ -17,19 +17,27 @@ keepalive = 2
 # Логування
 accesslog = '-'
 errorlog = '-'
-loglevel = 'info'
+loglevel = 'debug'
+capture_output = True
+enable_stdio_inheritance = True
+access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
 
-# Проксі
-forwarded_allow_ips = '*'
-proxy_allow_ips = '*'
+# Проксі та безпека
+forwarded_allow_ips = ['*']
+proxy_allow_ips = ['*']
+secure_scheme_headers = {
+    'X-FORWARDED-PROTOCOL': 'ssl',
+    'X-FORWARDED-PROTO': 'https',
+    'X-FORWARDED-SSL': 'on'
+}
 
 # Додатково
 wsgi_app = 'meditation_app.wsgi:application'
 reload = False
 
 # Налаштування користувача
-user = None
-group = None
+user = 0
+group = 0
 umask = 0
 initgroups = False
 
@@ -54,4 +62,8 @@ def on_starting(server):
 def worker_exit(server, worker):
     from django.db import connections
     for conn in connections.all():
-        conn.close() 
+        conn.close()
+
+# Процес
+proc_name = None
+default_proc_name = 'meditation_app.wsgi:application' 
