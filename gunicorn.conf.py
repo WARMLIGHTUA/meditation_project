@@ -2,40 +2,37 @@ import multiprocessing
 import os
 
 # Основні налаштування
-wsgi_app = 'meditation_app.wsgi:application'
 bind = f"0.0.0.0:{os.getenv('PORT', '8080')}"
-workers = multiprocessing.cpu_count() * 2 + 1
+workers = 3
 worker_class = 'gthread'
-threads = 4
+threads = 2
 timeout = 120
-keepalive = 5
 
-# Розширені налаштування логування
+# Налаштування логування
 accesslog = '-'
 errorlog = '-'
-loglevel = os.getenv('GUNICORN_LOG_LEVEL', 'info')
-access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
+loglevel = 'info'
 capture_output = True
-enable_stdio_inheritance = True
-logger_class = 'gunicorn.glogging.Logger'
 
 # Налаштування для Railway
 forwarded_allow_ips = '*'
 secure_scheme_headers = {
-    'X-FORWARDED-PROTOCOL': 'ssl',
-    'X-FORWARDED-PROTO': 'https',
-    'X-FORWARDED-SSL': 'on'
+    'X-FORWARDED-PROTO': 'https'
 }
 
 # Налаштування безпеки
-limit_request_line = 4094
-limit_request_fields = 100
-limit_request_field_size = 8190
-proxy_allow_ips = '127.0.0.1,*'
-proxy_protocol = False
+proxy_allow_ips = '*'
+
+# Додаткові налаштування
+worker_tmp_dir = '/dev/shm'
+preload_app = False
+
+# Розширені налаштування логування
+access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
+enable_stdio_inheritance = True
+logger_class = 'gunicorn.glogging.Logger'
 
 # Налаштування для файлової системи
-worker_tmp_dir = '/dev/shm'
 tmp_upload_dir = None
 
 # Налаштування користувача
@@ -59,7 +56,6 @@ max_requests = 1000
 max_requests_jitter = 50
 graceful_timeout = 30
 keepalive = 5
-preload_app = True
 reload = False
 
 # Налаштування для статистики

@@ -84,9 +84,7 @@ WSGI_APPLICATION = 'meditation_app.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        conn_max_age=600,
-        conn_health_checks=True,
-        ssl_require=True
+        conn_max_age=600
     )
 }
 
@@ -255,41 +253,17 @@ LOGGING = {
 # Proxy settings
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Additional security headers
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = 'DENY'
-
-# SSL settings
-if not DEBUG:
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SECURE = True
-    SECURE_SSL_REDIRECT = True
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
-else:
-    CSRF_COOKIE_SECURE = False
-    SESSION_COOKIE_SECURE = False
-    SECURE_SSL_REDIRECT = False
-
-# Trusted hosts
-CSRF_TRUSTED_ORIGINS = [
-    'https://*.up.railway.app',
-    'http://*.up.railway.app',
-]
 
 # Railway specific settings
 APP_STATIC_URL = os.environ.get('APP_STATIC_URL', '/static/')
 ENVIRONMENT_NAME = os.environ.get('ENVIRONMENT_NAME', 'development')
 
-if ENVIRONMENT_NAME == 'production':
-    SECURE_SSL_REDIRECT = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
+# CSRF settings
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.up.railway.app',
+    'http://*.up.railway.app',
+    f'https://{os.environ.get("APP_STATIC_URL", "").strip("/")}',
+]
 
 # Performance optimizations
 if not DEBUG:
@@ -314,10 +288,3 @@ SECURE_REFERRER_POLICY = 'same-origin'
 X_FRAME_OPTIONS = 'DENY'
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-
-# Update CSRF trusted origins
-CSRF_TRUSTED_ORIGINS = [
-    'https://*.up.railway.app',
-    'http://*.up.railway.app',
-    f'https://{os.environ.get("APP_STATIC_URL", "").strip("/")}',
-]
