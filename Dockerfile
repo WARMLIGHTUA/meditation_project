@@ -24,7 +24,9 @@ COPY . .
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     DJANGO_SETTINGS_MODULE=meditation_app.settings \
-    PORT=8080
+    PORT=8080 \
+    WEB_CONCURRENCY=2 \
+    GUNICORN_CMD_ARGS="--worker-tmp-dir /dev/shm --forwarded-allow-ips='*' --proxy-allow-ips='*'"
 
 # Створення та налаштування entrypoint
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
