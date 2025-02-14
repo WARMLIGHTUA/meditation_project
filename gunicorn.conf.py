@@ -6,6 +6,10 @@ bind = f"0.0.0.0:{os.getenv('PORT', '8080')}"
 workers = 2
 worker_class = 'gthread'
 threads = 2
+worker_tmp_dir = '/dev/shm'
+chdir = '/app'
+
+# Таймаути
 timeout = 120
 graceful_timeout = 30
 keepalive = 2
@@ -13,18 +17,15 @@ keepalive = 2
 # Логування
 accesslog = '-'
 errorlog = '-'
-loglevel = os.getenv('GUNICORN_LOG_LEVEL', 'info')
-access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(L)s'
+loglevel = 'info'
 
-# Проксі та безпека
+# Проксі
 forwarded_allow_ips = '*'
 proxy_allow_ips = '*'
-proxy_protocol = True
 
 # Додатково
 wsgi_app = 'meditation_app.wsgi:application'
 reload = False
-preload_app = True
 
 # Налаштування користувача
 user = None
