@@ -24,11 +24,15 @@ ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PORT=8000
 
+# Створення скрипту для запуску
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
 # Збирання статичних файлів
 RUN python manage.py collectstatic --noinput
 
 # Відкриття порту
 EXPOSE 8000
 
-# Запуск додатку
-CMD gunicorn meditation_app.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --threads 2 --log-level debug --access-logfile - --error-logfile - 
+# Запуск додатку через entrypoint скрипт
+ENTRYPOINT ["/docker-entrypoint.sh"] 
