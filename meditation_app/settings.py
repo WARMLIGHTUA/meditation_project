@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'meditation_app.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        conn_max_age=600
+        conn_max_age=60
     )
 }
 
@@ -262,7 +262,6 @@ ENVIRONMENT_NAME = os.environ.get('ENVIRONMENT_NAME', 'development')
 CSRF_TRUSTED_ORIGINS = [
     'https://*.up.railway.app',
     'http://*.up.railway.app',
-    f'https://{os.environ.get("APP_STATIC_URL", "").strip("/")}',
 ]
 
 # Performance optimizations
@@ -286,5 +285,3 @@ if not DEBUG:
 # Additional security headers
 SECURE_REFERRER_POLICY = 'same-origin'
 X_FRAME_OPTIONS = 'DENY'
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True

@@ -3,7 +3,7 @@ import os
 
 # Основні налаштування
 bind = f"0.0.0.0:{os.getenv('PORT', '8080')}"
-workers = 3
+workers = 2
 worker_class = 'gthread'
 threads = 2
 timeout = 120
@@ -11,29 +11,26 @@ timeout = 120
 # Налаштування логування
 accesslog = '-'
 errorlog = '-'
-loglevel = 'info'
+loglevel = 'debug'
 capture_output = True
+enable_stdio_inheritance = True
+logger_class = 'gunicorn.glogging.Logger'
 
-# Налаштування для Railway
+# Налаштування для проксі
 forwarded_allow_ips = '*'
+proxy_allow_ips = '*'
+proxy_protocol = False
 secure_scheme_headers = {
     'X-FORWARDED-PROTO': 'https'
 }
 
-# Налаштування безпеки
-proxy_allow_ips = '*'
-
-# Додаткові налаштування
-worker_tmp_dir = '/dev/shm'
-preload_app = False
-
-# Розширені налаштування логування
-access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
-enable_stdio_inheritance = True
-logger_class = 'gunicorn.glogging.Logger'
-
 # Налаштування для файлової системи
+worker_tmp_dir = '/dev/shm'
 tmp_upload_dir = None
+
+# Налаштування процесу
+proc_name = 'meditation_app'
+default_proc_name = 'meditation_app.wsgi:application'
 
 # Налаштування користувача
 user = None
