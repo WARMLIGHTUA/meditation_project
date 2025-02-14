@@ -84,9 +84,16 @@ WSGI_APPLICATION = 'meditation_app.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        conn_max_age=600
+        conn_max_age=600,
+        conn_health_checks=True,
+        ssl_require=True
     )
 }
+
+# Connection pool settings
+if not DEBUG:
+    DATABASES['default']['CONN_MAX_AGE'] = 60
+    DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
 # Password validation
@@ -168,9 +175,43 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message} {pathname} {lineno}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+        'gunicorn': {
+            'format': '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(L)s',
+            'class': 'logging.Formatter',
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
     'handlers': {
         'console': {
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
+        },
+        'gunicorn': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'gunicorn',
         },
     },
     'root': {
@@ -179,8 +220,33 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['console'],
+            'handlers': ['console', 'mail_admins'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+        'django.server': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': os.getenv('DB_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+        'meditation_app': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'gunicorn.access': {
+            'handlers': ['gunicorn'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'gunicorn.error': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'INFO',
             'propagate': False,
         },
     },
@@ -213,4 +279,44 @@ else:
 CSRF_TRUSTED_ORIGINS = [
     'https://*.up.railway.app',
     'http://*.up.railway.app',
+]
+
+# Railway specific settings
+APP_STATIC_URL = os.environ.get('APP_STATIC_URL', '/static/')
+ENVIRONMENT_NAME = os.environ.get('ENVIRONMENT_NAME', 'development')
+
+if ENVIRONMENT_NAME == 'production':
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
+# Performance optimizations
+if not DEBUG:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'unique-snowflake',
+        }
+    }
+    
+    # Optimize database
+    DATABASES['default']['CONN_MAX_AGE'] = 60
+    DATABASES['default']['OPTIONS'] = {
+        'connect_timeout': 10,
+        'client_encoding': 'UTF8',
+        'application_name': 'meditation_app'
+    }
+
+# Additional security headers
+SECURE_REFERRER_POLICY = 'same-origin'
+X_FRAME_OPTIONS = 'DENY'
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Update CSRF trusted origins
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.up.railway.app',
+    'http://*.up.railway.app',
+    f'https://{os.environ.get("APP_STATIC_URL", "").strip("/")}',
 ]
