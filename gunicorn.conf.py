@@ -31,7 +31,6 @@ secure_scheme_headers = {
 }
 
 # Процес
-proc_name = 'meditation_app'
 wsgi_app = 'meditation_app.wsgi:application'
 reload = False
 
