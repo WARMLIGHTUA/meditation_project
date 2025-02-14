@@ -23,7 +23,8 @@ COPY . .
 # Змінні середовища
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    DJANGO_SETTINGS_MODULE=meditation_app.settings
+    DJANGO_SETTINGS_MODULE=meditation_app.settings \
+    PORT=8000
 
 # Створення та налаштування entrypoint
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
@@ -33,7 +34,7 @@ RUN chmod +x /docker-entrypoint.sh
 RUN python manage.py collectstatic --noinput
 
 # Відкриття порту
-EXPOSE 8080
+EXPOSE 8000
 
 # Запуск додатку
 ENTRYPOINT ["/docker-entrypoint.sh"] 
