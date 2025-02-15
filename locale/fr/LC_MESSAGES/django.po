@@ -332,9 +332,6 @@ msgstr "Liste des méditations"
 msgid "Meditations"
 msgstr "Méditations"
 
-msgid "Duration"
-msgstr "Durée"
-
 msgid "min."
 msgstr "min."
 

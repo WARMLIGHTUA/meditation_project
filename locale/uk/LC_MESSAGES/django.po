@@ -3,16 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-15 14:08+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2024-02-15 14:30+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,126 +22,126 @@ msgstr ""
 
 #: .\meditation\forms.py:15 .\meditation\templates\meditation\login.html:25
 msgid "Username or Email"
-msgstr ""
+msgstr "Ім'я користувача або Email"
 
 #: .\meditation\forms.py:18
 msgid "Enter your username or email"
-msgstr ""
+msgstr "Введіть ім'я користувача або email"
 
 #: .\meditation\forms.py:23 .\meditation\forms.py:58
 #: .\meditation\templates\meditation\login.html:35
 #: .\meditation\templates\meditation\register.html:45
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #: .\meditation\forms.py:26
 msgid "Enter your password"
-msgstr ""
+msgstr "Введіть пароль"
 
 #: .\meditation\forms.py:34
 msgid "Both username and password are required."
-msgstr ""
+msgstr "Потрібно ввести ім'я користувача та пароль."
 
 #: .\meditation\forms.py:42 .\meditation\templates\meditation\register.html:25
 msgid "Username"
-msgstr ""
+msgstr "Ім'я користувача"
 
 #: .\meditation\forms.py:51 .\meditation\templates\meditation\register.html:35
 msgid "Email"
-msgstr ""
+msgstr "Електронна пошта"
 
 #: .\meditation\forms.py:65 .\meditation\templates\meditation\register.html:60
 msgid "Confirm Password"
-msgstr ""
+msgstr "Підтвердіть пароль"
 
 #: .\meditation\forms.py:81
 msgid "Username can only contain letters, numbers, and @/./+/-/_ characters."
-msgstr ""
+msgstr "Ім'я користувача може містити лише літери, цифри та символи @/./+/-/_"
 
 #: .\meditation\forms.py:84
 msgid "This username is already taken."
-msgstr ""
+msgstr "Це ім'я користувача вже зайняте"
 
 #: .\meditation\forms.py:91
 msgid "This email is already registered."
-msgstr ""
+msgstr "Ця електронна пошта вже зареєстрована"
 
 #: .\meditation\forms.py:99
 msgid "Passwords do not match."
-msgstr ""
+msgstr "Паролі не співпадають"
 
 #: .\meditation\forms.py:103
 msgid "Password must be at least 8 characters long."
-msgstr ""
+msgstr "Пароль повинен містити щонайменше 8 символів"
 
 #: .\meditation\forms.py:105
 msgid "Password must contain at least one uppercase letter."
-msgstr ""
+msgstr "Пароль повинен містити щонайменше одну велику літеру"
 
 #: .\meditation\forms.py:107
 msgid "Password must contain at least one lowercase letter."
-msgstr ""
+msgstr "Пароль повинен містити щонайменше одну малу літеру"
 
 #: .\meditation\forms.py:109
 msgid "Password must contain at least one digit."
-msgstr ""
+msgstr "Пароль повинен містити щонайменше одну цифру"
 
 #: .\meditation\forms.py:111
 msgid "Password must contain at least one special character."
-msgstr ""
+msgstr "Пароль повинен містити щонайменше один спеціальний символ"
 
 #: .\meditation\forms.py:125
 msgid "Enter your first name"
-msgstr ""
+msgstr "Введіть ваше ім'я"
 
 #: .\meditation\forms.py:129
 msgid "Enter your last name"
-msgstr ""
+msgstr "Введіть ваше прізвище"
 
 #: .\meditation\forms.py:133
 msgid "Enter your birth year"
-msgstr ""
+msgstr "Введіть рік народження"
 
 #: .\meditation\forms.py:145
 msgid "First name can only contain letters, spaces, hyphens and apostrophes."
-msgstr ""
+msgstr "Ім'я може містити лише літери, пробіли, дефіси та апострофи."
 
 #: .\meditation\forms.py:153
 msgid "Last name can only contain letters, spaces, hyphens and apostrophes."
-msgstr ""
+msgstr "Прізвище може містити лише літери, пробіли, дефіси та апострофи."
 
 #: .\meditation\forms.py:162
 msgid "Please enter a valid birth year between 1900 and current year."
-msgstr ""
+msgstr "Будь ласка, введіть дійсний рік народження між 1900 та поточним роком."
 
 #: .\meditation\forms.py:169
 msgid "Please select your gender."
-msgstr ""
+msgstr "Будь ласка, оберіть вашу стать."
 
 #: .\meditation\forms.py:171
 msgid "Invalid gender selection."
-msgstr ""
+msgstr "Недійсний вибір статі."
 
 #: .\meditation\models.py:13
 msgid "Title"
-msgstr ""
+msgstr "Назва"
 
 #: .\meditation\models.py:14
 msgid "Description"
-msgstr ""
+msgstr "Опис"
 
 #: .\meditation\models.py:15
 #: .\venv\Lib\site-packages\django\db\models\fields\files.py:393
 msgid "Image"
-msgstr ""
+msgstr "Зображення"
 
 #: .\meditation\models.py:16
 msgid "Video URL"
-msgstr ""
+msgstr "URL відео"
 
 #: .\meditation\models.py:17
 msgid "Created at"
-msgstr ""
+msgstr "Створено"
 
 #: .\meditation\models.py:19
 #: .\meditation\templates\meditation\favorite_tracks.html:21
@@ -150,20 +149,20 @@ msgstr ""
 #: .\meditation\templates\meditation\track_list.html:21
 #: .\meditation\templates\meditation\track_list.html:131
 msgid "Rating"
-msgstr ""
+msgstr "Рейтинг"
 
 #: .\meditation\models.py:25
 #: .\meditation\templates\meditation\meditation_detail.html:74
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
 #: .\meditation\models.py:36
 msgid "Audio File"
-msgstr ""
+msgstr "Аудіо файл"
 
 #: .\meditation\models.py:38
 msgid "Upload MP3 or WAV file"
-msgstr ""
+msgstr "Завантажте файл MP3 або WAV"
 
 #: .\meditation\models.py:41
 #: .\meditation\templates\meditation\favorite_tracks.html:18
@@ -172,207 +171,207 @@ msgstr ""
 #: .\meditation\templates\meditation\track_list.html:124
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1857
 msgid "Duration"
-msgstr ""
+msgstr "Тривалість"
 
 #: .\meditation\models.py:42
 msgid "Duration in minutes"
-msgstr ""
+msgstr "Тривалість у хвилинах"
 
 #: .\meditation\models.py:47
 msgid "Meditation Track"
-msgstr ""
+msgstr "Медитаційний трек"
 
 #: .\meditation\models.py:48
 #: .\meditation\templates\meditation\track_list.html:5
 #: .\meditation\templates\meditation\track_list.html:10
 msgid "Meditation Tracks"
-msgstr ""
+msgstr "Медитаційні треки"
 
 #: .\meditation\models.py:57
 #: .\meditation\templates\meditation\meditation_list.html:25
 #: .\meditation\templates\meditation\top_content_detail.html:24
 #: .\meditation\templates\meditation\top_content_list.html:23
 msgid "Featured"
-msgstr ""
+msgstr "Рекомендовані"
 
 #: .\meditation\models.py:60 .\meditation\models.py:61
 #: .\meditation\templates\meditation\top_content_list.html:5
 #: .\meditation\templates\meditation\top_content_list.html:9
 msgid "Top Content"
-msgstr ""
+msgstr "Найкращий контент"
 
 #: .\meditation\models.py:71 .\meditation\models.py:72
 msgid "Duration in weeks"
-msgstr ""
+msgstr "Тривалість у тижнях"
 
 #: .\meditation\models.py:76 .\meditation\models.py:97
 msgid "Price"
-msgstr ""
+msgstr "Ціна"
 
 #: .\meditation\models.py:84
 msgid "Course"
-msgstr ""
+msgstr "Курс"
 
 #: .\meditation\models.py:85 .\meditation\templates\meditation\base.html:257
 #: .\meditation\templates\meditation\course_list.html:5
 #: .\meditation\templates\meditation\course_list.html:10
 msgid "Courses"
-msgstr ""
+msgstr "Курси"
 
 #: .\meditation\models.py:94 .\meditation\models.py:138
 msgid "Date and Time"
-msgstr ""
+msgstr "Дата та час"
 
 #: .\meditation\models.py:95 .\meditation\models.py:139
 msgid "Location"
-msgstr ""
+msgstr "Місце проведення"
 
 #: .\meditation\models.py:104 .\meditation\models.py:142
 msgid "Maximum Participants"
-msgstr ""
+msgstr "Максимальна кількість учасників"
 
 #: .\meditation\models.py:110
 msgid "Workshop"
-msgstr ""
+msgstr "Воркшоп"
 
 #: .\meditation\models.py:111 .\meditation\templates\meditation\base.html:260
 #: .\meditation\templates\meditation\workshop_list.html:5
 #: .\meditation\templates\meditation\workshop_list.html:10
 msgid "Workshops"
-msgstr ""
+msgstr "Воркшопи"
 
 #: .\meditation\models.py:121
 msgid "Members Count"
-msgstr ""
+msgstr "Кількість учасників"
 
 #: .\meditation\models.py:125
 msgid "Private Group"
-msgstr ""
+msgstr "Приватна група"
 
 #: .\meditation\models.py:128
 msgid "Group"
-msgstr ""
+msgstr "Група"
 
 #: .\meditation\models.py:129 .\meditation\templates\meditation\base.html:263
 #: .\meditation\templates\meditation\group_list.html:5
 #: .\meditation\templates\meditation\group_list.html:10
 msgid "Groups"
-msgstr ""
+msgstr "Групи"
 
 #: .\meditation\models.py:140
 msgid "Online Event"
-msgstr ""
+msgstr "Онлайн подія"
 
 #: .\meditation\models.py:148
 msgid "Event"
-msgstr ""
+msgstr "Подія"
 
 #: .\meditation\models.py:149 .\meditation\templates\meditation\base.html:266
 #: .\meditation\templates\meditation\event_list.html:5
 #: .\meditation\templates\meditation\event_list.html:10
 msgid "Events"
-msgstr ""
+msgstr "Події"
 
 #: .\meditation\models.py:159
 msgid "Male"
-msgstr ""
+msgstr "Чоловіча"
 
 #: .\meditation\models.py:160
 msgid "Female"
-msgstr ""
+msgstr "Жіноча"
 
 #: .\meditation\models.py:161
 msgid "Other"
-msgstr ""
+msgstr "Інша"
 
 #: .\meditation\models.py:168 .\meditation\models.py:206
 msgid "User"
-msgstr ""
+msgstr "Користувач"
 
 #: .\meditation\models.py:170
 msgid "First Name"
-msgstr ""
+msgstr "Ім'я"
 
 #: .\meditation\models.py:171
 msgid "Last Name"
-msgstr ""
+msgstr "Прізвище"
 
 #: .\meditation\models.py:173
 msgid "Birth Year"
-msgstr ""
+msgstr "Рік народження"
 
 #: .\meditation\models.py:182
 msgid "Gender"
-msgstr ""
+msgstr "Стать"
 
 #: .\meditation\models.py:188
 msgid "User Profile"
-msgstr ""
+msgstr "Профіль користувача"
 
 #: .\meditation\models.py:189
 msgid "User Profiles"
-msgstr ""
+msgstr "Профілі користувачів"
 
 #: .\meditation\models.py:212 .\meditation\templates\meditation\base.html:15
 msgid "Meditation"
-msgstr ""
+msgstr "Медитація"
 
 #: .\meditation\models.py:214
 msgid "Added at"
-msgstr ""
+msgstr "Додано"
 
 #: .\meditation\models.py:217
 msgid "Favorite Meditation"
-msgstr ""
+msgstr "Улюблена медитація"
 
 #: .\meditation\models.py:218
 #: .\meditation\templates\meditation\favorite_tracks.html:5
 msgid "Favorite Meditations"
-msgstr ""
+msgstr "Улюблені медитації"
 
 #: .\meditation\models.py:229
 msgid "Home Page"
-msgstr ""
+msgstr "Головна сторінка"
 
 #: .\meditation\models.py:230
 msgid "Tracks Page"
-msgstr ""
+msgstr "Сторінка треків"
 
 #: .\meditation\models.py:231
 msgid "Courses Page"
-msgstr ""
+msgstr "Сторінка курсів"
 
 #: .\meditation\models.py:232
 msgid "Workshops Page"
-msgstr ""
+msgstr "Сторінка воркшопів"
 
 #: .\meditation\models.py:233
 msgid "Groups Page"
-msgstr ""
+msgstr "Сторінка груп"
 
 #: .\meditation\models.py:234
 msgid "Events Page"
-msgstr ""
+msgstr "Сторінка подій"
 
 #: .\meditation\models.py:235
 msgid "Favorites Page"
-msgstr ""
+msgstr "Сторінка улюблених"
 
 #: .\meditation\models.py:239
 msgid "Light Theme"
-msgstr ""
+msgstr "Світла тема"
 
 #: .\meditation\models.py:240
 msgid "Dark Theme"
-msgstr ""
+msgstr "Темна тема"
 
 #: .\meditation\models.py:244
 msgid "Page"
-msgstr ""
+msgstr "Сторінка"
 
 #: .\meditation\models.py:250
 msgid "Theme"
-msgstr ""
+msgstr "Тема"
 
 #: .\meditation\models.py:256
 msgid "Background Image"
@@ -421,29 +420,29 @@ msgstr ""
 
 #: .\meditation\templates\meditation\base.html:271
 msgid "Favorites"
-msgstr ""
+msgstr "Улюблені"
 
 #: .\meditation\templates\meditation\base.html:289
 msgid "Admin Panel"
-msgstr ""
+msgstr "Панель адміністратора"
 
 #: .\meditation\templates\meditation\base.html:296
 msgid "Logout"
-msgstr ""
+msgstr "Вийти"
 
 #: .\meditation\templates\meditation\base.html:304
 #: .\meditation\templates\meditation\login.html:4
 #: .\meditation\templates\meditation\login.html:12
 #: .\meditation\templates\meditation\login.html:45
 msgid "Login"
-msgstr ""
+msgstr "Увійти"
 
 #: .\meditation\templates\meditation\base.html:307
 #: .\meditation\templates\meditation\register.html:4
 #: .\meditation\templates\meditation\register.html:12
 #: .\meditation\templates\meditation\register.html:70
 msgid "Register"
-msgstr ""
+msgstr "Зареєструватися"
 
 #: .\meditation\templates\meditation\base.html:313
 msgid "Language"
@@ -932,17 +931,13 @@ msgstr ""
 msgid "Enter a valid email address."
 msgstr ""
 
-#. Translators: "letters" means latin letters: a-z and A-Z.
 #: .\venv\Lib\site-packages\django\core\validators.py:259
-msgid ""
-"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
-msgstr ""
+msgid "Enter a valid 'slug' consisting of letters, numbers, underscores or hyphens."
+msgstr "Введіть правильний 'slug', що складається з літер, цифр, підкреслень або дефісів."
 
 #: .\venv\Lib\site-packages\django\core\validators.py:267
-msgid ""
-"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
-"hyphens."
-msgstr ""
+msgid "Enter a valid 'slug' consisting of Unicode letters, numbers, underscores, or hyphens."
+msgstr "Введіть правильний 'slug', що складається з Unicode літер, цифр, підкреслень або дефісів."
 
 #: .\venv\Lib\site-packages\django\core\validators.py:279
 #: .\venv\Lib\site-packages\django\core\validators.py:306
@@ -1044,119 +1039,118 @@ msgstr[1] ""
 #: .\venv\Lib\site-packages\django\core\validators.py:563
 #, python-format
 msgid ""
-"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"File extension '%(extension)s' is not allowed. Allowed extensions are: "
 "%(allowed_extensions)s."
-msgstr ""
+msgstr "Розширення файлу '%(extension)s' не дозволено. Дозволені розширення: %(allowed_extensions)s."
 
 #: .\venv\Lib\site-packages\django\core\validators.py:624
 msgid "Null characters are not allowed."
-msgstr ""
+msgstr "Символи Null не дозволені."
 
 #: .\venv\Lib\site-packages\django\db\models\base.py:1473
 #: .\venv\Lib\site-packages\django\forms\models.py:906
 msgid "and"
-msgstr ""
+msgstr "та"
 
 #: .\venv\Lib\site-packages\django\db\models\base.py:1475
 #, python-format
 msgid "%(model_name)s with this %(field_labels)s already exists."
-msgstr ""
+msgstr "%(model_name)s з таким %(field_labels)s вже існує."
 
 #: .\venv\Lib\site-packages\django\db\models\constraints.py:20
 #, python-format
-msgid "Constraint “%(name)s” is violated."
-msgstr ""
+msgid "Constraint '%(name)s' is violated."
+msgstr "Порушено обмеження '%(name)s'."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:133
 #, python-format
 msgid "Value %(value)r is not a valid choice."
-msgstr ""
+msgstr "Значення %(value)r не є допустимим вибором."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:134
 msgid "This field cannot be null."
-msgstr ""
+msgstr "Це поле не може бути порожнім."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:135
 msgid "This field cannot be blank."
-msgstr ""
+msgstr "Це поле не може бути пустим."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:136
 #, python-format
 msgid "%(model_name)s with this %(field_label)s already exists."
-msgstr ""
+msgstr "%(model_name)s з таким %(field_label)s вже існує."
 
-#. Translators: The 'lookup_type' is one of 'date', 'year' or
-#. 'month'. Eg: "Title must be unique for pub_date year"
+#. Translators: The 'lookup_type' is one of 'date', 'year' or 'month'.
+#. Eg: "Title must be unique for pub_date year"
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:140
 #, python-format
-msgid ""
-"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
-msgstr ""
+msgid "%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr "%(field_label)s повинен бути унікальним для %(date_field_label)s %(lookup_type)s."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:179
 #, python-format
 msgid "Field of type: %(field_type)s"
-msgstr ""
+msgstr "Поле типу: %(field_type)s"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1155
 #, python-format
-msgid "“%(value)s” value must be either True or False."
-msgstr ""
+msgid "'%(value)s' value must be either True or False."
+msgstr "Значення '%(value)s' повинно бути True або False."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1156
 #, python-format
-msgid "“%(value)s” value must be either True, False, or None."
-msgstr ""
+msgid "'%(value)s' value must be either True, False, or None."
+msgstr "Значення '%(value)s' повинно бути True, False або None."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1158
 msgid "Boolean (Either True or False)"
-msgstr ""
+msgstr "Логічне значення (True або False)"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1208
 #, python-format
 msgid "String (up to %(max_length)s)"
-msgstr ""
+msgstr "Рядок (до %(max_length)s)"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1210
 msgid "String (unlimited)"
-msgstr ""
+msgstr "Рядок (необмежений)"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1314
 msgid "Comma-separated integers"
-msgstr ""
+msgstr "Цілі числа, розділені комами"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1415
 #, python-format
 msgid ""
-"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"'%(value)s' value has an invalid date format. It must be in YYYY-MM-DD "
 "format."
-msgstr ""
+msgstr "Значення '%(value)s' має неправильний формат дати. Воно повинно бути у форматі РРРР-ММ-ДД."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1419
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1554
 #, python-format
 msgid ""
-"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"'%(value)s' value has the correct format (YYYY-MM-DD) but it is an invalid "
 "date."
-msgstr ""
+msgstr "Значення '%(value)s' має правильний формат (РРРР-ММ-ДД), але це недійсна дата."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1423
 msgid "Date (without time)"
-msgstr ""
+msgstr "Дата (без часу)"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1550
 #, python-format
 msgid ""
-"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
+"'%(value)s' value has an invalid format. It must be in YYYY-MM-DD "
 "HH:MM[:ss[.uuuuuu]][TZ] format."
-msgstr ""
+msgstr "Значення '%(value)s' має неправильний формат. Воно повинно бути у форматі РРРР-ММ-ДД ГГ:ХХ[:сс[.мкмкмк]][ЧП]."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1558
 #, python-format
 msgid ""
-"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"'%(value)s' value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
 "[TZ]) but it is an invalid date/time."
-msgstr ""
+msgstr "Значення '%(value)s' має правильний формат (РРРР-ММ-ДД ГГ:ХХ[:сс[.мкмкмк]][ЧП]), але це недійсна дата/час."
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1563
 msgid "Date (with time)"
@@ -1164,7 +1158,8 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1690
 #, python-format
-msgid "“%(value)s” value must be a decimal number."
+msgid ""
+"'%(value)s' value must be a decimal number."
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1692
@@ -1174,7 +1169,7 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1853
 #, python-format
 msgid ""
-"“%(value)s” value has an invalid format. It must be in [DD] "
+"'%(value)s' value has an invalid format. It must be in [DD] "
 "[[HH:]MM:]ss[.uuuuuu] format."
 msgstr ""
 
@@ -1188,7 +1183,8 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2012
 #, python-format
-msgid "“%(value)s” value must be a float."
+msgid ""
+"'%(value)s' value must be a float."
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2014
@@ -1197,7 +1193,8 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2054
 #, python-format
-msgid "“%(value)s” value must be an integer."
+msgid ""
+"'%(value)s' value must be an integer."
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2056
@@ -1223,7 +1220,8 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2301
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2302
 #, python-format
-msgid "“%(value)s” value must be either None, True or False."
+msgid ""
+"'%(value)s' value must be either None, True or False."
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2304
@@ -1254,14 +1252,14 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2512
 #, python-format
 msgid ""
-"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"'%(value)s' value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
 "format."
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2516
 #, python-format
 msgid ""
-"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"'%(value)s' value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
 "invalid time."
 msgstr ""
 
@@ -1279,7 +1277,8 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2717
 #, python-format
-msgid "“%(value)s” is not a valid UUID."
+msgid ""
+"'%(value)s' is not a valid UUID."
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2719
@@ -1484,13 +1483,14 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\models.py:1587
 #, python-format
-msgid "“%(pk)s” is not a valid value."
+msgid ""
+"'%(pk)s' is not a valid value."
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\utils.py:227
 #, python-format
 msgid ""
-"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"'%(datetime)s' couldn't be interpreted in time zone %(current_timezone)s; it "
 "may be ambiguous or it may not exist."
 msgstr ""
 
@@ -1924,131 +1924,131 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\views\csrf.py:34
 msgid ""
-"You are seeing this message because this HTTPS site requires a “Referer "
-"header” to be sent by your web browser, but none was sent. This header is "
+"You are seeing this message because this HTTPS site requires a 'Referer "
+"header' to be sent by your web browser, but none was sent. This header is "
 "required for security reasons, to ensure that your browser is not being "
 "hijacked by third parties."
-msgstr ""
+msgstr "Ви бачите це повідомлення, тому що цей HTTPS-сайт вимагає, щоб ваш веб-браузер надіслав заголовок 'Referer', але він не був надісланий. Цей заголовок потрібен з міркувань безпеки, щоб переконатися, що ваш браузер не був зламаний третіми сторонами."
 
 #: .\venv\Lib\site-packages\django\views\csrf.py:40
 msgid ""
-"If you have configured your browser to disable “Referer” headers, please re-"
-"enable them, at least for this site, or for HTTPS connections, or for “same-"
-"origin” requests."
-msgstr ""
+"If you have configured your browser to disable 'Referer' headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for 'same-"
+"origin' requests."
+msgstr "Якщо ви налаштували свій браузер на вимкнення заголовків 'Referer', будь ласка, увімкніть їх знову, принаймні для цього сайту, або для HTTPS-з'єднань, або для запитів 'same-origin'."
 
 #: .\venv\Lib\site-packages\django\views\csrf.py:45
 msgid ""
 "If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
-"including the “Referrer-Policy: no-referrer” header, please remove them. The "
-"CSRF protection requires the “Referer” header to do strict referer checking. "
-"If you’re concerned about privacy, use alternatives like <a "
+"including the 'Referrer-Policy: no-referrer' header, please remove them. The "
+"CSRF protection requires the 'Referer' header to do strict referer checking. "
+"If you're concerned about privacy, use alternatives like <a "
 "rel=\"noreferrer\" …> for links to third-party sites."
-msgstr ""
+msgstr "Якщо ви використовуєте тег <meta name=\"referrer\" content=\"no-referrer\"> або включаєте заголовок 'Referrer-Policy: no-referrer', будь ласка, видаліть їх. Захист CSRF вимагає заголовка 'Referer' для строгої перевірки джерела. Якщо ви турбуєтеся про конфіденційність, використовуйте альтернативи, такі як <a rel=\"noreferrer\" …> для посилань на сторонні сайти."
 
 #: .\venv\Lib\site-packages\django\views\csrf.py:54
 msgid ""
 "You are seeing this message because this site requires a CSRF cookie when "
 "submitting forms. This cookie is required for security reasons, to ensure "
 "that your browser is not being hijacked by third parties."
-msgstr ""
+msgstr "Ви бачите це повідомлення, тому що цей сайт вимагає CSRF-куки при відправці форм. Ці куки потрібні з міркувань безпеки, щоб переконатися, що ваш браузер не був зламаний третіми сторонами."
 
 #: .\venv\Lib\site-packages\django\views\csrf.py:60
 msgid ""
 "If you have configured your browser to disable cookies, please re-enable "
-"them, at least for this site, or for “same-origin” requests."
-msgstr ""
+"them, at least for this site, or for 'same-origin' requests."
+msgstr "Якщо ви налаштували свій браузер на вимкнення кук, будь ласка, увімкніть їх знову, принаймні для цього сайту або для запитів 'same-origin'."
 
 #: .\venv\Lib\site-packages\django\views\csrf.py:66
 msgid "More information is available with DEBUG=True."
-msgstr ""
+msgstr "Більше інформації доступно при DEBUG=True."
 
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:44
 msgid "No year specified"
-msgstr ""
+msgstr "Рік не вказано"
 
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:64
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:115
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:214
 msgid "Date out of range"
-msgstr ""
+msgstr "Дата поза діапазоном"
 
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:94
 msgid "No month specified"
-msgstr ""
+msgstr "Місяць не вказано"
 
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:147
 msgid "No day specified"
-msgstr ""
+msgstr "День не вказано"
 
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:194
 msgid "No week specified"
-msgstr ""
+msgstr "Тиждень не вказано"
 
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:349
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:380
 #, python-format
 msgid "No %(verbose_name_plural)s available"
-msgstr ""
+msgstr "%(verbose_name_plural)s недоступні"
 
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:652
 #, python-format
 msgid ""
 "Future %(verbose_name_plural)s not available because "
 "%(class_name)s.allow_future is False."
-msgstr ""
+msgstr "Майбутні %(verbose_name_plural)s недоступні, оскільки %(class_name)s.allow_future має значення False."
 
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:692
 #, python-format
-msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
-msgstr ""
+msgid "Invalid date string '%(datestr)s' given format '%(format)s'"
+msgstr "Неправильний рядок дати '%(datestr)s' для формату '%(format)s'"
 
 #: .\venv\Lib\site-packages\django\views\generic\detail.py:56
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
-msgstr ""
+msgstr "Не знайдено %(verbose_name)s, що відповідає запиту"
 
 #: .\venv\Lib\site-packages\django\views\generic\list.py:70
-msgid "Page is not “last”, nor can it be converted to an int."
-msgstr ""
+msgid "Page is not 'last', nor can it be converted to an int."
+msgstr "Сторінка не є 'last' і не може бути перетворена в ціле число."
 
 #: .\venv\Lib\site-packages\django\views\generic\list.py:77
 #, python-format
 msgid "Invalid page (%(page_number)s): %(message)s"
-msgstr ""
+msgstr "Неправильна сторінка (%(page_number)s): %(message)s"
 
 #: .\venv\Lib\site-packages\django\views\generic\list.py:169
 #, python-format
-msgid "Empty list and “%(class_name)s.allow_empty” is False."
-msgstr ""
+msgid "Empty list and '%(class_name)s.allow_empty' is False."
+msgstr "Порожній список і '%(class_name)s.allow_empty' має значення False."
 
 #: .\venv\Lib\site-packages\django\views\static.py:49
 msgid "Directory indexes are not allowed here."
-msgstr ""
+msgstr "Індекси каталогів тут не дозволені."
 
 #: .\venv\Lib\site-packages\django\views\static.py:51
 #, python-format
-msgid "“%(path)s” does not exist"
-msgstr ""
+msgid "'%(path)s' does not exist"
+msgstr "'%(path)s' не існує"
 
 #: .\venv\Lib\site-packages\django\views\static.py:68
 #: .\venv\Lib\site-packages\django\views\templates\directory_index.html:8
 #: .\venv\Lib\site-packages\django\views\templates\directory_index.html:11
 #, python-format
 msgid "Index of %(directory)s"
-msgstr ""
+msgstr "Індекс %(directory)s"
 
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:7
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:220
 msgid "The install worked successfully! Congratulations!"
-msgstr ""
+msgstr "Встановлення пройшло успішно! Вітаємо!"
 
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:206
 #, python-format
 msgid ""
 "View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
 "target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
-msgstr ""
+msgstr "Переглянути <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" target=\"_blank\" rel=\"noopener\">примітки до випуску</a> для Django %(version)s"
 
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:221
 #, python-format
@@ -2057,28 +2057,28 @@ msgid ""
 "%(version)s/ref/settings/#debug\" target=\"_blank\" "
 "rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
 "configured any URLs."
-msgstr ""
+msgstr "Ви бачите цю сторінку, тому що <a href=\"https://docs.djangoproject.com/en/%(version)s/ref/settings/#debug\" target=\"_blank\" rel=\"noopener\">DEBUG=True</a> у вашому файлі налаштувань і ви не налаштували жодних URL-адрес."
 
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:229
 msgid "Django Documentation"
-msgstr ""
+msgstr "Документація Django"
 
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:230
-msgid "Topics, references, &amp; how-to’s"
-msgstr ""
+msgid "Topics, references, &amp; how-to's"
+msgstr "Теми, довідники та інструкції"
 
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:238
 msgid "Tutorial: A Polling App"
-msgstr ""
+msgstr "Підручник: Додаток для опитувань"
 
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:239
 msgid "Get started with Django"
-msgstr ""
+msgstr "Початок роботи з Django"
 
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:247
 msgid "Django Community"
-msgstr ""
+msgstr "Спільнота Django"
 
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:248
 msgid "Connect, get help, or contribute"
-msgstr ""
+msgstr "Приєднуйтесь, отримуйте допомогу або зробіть внесок"
