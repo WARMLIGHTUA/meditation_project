@@ -1,6 +1,5 @@
 const CACHE_NAME = 'meditation-app-v1';
 const STATIC_CACHE_URLS = [
-    '/',
     '/static/meditation/css/styles.css',
     '/static/meditation/js/main.js',
     '/static/meditation/manifest.json',
@@ -32,24 +31,43 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-    event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request)
-                    .then(response => {
-                        if (!response || response.status !== 200 || response.type !== 'basic') {
-                            return response;
-                        }
-                        const responseToCache = response.clone();
-                        caches.open(CACHE_NAME)
-                            .then(cache => {
-                                cache.put(event.request, responseToCache);
-                            });
+    // Ігноруємо запити до API та інші динамічні запити
+    if (event.request.url.includes('/api/') || 
+        event.request.url.includes('/admin/') ||
+        event.request.method !== 'GET') {
+        return;
+    }
+
+    // Перевіряємо, чи це запит на статичні файли
+    if (event.request.url.includes('/static/')) {
+        event.respondWith(
+            caches.match(event.request)
+                .then(response => {
+                    if (response) {
                         return response;
-                    });
+                    }
+                    return fetch(event.request)
+                        .then(response => {
+                            if (!response || response.status !== 200) {
+                                return response;
+                            }
+                            const responseToCache = response.clone();
+                            caches.open(CACHE_NAME)
+                                .then(cache => {
+                                    cache.put(event.request, responseToCache);
+                                });
+                            return response;
+                        });
+                })
+        );
+        return;
+    }
+
+    // Для всіх інших запитів використовуємо стратегію "Network First"
+    event.respondWith(
+        fetch(event.request)
+            .catch(() => {
+                return caches.match(event.request);
             })
     );
 }); 
