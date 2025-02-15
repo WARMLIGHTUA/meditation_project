@@ -36,6 +36,9 @@ echo "Django settings module: ${DJANGO_SETTINGS_MODULE:-Not set}"
 echo "Environment name: ${ENVIRONMENT_NAME:-Not set}"
 echo "Django debug mode: ${DJANGO_DEBUG:-Not set}"
 echo "Gunicorn log level: ${GUNICORN_LOG_LEVEL:-info}"
+echo "Gunicorn config file exists: $(test -f ./gunicorn.conf.py && echo 'Yes' || echo 'No')"
+echo "Gunicorn config contents:"
+cat ./gunicorn.conf.py
 
 # Очікування DATABASE_URL
 max_attempts=5
@@ -101,10 +104,10 @@ python manage.py migrate --noinput
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
 
-# Запуск Gunicorn
-echo "Starting Gunicorn..."
-echo "Using log level: ${GUNICORN_LOG_LEVEL:-info}"
-gunicorn meditation_app.wsgi:application -c ./gunicorn.conf.py &
+# Запуск Gunicorn з розширеним логуванням
+echo "Starting Gunicorn with config from ./gunicorn.conf.py..."
+echo "Gunicorn command: gunicorn meditation_app.wsgi:application -c ./gunicorn.conf.py"
+gunicorn meditation_app.wsgi:application -c ./gunicorn.conf.py --log-level=debug --access-logfile=- --error-logfile=- &
 child=$!
 
 # Очікування завершення процесу
