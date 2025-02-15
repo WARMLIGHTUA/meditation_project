@@ -5,6 +5,8 @@ cleanup() {
     echo "Отримано сигнал завершення..."
     echo "Закриваю з'єднання з базою даних..."
     python manage.py dbshell <<< "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = current_database() AND pid <> pg_backend_pid();"
+    echo "Очікування завершення активних з'єднань..."
+    sleep 5
     echo "Завершую Gunicorn..."
     kill -TERM "$child" 2>/dev/null
     wait "$child"
