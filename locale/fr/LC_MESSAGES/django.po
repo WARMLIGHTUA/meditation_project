@@ -498,7 +498,7 @@ msgid "For technical support, please contact us at:"
 msgstr "Pour le support technique, veuillez nous contacter à :"
 
 msgid "Featured Content"
-msgstr "Contenu en vedette"
+msgstr "Contenu en Vedette"
 
 msgid "Edit Meditation Track"
 msgstr "Modifier la piste de méditation"
@@ -513,16 +513,16 @@ msgid "Public"
 msgstr "Public"
 
 msgid "Join Group"
-msgstr "Rejoindre le groupe"
+msgstr "Rejoindre le Groupe"
 
 msgid "No groups available at the moment."
 msgstr "Aucun groupe disponible pour le moment."
 
 msgid "Edit Group"
-msgstr "Modifier le groupe"
+msgstr "Modifier le Groupe"
 
 msgid "Create New Group"
-msgstr "Créer un nouveau groupe"
+msgstr "Créer un Nouveau Groupe"
 
 msgid "Save"
 msgstr "Enregistrer"
@@ -540,7 +540,7 @@ msgid "Date Added"
 msgstr "Date d'ajout"
 
 msgid "Technical Support"
-msgstr "Support technique"
+msgstr "Support Technique"
 
 msgid "Rules"
 msgstr "Règles"
@@ -573,4 +573,160 @@ msgid "Invalid gender selection."
 msgstr "Sélection de genre invalide."
 
 msgid "Registration failed. Please try again."
-msgstr "L'inscription a échoué. Veuillez réessayer." 
+msgstr "L'inscription a échoué. Veuillez réessayer."
+
+msgid "Meditation App - Your daily meditation companion"
+msgstr "Application de Méditation - Votre compagnon quotidien de méditation"
+
+msgid "Language"
+msgstr "Langue"
+
+msgid "Technical Support"
+msgstr "Support Technique"
+
+msgid "Rules"
+msgstr "Règles"
+
+msgid "All rights reserved"
+msgstr "Tous droits réservés"
+
+msgid "Featured Content"
+msgstr "Contenu en Vedette"
+
+msgid "No content available at the moment."
+msgstr "Aucun contenu disponible pour le moment."
+
+msgid "Watch Video"
+msgstr "Regarder la Vidéo"
+
+msgid "Share"
+msgstr "Partager"
+
+msgid "Comments"
+msgstr "Commentaires"
+
+msgid "Write your comment here..."
+msgstr "Écrivez votre commentaire ici..."
+
+msgid "Post Comment"
+msgstr "Publier le Commentaire"
+
+msgid "Delete"
+msgstr "Supprimer"
+
+msgid "No comments yet."
+msgstr "Pas encore de commentaires."
+
+msgid "Add to Favorites"
+msgstr "Ajouter aux Favoris"
+
+msgid "Remove from Favorites"
+msgstr "Retirer des Favoris"
+
+msgid "minutes"
+msgstr "minutes"
+
+msgid "Your browser does not support the audio element."
+msgstr "Votre navigateur ne prend pas en charge l'élément audio."
+
+msgid "Audio Track"
+msgstr "Piste Audio"
+
+msgid "Video"
+msgstr "Vidéo"
+
+msgid "Created"
+msgstr "Créé"
+
+msgid "Rating"
+msgstr "Note"
+
+msgid "Author"
+msgstr "Auteur"
+
+msgid "Duration"
+msgstr "Durée"
+
+msgid "Price"
+msgstr "Prix"
+
+msgid "Location"
+msgstr "Lieu"
+
+msgid "Date and Time"
+msgstr "Date et Heure"
+
+msgid "Maximum Participants"
+msgstr "Nombre Maximum de Participants"
+
+msgid "Join Group"
+msgstr "Rejoindre le Groupe"
+
+msgid "Leave Group"
+msgstr "Quitter le Groupe"
+
+msgid "Private Group"
+msgstr "Groupe Privé"
+
+msgid "Public Group"
+msgstr "Groupe Public"
+
+msgid "Group Members"
+msgstr "Membres du Groupe"
+
+msgid "Create New Group"
+msgstr "Créer un Nouveau Groupe"
+
+msgid "Edit Group"
+msgstr "Modifier le Groupe"
+
+msgid "Delete Group"
+msgstr "Supprimer le Groupe"
+
+msgid "Confirm Delete"
+msgstr "Confirmer la Suppression"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Apply"
+msgstr "Appliquer"
+
+msgid "Reset"
+msgstr "Réinitialiser"
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Search..."
+msgstr "Rechercher..."
+
+msgid "Filter"
+msgstr "Filtrer"
+
+msgid "Sort by"
+msgstr "Trier par"
+
+msgid "Ascending"
+msgstr "Croissant"
+
+msgid "Descending"
+msgstr "Décroissant"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Popular"
+msgstr "Populaire"
+
+msgid "Latest"
+msgstr "Plus Récent"
+
+msgid "All"
+msgstr "Tout" 

@@ -102,8 +102,8 @@ msgstr "Account Information"
 msgid "Profile Information"
 msgstr "Profile Information"
 
-msgid "Meditation App"
-msgstr "Meditation App"
+msgid "Meditation App - Your daily meditation companion"
+msgstr "Meditation App - Your daily meditation companion"
 
 msgid "Tracks"
 msgstr "Tracks"
@@ -250,4 +250,151 @@ msgid "Practice"
 msgstr "Practice"
 
 msgid "Community"
-msgstr "Community" 
+msgstr "Community"
+
+msgid "Language"
+msgstr "Language"
+
+msgid "Technical Support"
+msgstr "Technical Support"
+
+msgid "Rules"
+msgstr "Rules"
+
+msgid "All rights reserved"
+msgstr "All rights reserved"
+
+msgid "Featured Content"
+msgstr "Featured Content"
+
+msgid "No content available at the moment."
+msgstr "No content available at the moment."
+
+msgid "Watch Video"
+msgstr "Watch Video"
+
+msgid "Share"
+msgstr "Share"
+
+msgid "Comments"
+msgstr "Comments"
+
+msgid "Write your comment here..."
+msgstr "Write your comment here..."
+
+msgid "Post Comment"
+msgstr "Post Comment"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "No comments yet."
+msgstr "No comments yet."
+
+msgid "Add to Favorites"
+msgstr "Add to Favorites"
+
+msgid "Remove from Favorites"
+msgstr "Remove from Favorites"
+
+msgid "minutes"
+msgstr "minutes"
+
+msgid "Your browser does not support the audio element."
+msgstr "Your browser does not support the audio element."
+
+msgid "Audio Track"
+msgstr "Audio Track"
+
+msgid "Video"
+msgstr "Video"
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Rating"
+msgstr "Rating"
+
+msgid "Author"
+msgstr "Author"
+
+msgid "Price"
+msgstr "Price"
+
+msgid "Location"
+msgstr "Location"
+
+msgid "Date and Time"
+msgstr "Date and Time"
+
+msgid "Maximum Participants"
+msgstr "Maximum Participants"
+
+msgid "Join Group"
+msgstr "Join Group"
+
+msgid "Leave Group"
+msgstr "Leave Group"
+
+msgid "Private Group"
+msgstr "Private Group"
+
+msgid "Public Group"
+msgstr "Public Group"
+
+msgid "Group Members"
+msgstr "Group Members"
+
+msgid "Create New Group"
+msgstr "Create New Group"
+
+msgid "Edit Group"
+msgstr "Edit Group"
+
+msgid "Delete Group"
+msgstr "Delete Group"
+
+msgid "Confirm Delete"
+msgstr "Confirm Delete"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Apply"
+msgstr "Apply"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Search..."
+msgstr "Search..."
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Sort by"
+msgstr "Sort by"
+
+msgid "Ascending"
+msgstr "Ascending"
+
+msgid "Descending"
+msgstr "Descending"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Popular"
+msgstr "Popular"
+
+msgid "Latest"
+msgstr "Latest"
+
+msgid "All"
+msgstr "All" 
