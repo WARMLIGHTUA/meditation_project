@@ -37,6 +37,39 @@ document.addEventListener('DOMContentLoaded', function() {
             setTheme(e.matches);
         }
     });
+
+    // Handle favorite buttons
+    document.querySelectorAll('.favorite-btn')?.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const trackId = this.dataset.trackId;
+            const icon = this.querySelector('i');
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            
+            fetch(`/meditation/track/${trackId}/favorite/`, {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': csrfToken
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    if (data.is_favorite) {
+                        icon.classList.add('text-danger');
+                        this.dataset.isFavorite = 'true';
+                    } else {
+                        icon.classList.remove('text-danger');
+                        this.dataset.isFavorite = 'false';
+                    }
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
 });
 
 // Handle audio player
