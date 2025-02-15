@@ -21,8 +21,15 @@ limit_request_field_size = 8190
 # Налаштування для кращої обробки сигналів
 worker_abort_on_error = False
 worker_shutdown_timeout = 60
-worker_int = True
-worker_term = True
+
+# Функції для обробки сигналів
+def worker_int(worker):
+    worker.log.info("worker received INT or QUIT signal")
+    return True
+
+def worker_term(worker):
+    worker.log.info("worker received TERM signal")
+    return True
 
 # Системні налаштування
 umask = 0
