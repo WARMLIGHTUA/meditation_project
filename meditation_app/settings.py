@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'meditation.apps.MeditationConfig',
     'crispy_forms',
     'crispy_bootstrap4',
-    'storages',
+    'storages', 
 ]
 
 MIDDLEWARE = [
