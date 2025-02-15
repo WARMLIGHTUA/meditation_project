@@ -167,6 +167,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Whitenoise configuration
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 WHITENOISE_MAX_AGE = 31536000
+WHITENOISE_MANIFEST_STRICT = False
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_INDEX_FILE = True
 
 # Logging
 LOGGING = {
