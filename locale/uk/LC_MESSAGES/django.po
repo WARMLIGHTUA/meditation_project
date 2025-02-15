@@ -16,7 +16,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
 msgid "Meditation App - Your daily meditation companion"
-msgstr "Медитація - ваш щоденний компаньйон для медитації"
+msgstr "Додаток для медитації - ваш щоденний помічник для медитації"
 
 msgid "Language"
 msgstr "Мова"
@@ -31,7 +31,7 @@ msgid "All rights reserved"
 msgstr "Всі права захищені"
 
 msgid "Featured Content"
-msgstr "Рекомендований контент"
+msgstr "Обраний контент"
 
 msgid "No content available at the moment."
 msgstr "На даний момент контент недоступний."
@@ -70,7 +70,7 @@ msgid "Your browser does not support the audio element."
 msgstr "Ваш браузер не підтримує аудіо елемент."
 
 msgid "Audio Track"
-msgstr "Аудіо трек"
+msgstr "Аудіозапис"
 
 msgid "Video"
 msgstr "Відео"
@@ -91,13 +91,13 @@ msgid "Price"
 msgstr "Ціна"
 
 msgid "Location"
-msgstr "Місце проведення"
+msgstr "Розташування"
 
 msgid "Date and Time"
 msgstr "Дата та час"
 
 msgid "Maximum Participants"
-msgstr "Максимальна кількість учасників"
+msgstr "Максимум учасників"
 
 msgid "Join Group"
 msgstr "Приєднатися до групи"
@@ -148,7 +148,7 @@ msgid "Filter"
 msgstr "Фільтр"
 
 msgid "Sort by"
-msgstr "Сортувати за"
+msgstr "Сортування"
 
 msgid "Ascending"
 msgstr "За зростанням"
@@ -163,10 +163,10 @@ msgid "Name"
 msgstr "Ім'я"
 
 msgid "Popular"
-msgstr "Популярні"
+msgstr "Популярне"
 
 msgid "Latest"
-msgstr "Останні"
+msgstr "Найновіше"
 
 msgid "All"
-msgstr "Всі"
+msgstr "Усе"
