@@ -1,7 +1,7 @@
 {% extends 'meditation/base.html' %}
 {% load i18n %}
 
-{% block title %}{{ object.title }}{% endblock %}
+{% block title %}{{ meditation.title }} - {{ block.super }}{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -59,34 +59,91 @@
 <canvas id="fractalCanvas"></canvas>
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="meditation-content text-center">
-                <h2 class="mb-4">{{ object.title }}</h2>
-                <p class="mb-4">{{ object.description }}</p>
-                
-                <div class="timer-display mb-4" id="timer">00:00</div>
-                
-                <div class="controls">
-                    <div class="audio-controls mb-3">
-                        <label for="volume" class="form-label">{% trans "Volume" %}</label>
-                        <input type="range" class="form-range" id="volume" min="0" max="1" step="0.1" value="1">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                {% if meditation.image %}
+                <img src="{{ meditation.image.url }}" class="card-img-top" alt="{{ meditation.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h1 class="card-title">{{ meditation.title }}</h1>
+                    <p class="card-text">{{ meditation.description }}</p>
+                    
+                    <div class="meditation-info">
+                        <p><strong>{% trans "Duration" %}:</strong> {{ meditation.duration }} {% trans "minutes" %}</p>
+                        <p><strong>{% trans "Author" %}:</strong> {{ meditation.author }}</p>
+                        <p><strong>{% trans "Created" %}:</strong> {{ meditation.created_at|date:"d F Y" }}</p>
+                        {% if meditation.rating %}
+                        <p><strong>{% trans "Rating" %}:</strong> {{ meditation.rating }}/5</p>
+                        {% endif %}
                     </div>
-                    <div class="btn-group">
-                        <button id="startBtn" class="btn btn-meditation btn-lg">
-                            <i class="fas fa-play"></i> {% trans "Start" %}
-                        </button>
-                        <button id="pauseBtn" class="btn btn-meditation btn-lg" disabled>
-                            <i class="fas fa-pause"></i> {% trans "Pause" %}
-                        </button>
-                        <button id="resetBtn" class="btn btn-meditation btn-lg" disabled>
-                            <i class="fas fa-undo"></i> {% trans "Reset" %}
-                        </button>
-                    </div>
-                </div>
 
-                <audio id="meditationAudio" src="{{ object.audio_file.url }}" preload="auto"></audio>
+                    {% if meditation.audio_file %}
+                    <div class="audio-player mt-4">
+                        <h5>{% trans "Audio Track" %}</h5>
+                        <audio controls class="w-100">
+                            <source src="{{ meditation.audio_file.url }}" type="audio/mpeg">
+                            {% trans "Your browser does not support the audio element." %}
+                        </audio>
+                    </div>
+                    {% endif %}
+
+                    {% if meditation.video_url %}
+                    <div class="video-player mt-4">
+                        <h5>{% trans "Video" %}</h5>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="{{ meditation.video_url }}" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                    <div class="user-actions mt-4">
+                        <button class="btn btn-outline-primary favorite-btn" data-meditation-id="{{ meditation.id }}">
+                            {% if meditation in user.favorite_meditations.all %}
+                            <i class="fas fa-heart"></i> {% trans "Remove from Favorites" %}
+                            {% else %}
+                            <i class="far fa-heart"></i> {% trans "Add to Favorites" %}
+                            {% endif %}
+                        </button>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
+
+            {% if user.is_authenticated %}
+            <div class="comments-section mt-4">
+                <h3>{% trans "Comments" %}</h3>
+                <form method="post" action="{% url 'meditation:add_comment' meditation.id %}" class="mb-4">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <textarea name="comment" class="form-control" rows="3" placeholder="{% trans 'Write your comment here...' %}" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2">{% trans "Post Comment" %}</button>
+                </form>
+
+                {% if comments %}
+                <div class="comments-list">
+                    {% for comment in comments %}
+                    <div class="comment card mb-3">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">{{ comment.user.username }} - {{ comment.created_at|date:"d F Y H:i" }}</h6>
+                            <p class="card-text">{{ comment.text }}</p>
+                            {% if user == comment.user or user.is_staff %}
+                            <form method="post" action="{% url 'meditation:delete_comment' comment.id %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger">{% trans "Delete" %}</button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p>{% trans "No comments yet." %}</p>
+                {% endif %}
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -384,6 +441,27 @@ document.addEventListener('DOMContentLoaded', function() {
     resetBtn.addEventListener('click', resetMeditation);
     
     updateTimer();
+
+    const favoriteBtn = document.querySelector('.favorite-btn');
+    if (favoriteBtn) {
+        favoriteBtn.addEventListener('click', function() {
+            const meditationId = this.dataset.meditationId;
+            fetch(`/meditation/${meditationId}/toggle_favorite/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'added') {
+                    this.innerHTML = '<i class="fas fa-heart"></i> {% trans "Remove from Favorites" %}';
+                } else {
+                    this.innerHTML = '<i class="far fa-heart"></i> {% trans "Add to Favorites" %}';
+                }
+            });
+        });
+    }
 });
 </script>
 {% endblock %} 

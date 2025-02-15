@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 
-{% block title %}{% trans "Meditation List" %}{% endblock %}
+{% block title %}{% trans "Meditations" %} - {{ block.super }}{% endblock %}
 
 {% block content %}
 {% csrf_token %}

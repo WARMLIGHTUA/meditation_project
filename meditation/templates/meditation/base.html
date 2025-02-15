@@ -1,18 +1,18 @@
 {% load i18n %}
 {% load static %}
 <!DOCTYPE html>
-<html lang="uk" data-theme="light">
+<html lang="{{ LANGUAGE_CODE }}" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000000">
-    <title>{% block title %}Meditation App{% endblock %}</title>
+    <title>{% block title %}{% trans "Meditation App" %}{% endblock %}</title>
     
     <!-- PWA Meta Tags -->
-    <meta name="description" content="Meditation App - Your daily meditation companion">
+    <meta name="description" content="{% trans 'Meditation App - Your daily meditation companion' %}">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Meditation">
+    <meta name="apple-mobile-web-app-title" content="{% trans 'Meditation' %}">
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="{% static 'meditation/manifest.json' %}">
@@ -318,10 +318,11 @@
                                 <input name="next" type="hidden" value="{{ request.path }}">
                                 {% get_current_language as CURRENT_LANGUAGE %}
                                 {% get_available_languages as LANGUAGES %}
-                                {% for lang_code, lang_name in LANGUAGES %}
-                                    <button type="submit" name="language" value="{{ lang_code }}" 
-                                            class="dropdown-item {% if lang_code == CURRENT_LANGUAGE %}active{% endif %}">
-                                        {{ lang_name }}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                    <button type="submit" name="language" value="{{ language.code }}" 
+                                            class="dropdown-item {% if language.code == CURRENT_LANGUAGE %}active{% endif %}">
+                                        {{ language.name_local }}
                                     </button>
                                 {% endfor %}
                             </form>
@@ -392,6 +393,28 @@
                         console.log('ServiceWorker registration failed: ', err);
                     });
             });
+        }
+    </script>
+    
+    <!-- Theme Switcher Script -->
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const themeIcon = document.querySelector('.theme-icon');
+            themeIcon.classList.toggle('fa-moon');
+            themeIcon.classList.toggle('fa-sun');
+        }
+
+        // Set initial theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+            document.querySelector('.theme-icon').classList.replace('fa-moon', 'fa-sun');
         }
     </script>
     

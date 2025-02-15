@@ -1,591 +1,2084 @@
-# Ukrainian translations for meditation project.
-# Copyright (C) 2024
-# This file is distributed under the same license as the meditation package.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-20 12:00+0000\n"
-"PO-Revision-Date: 2024-03-20 12:00+0000\n"
-"Last-Translator: Your Name <your.email@example.com>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
-"Language: uk\n"
+"POT-Creation-Date: 2025-02-15 14:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-# Model fields
-msgid "Title"
-msgstr "Назва"
-
-msgid "Description"
-msgstr "Опис"
-
-msgid "Image"
-msgstr "Зображення"
-
-msgid "Video URL"
-msgstr "URL відео"
-
-msgid "Created at"
-msgstr "Створено"
-
-msgid "Rating"
-msgstr "Рейтинг"
-
-msgid "Author"
-msgstr "Автор"
-
-msgid "Audio File"
-msgstr "Аудіо файл"
-
-msgid "Upload MP3 or WAV file"
-msgstr "Завантажте файл MP3 або WAV"
-
-msgid "Duration"
-msgstr "Тривалість"
-
-msgid "Duration in minutes"
-msgstr "Тривалість у хвилинах"
-
-msgid "Featured"
-msgstr "Рекомендовані"
-
-msgid "Duration in weeks"
-msgstr "Тривалість у тижнях"
-
-msgid "Price"
-msgstr "Ціна"
-
-msgid "Date and Time"
-msgstr "Дата та час"
-
-msgid "Location"
-msgstr "Місце проведення"
-
-msgid "Maximum Participants"
-msgstr "Максимальна кількість учасників"
-
-msgid "Members Count"
-msgstr "Кількість учасників"
-
-msgid "Private Group"
-msgstr "Приватна група"
-
-msgid "Online Event"
-msgstr "Онлайн подія"
-
-msgid "User"
-msgstr "Користувач"
-
-msgid "First Name"
-msgstr "Ім'я"
-
-msgid "Last Name"
-msgstr "Прізвище"
-
-msgid "Birth Year"
-msgstr "Рік народження"
-
-msgid "Gender"
-msgstr "Стать"
-
-msgid "Male"
-msgstr "Чоловіча"
-
-msgid "Female"
-msgstr "Жіноча"
-
-msgid "Other"
-msgstr "Інше"
-
-msgid "User Profile"
-msgstr "Профіль користувача"
-
-msgid "User Profiles"
-msgstr "Профілі користувачів"
-
-msgid "Favorite Meditation"
-msgstr "Улюблена медитація"
-
-msgid "Favorite Meditations"
-msgstr "Улюблені медитації"
-
-msgid "Added at"
-msgstr "Додано"
-
-msgid "Page"
-msgstr "Сторінка"
-
-msgid "Theme"
-msgstr "Тема"
-
-msgid "Background Image"
-msgstr "Фонове зображення"
-
-msgid "Background Video"
-msgstr "Фонове відео"
-
-msgid "Upload MP4 or WebM file"
-msgstr "Завантажте файл MP4 або WebM"
-
-msgid "Background Color"
-msgstr "Колір фону"
-
-msgid "HEX color code (e.g. #FFFFFF)"
-msgstr "HEX код кольору (напр. #FFFFFF)"
-
-msgid "Background Opacity"
-msgstr "Прозорість фону"
-
-msgid "Page Background"
-msgstr "Фон сторінки"
-
-msgid "Page Backgrounds"
-msgstr "Фони сторінок"
-
-# Form validation messages
+#: .\meditation\forms.py:15 .\meditation\templates\meditation\login.html:25
 msgid "Username or Email"
-msgstr "Ім'я користувача або Email"
+msgstr ""
 
+#: .\meditation\forms.py:18
 msgid "Enter your username or email"
-msgstr "Введіть ім'я користувача або email"
+msgstr ""
 
+#: .\meditation\forms.py:23 .\meditation\forms.py:58
+#: .\meditation\templates\meditation\login.html:35
+#: .\meditation\templates\meditation\register.html:45
 msgid "Password"
-msgstr "Пароль"
+msgstr ""
 
+#: .\meditation\forms.py:26
 msgid "Enter your password"
-msgstr "Введіть пароль"
+msgstr ""
 
+#: .\meditation\forms.py:34
 msgid "Both username and password are required."
-msgstr "Необхідно ввести ім'я користувача та пароль."
+msgstr ""
 
+#: .\meditation\forms.py:42 .\meditation\templates\meditation\register.html:25
 msgid "Username"
-msgstr "Ім'я користувача"
+msgstr ""
 
+#: .\meditation\forms.py:51 .\meditation\templates\meditation\register.html:35
 msgid "Email"
-msgstr "Email"
+msgstr ""
 
+#: .\meditation\forms.py:65 .\meditation\templates\meditation\register.html:60
 msgid "Confirm Password"
-msgstr "Підтвердіть пароль"
+msgstr ""
 
+#: .\meditation\forms.py:81
 msgid "Username can only contain letters, numbers, and @/./+/-/_ characters."
-msgstr "Ім'я користувача може містити лише літери, цифри та символи @/./+/-/_"
+msgstr ""
 
+#: .\meditation\forms.py:84
 msgid "This username is already taken."
-msgstr "Це ім'я користувача вже зайняте."
+msgstr ""
 
+#: .\meditation\forms.py:91
 msgid "This email is already registered."
-msgstr "Цей email вже зареєстрований."
+msgstr ""
 
+#: .\meditation\forms.py:99
 msgid "Passwords do not match."
-msgstr "Паролі не співпадають."
+msgstr ""
 
+#: .\meditation\forms.py:103
 msgid "Password must be at least 8 characters long."
-msgstr "Пароль повинен містити щонайменше 8 символів."
+msgstr ""
 
+#: .\meditation\forms.py:105
 msgid "Password must contain at least one uppercase letter."
-msgstr "Пароль повинен містити хоча б одну велику літеру."
+msgstr ""
 
+#: .\meditation\forms.py:107
 msgid "Password must contain at least one lowercase letter."
-msgstr "Пароль повинен містити хоча б одну малу літеру."
+msgstr ""
 
+#: .\meditation\forms.py:109
 msgid "Password must contain at least one digit."
-msgstr "Пароль повинен містити хоча б одну цифру."
+msgstr ""
 
+#: .\meditation\forms.py:111
 msgid "Password must contain at least one special character."
-msgstr "Пароль повинен містити хоча б один спеціальний символ."
+msgstr ""
 
+#: .\meditation\forms.py:125
 msgid "Enter your first name"
-msgstr "Введіть ваше ім'я"
+msgstr ""
 
+#: .\meditation\forms.py:129
 msgid "Enter your last name"
-msgstr "Введіть ваше прізвище"
+msgstr ""
 
+#: .\meditation\forms.py:133
 msgid "Enter your birth year"
-msgstr "Введіть рік народження"
+msgstr ""
 
-msgid "First name should contain only letters."
-msgstr "Ім'я повинно містити лише літери."
-
-msgid "Last name should contain only letters."
-msgstr "Прізвище повинно містити лише літери."
-
-msgid "Please enter a valid birth year between 1900 and 2100."
-msgstr "Будь ласка, введіть дійсний рік народження між 1900 та 2100."
-
-msgid "Don't have an account?"
-msgstr "Не маєте облікового запису?"
-
-msgid "Register here"
-msgstr "Зареєструватися тут"
-
-msgid "Already have an account?"
-msgstr "Вже маєте обліковий запис?"
-
-msgid "Login here"
-msgstr "Увійти тут"
-
-msgid "Account Information"
-msgstr "Інформація про обліковий запис"
-
-msgid "Profile Information"
-msgstr "Інформація профілю"
-
-msgid "Meditation App"
-msgstr "Додаток для медитації"
-
-msgid "Tracks"
-msgstr "Медитації"
-
-msgid "Courses"
-msgstr "Курси"
-
-msgid "Workshops"
-msgstr "Воркшопи"
-
-msgid "Groups"
-msgstr "Групи"
-
-msgid "Events"
-msgstr "Події"
-
-msgid "Favorites"
-msgstr "Улюблені"
-
-msgid "Login"
-msgstr "Увійти"
-
-msgid "Register"
-msgstr "Зареєструватися"
-
-msgid "Logout"
-msgstr "Вийти"
-
-msgid "Profile"
-msgstr "Профіль"
-
-msgid "Admin"
-msgstr "Адмін"
-
-msgid "Search"
-msgstr "Пошук"
-
-msgid "Light"
-msgstr "Світла"
-
-msgid "Dark"
-msgstr "Темна"
-
-msgid "Meditation track was created successfully"
-msgstr "Медитацію успішно створено"
-
-msgid "Meditation track was updated successfully"
-msgstr "Медитацію успішно оновлено"
-
-msgid "Course was created successfully"
-msgstr "Курс успішно створено"
-
-msgid "Course was updated successfully"
-msgstr "Курс успішно оновлено"
-
-msgid "Workshop was created successfully"
-msgstr "Воркшоп успішно створено"
-
-msgid "Workshop was updated successfully"
-msgstr "Воркшоп успішно оновлено"
-
-msgid "Group was created successfully"
-msgstr "Групу успішно створено"
-
-msgid "Group was updated successfully"
-msgstr "Групу успішно оновлено"
-
-msgid "Event was created successfully"
-msgstr "Подію успішно створено"
-
-msgid "Event was updated successfully"
-msgstr "Подію успішно оновлено"
-
-msgid "Successfully logged in!"
-msgstr "Успішний вхід!"
-
-msgid "Invalid username or password."
-msgstr "Невірне ім'я користувача або пароль."
-
-msgid "Registration successful! Welcome to our community!"
-msgstr "Реєстрація успішна! Ласкаво просимо до нашої спільноти!"
-
-msgid "Please correct the errors below."
-msgstr "Будь ласка, виправте помилки нижче."
-
-msgid "Meditation track not found"
-msgstr "Медитацію не знайдено"
-
-msgid "Meditation"
-msgstr "Медитація"
-
-msgid "Meditation List"
-msgstr "Список медитацій"
-
-msgid "Meditations"
-msgstr "Медитації"
-
-msgid "Duration"
-msgstr "Тривалість"
-
-msgid "min."
-msgstr "хв."
-
-msgid "Start Meditation"
-msgstr "Почати медитацію"
-
-msgid "No meditations available at the moment."
-msgstr "Наразі немає доступних медитацій."
-
-msgid "Volume"
-msgstr "Гучність"
-
-msgid "Start"
-msgstr "Почати"
-
-msgid "Pause"
-msgstr "Пауза"
-
-msgid "Reset"
-msgstr "Скинути"
-
-msgid "Top"
-msgstr "Топ"
-
-msgid "Sort"
-msgstr "Сортування"
-
-msgid "Filters"
-msgstr "Фільтри"
-
-msgid "MEDITATION"
-msgstr "МЕДИТАЦІЯ"
-
-msgid "Home"
-msgstr "Головна"
-
-msgid "Learn"
-msgstr "Вивчати"
-
-msgid "Practice"
-msgstr "Практика"
-
-msgid "Community"
-msgstr "Спільнота"
-
-msgid "Content management is available in the admin panel"
-msgstr "Управління контентом доступне в панелі адміністратора"
-
-msgid "Max participants"
-msgstr "Максимальна кількість учасників"
-
-msgid "Watch Preview"
-msgstr "Дивитись прев'ю"
-
-msgid "No workshops available at the moment."
-msgstr "На даний момент воркшопи відсутні."
-
-msgid "Edit Workshop"
-msgstr "Редагувати воркшоп"
-
-msgid "Create New Workshop"
-msgstr "Створити новий воркшоп"
-
-msgid "Meditation Tracks"
-msgstr "Медитації"
-
-msgid "Search tracks..."
-msgstr "Пошук медитацій..."
-
-msgid "Your browser does not support the audio element."
-msgstr "Ваш браузер не підтримує аудіо елемент."
-
-msgid "Filter Tracks"
-msgstr "Фільтрувати медитації"
-
-msgid "Min"
-msgstr "Мін"
-
-msgid "Max"
-msgstr "Макс"
-
-msgid "All"
-msgstr "Всі"
-
-msgid "Close"
-msgstr "Закрити"
-
-msgid "Apply"
-msgstr "Застосувати"
-
-msgid "Top Content"
-msgstr "Топ контент"
-
-msgid "Watch Video"
-msgstr "Дивитись відео"
-
-msgid "No top content available at the moment."
-msgstr "На даний момент топ контент відсутній."
-
-msgid "Created"
-msgstr "Створено"
-
-msgid "Like"
-msgstr "Вподобати"
-
-msgid "Share"
-msgstr "Поділитися"
-
-msgid "Comments"
-msgstr "Коментарі"
-
-msgid "Add a comment..."
-msgstr "Додати коментар..."
-
-msgid "Post Comment"
-msgstr "Опублікувати коментар"
-
-msgid "User Name"
-msgstr "Ім'я користувача"
-
-msgid "This is a sample comment."
-msgstr "Це приклад коментаря."
-
-msgid "hours ago"
-msgstr "годин тому"
-
-msgid "Rules and Terms of Use"
-msgstr "Правила та умови використання"
-
-msgid "1. General Provisions"
-msgstr "1. Загальні положення"
-
-msgid "These rules govern the use of the Meditation App platform and establish the rights and obligations of users."
-msgstr "Ці правила регулюють використання платформи Meditation App та встановлюють права та обов'язки користувачів."
-
-msgid "2. User Rights and Responsibilities"
-msgstr "2. Права та обов'язки користувачів"
-
-msgid "Users must be at least 13 years old"
-msgstr "Користувачі повинні бути не молодше 13 років"
-
-msgid "Users are responsible for maintaining the confidentiality of their account"
-msgstr "Користувачі відповідають за збереження конфіденційності свого облікового запису"
-
-msgid "Users must not share inappropriate or harmful content"
-msgstr "Користувачі не повинні поширювати неприйнятний або шкідливий контент"
-
-msgid "3. Privacy Policy"
-msgstr "3. Політика конфіденційності"
-
-msgid "We respect your privacy and protect your personal data according to GDPR and other applicable laws."
-msgstr "Ми поважаємо вашу конфіденційність та захищаємо ваші персональні дані відповідно до GDPR та інших застосовних законів."
-
-msgid "4. Content Usage"
-msgstr "4. Використання контенту"
-
-msgid "All content on the platform is protected by copyright and may not be used without permission."
-msgstr "Весь контент на платформі захищений авторським правом і не може бути використаний без дозволу."
-
-msgid "5. Technical Support"
-msgstr "5. Технічна підтримка"
-
-msgid "For technical support, please contact us at:"
-msgstr "Для технічної підтримки, будь ласка, зв'яжіться з нами за адресою:"
-
-msgid "Featured Content"
-msgstr "Рекомендований контент"
-
-msgid "Edit Meditation Track"
-msgstr "Редагувати медитацію"
-
-msgid "Create New Meditation Track"
-msgstr "Створити нову медитацію"
-
-msgid "Private"
-msgstr "Приватна"
-
-msgid "Public"
-msgstr "Публічна"
-
-msgid "Join Group"
-msgstr "Приєднатися до групи"
-
-msgid "No groups available at the moment."
-msgstr "На даний момент групи відсутні."
-
-msgid "Edit Group"
-msgstr "Редагувати групу"
-
-msgid "Create New Group"
-msgstr "Створити нову групу"
-
-msgid "Save"
-msgstr "Зберегти"
-
-msgid "Cancel"
-msgstr "Скасувати"
-
-msgid "My Favorite Meditations"
-msgstr "Мої улюблені медитації"
-
-msgid "Search favorites..."
-msgstr "Пошук улюблених..."
-
-msgid "Date Added"
-msgstr "Дата додавання"
-
-msgid "Technical Support"
-msgstr "Технічна підтримка"
-
-msgid "Rules"
-msgstr "Правила"
-
-msgid "All rights reserved"
-msgstr "Всі права захищені"
-
-msgid "Admin Panel"
-msgstr "Панель адміністратора"
-
-msgid "Successfully registered!"
-msgstr "Успішно зареєстровано!"
-
-msgid "Registration failed. Please check the form for errors."
-msgstr "Помилка реєстрації. Будь ласка, перевірте форму на наявність помилок."
-
+#: .\meditation\forms.py:145
 msgid "First name can only contain letters, spaces, hyphens and apostrophes."
-msgstr "Ім'я може містити лише літери, пробіли, дефіси та апострофи."
+msgstr ""
 
+#: .\meditation\forms.py:153
 msgid "Last name can only contain letters, spaces, hyphens and apostrophes."
-msgstr "Прізвище може містити лише літери, пробіли, дефіси та апострофи."
+msgstr ""
 
+#: .\meditation\forms.py:162
 msgid "Please enter a valid birth year between 1900 and current year."
-msgstr "Будь ласка, введіть дійсний рік народження між 1900 та поточним роком."
+msgstr ""
 
+#: .\meditation\forms.py:169
 msgid "Please select your gender."
-msgstr "Будь ласка, виберіть вашу стать."
+msgstr ""
 
+#: .\meditation\forms.py:171
 msgid "Invalid gender selection."
-msgstr "Невірний вибір статі."
+msgstr ""
 
-msgid "Registration failed. Please try again."
-msgstr "Помилка реєстрації. Будь ласка, спробуйте ще раз."
+#: .\meditation\models.py:13
+msgid "Title"
+msgstr ""
 
+#: .\meditation\models.py:14
+msgid "Description"
+msgstr ""
+
+#: .\meditation\models.py:15
+#: .\venv\Lib\site-packages\django\db\models\fields\files.py:393
+msgid "Image"
+msgstr ""
+
+#: .\meditation\models.py:16
+msgid "Video URL"
+msgstr ""
+
+#: .\meditation\models.py:17
+msgid "Created at"
+msgstr ""
+
+#: .\meditation\models.py:19
+#: .\meditation\templates\meditation\favorite_tracks.html:21
+#: .\meditation\templates\meditation\meditation_detail.html:77
+#: .\meditation\templates\meditation\track_list.html:21
+#: .\meditation\templates\meditation\track_list.html:131
+msgid "Rating"
+msgstr ""
+
+#: .\meditation\models.py:25
+#: .\meditation\templates\meditation\meditation_detail.html:74
+msgid "Author"
+msgstr ""
+
+#: .\meditation\models.py:36
+msgid "Audio File"
+msgstr ""
+
+#: .\meditation\models.py:38
+msgid "Upload MP3 or WAV file"
+msgstr ""
+
+#: .\meditation\models.py:41
+#: .\meditation\templates\meditation\favorite_tracks.html:18
+#: .\meditation\templates\meditation\meditation_detail.html:73
+#: .\meditation\templates\meditation\track_list.html:18
+#: .\meditation\templates\meditation\track_list.html:124
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1857
+msgid "Duration"
+msgstr ""
+
+#: .\meditation\models.py:42
+msgid "Duration in minutes"
+msgstr ""
+
+#: .\meditation\models.py:47
+msgid "Meditation Track"
+msgstr ""
+
+#: .\meditation\models.py:48
+#: .\meditation\templates\meditation\track_list.html:5
+#: .\meditation\templates\meditation\track_list.html:10
+msgid "Meditation Tracks"
+msgstr ""
+
+#: .\meditation\models.py:57
+#: .\meditation\templates\meditation\meditation_list.html:25
+#: .\meditation\templates\meditation\top_content_detail.html:24
+#: .\meditation\templates\meditation\top_content_list.html:23
+msgid "Featured"
+msgstr ""
+
+#: .\meditation\models.py:60 .\meditation\models.py:61
+#: .\meditation\templates\meditation\top_content_list.html:5
+#: .\meditation\templates\meditation\top_content_list.html:9
+msgid "Top Content"
+msgstr ""
+
+#: .\meditation\models.py:71 .\meditation\models.py:72
+msgid "Duration in weeks"
+msgstr ""
+
+#: .\meditation\models.py:76 .\meditation\models.py:97
+msgid "Price"
+msgstr ""
+
+#: .\meditation\models.py:84
+msgid "Course"
+msgstr ""
+
+#: .\meditation\models.py:85 .\meditation\templates\meditation\base.html:257
+#: .\meditation\templates\meditation\course_list.html:5
+#: .\meditation\templates\meditation\course_list.html:10
+msgid "Courses"
+msgstr ""
+
+#: .\meditation\models.py:94 .\meditation\models.py:138
+msgid "Date and Time"
+msgstr ""
+
+#: .\meditation\models.py:95 .\meditation\models.py:139
+msgid "Location"
+msgstr ""
+
+#: .\meditation\models.py:104 .\meditation\models.py:142
+msgid "Maximum Participants"
+msgstr ""
+
+#: .\meditation\models.py:110
+msgid "Workshop"
+msgstr ""
+
+#: .\meditation\models.py:111 .\meditation\templates\meditation\base.html:260
+#: .\meditation\templates\meditation\workshop_list.html:5
+#: .\meditation\templates\meditation\workshop_list.html:10
+msgid "Workshops"
+msgstr ""
+
+#: .\meditation\models.py:121
+msgid "Members Count"
+msgstr ""
+
+#: .\meditation\models.py:125
+msgid "Private Group"
+msgstr ""
+
+#: .\meditation\models.py:128
+msgid "Group"
+msgstr ""
+
+#: .\meditation\models.py:129 .\meditation\templates\meditation\base.html:263
+#: .\meditation\templates\meditation\group_list.html:5
+#: .\meditation\templates\meditation\group_list.html:10
+msgid "Groups"
+msgstr ""
+
+#: .\meditation\models.py:140
+msgid "Online Event"
+msgstr ""
+
+#: .\meditation\models.py:148
+msgid "Event"
+msgstr ""
+
+#: .\meditation\models.py:149 .\meditation\templates\meditation\base.html:266
+#: .\meditation\templates\meditation\event_list.html:5
+#: .\meditation\templates\meditation\event_list.html:10
+msgid "Events"
+msgstr ""
+
+#: .\meditation\models.py:159
+msgid "Male"
+msgstr ""
+
+#: .\meditation\models.py:160
+msgid "Female"
+msgstr ""
+
+#: .\meditation\models.py:161
+msgid "Other"
+msgstr ""
+
+#: .\meditation\models.py:168 .\meditation\models.py:206
+msgid "User"
+msgstr ""
+
+#: .\meditation\models.py:170
+msgid "First Name"
+msgstr ""
+
+#: .\meditation\models.py:171
+msgid "Last Name"
+msgstr ""
+
+#: .\meditation\models.py:173
+msgid "Birth Year"
+msgstr ""
+
+#: .\meditation\models.py:182
+msgid "Gender"
+msgstr ""
+
+#: .\meditation\models.py:188
+msgid "User Profile"
+msgstr ""
+
+#: .\meditation\models.py:189
+msgid "User Profiles"
+msgstr ""
+
+#: .\meditation\models.py:212 .\meditation\templates\meditation\base.html:15
+msgid "Meditation"
+msgstr ""
+
+#: .\meditation\models.py:214
+msgid "Added at"
+msgstr ""
+
+#: .\meditation\models.py:217
+msgid "Favorite Meditation"
+msgstr ""
+
+#: .\meditation\models.py:218
+#: .\meditation\templates\meditation\favorite_tracks.html:5
+msgid "Favorite Meditations"
+msgstr ""
+
+#: .\meditation\models.py:229
+msgid "Home Page"
+msgstr ""
+
+#: .\meditation\models.py:230
+msgid "Tracks Page"
+msgstr ""
+
+#: .\meditation\models.py:231
+msgid "Courses Page"
+msgstr ""
+
+#: .\meditation\models.py:232
+msgid "Workshops Page"
+msgstr ""
+
+#: .\meditation\models.py:233
+msgid "Groups Page"
+msgstr ""
+
+#: .\meditation\models.py:234
+msgid "Events Page"
+msgstr ""
+
+#: .\meditation\models.py:235
+msgid "Favorites Page"
+msgstr ""
+
+#: .\meditation\models.py:239
+msgid "Light Theme"
+msgstr ""
+
+#: .\meditation\models.py:240
+msgid "Dark Theme"
+msgstr ""
+
+#: .\meditation\models.py:244
+msgid "Page"
+msgstr ""
+
+#: .\meditation\models.py:250
+msgid "Theme"
+msgstr ""
+
+#: .\meditation\models.py:256
+msgid "Background Image"
+msgstr ""
+
+#: .\meditation\models.py:262
+msgid "Background Video"
+msgstr ""
+
+#: .\meditation\models.py:266
+msgid "Upload MP4 or WebM file"
+msgstr ""
+
+#: .\meditation\models.py:269
+msgid "Background Color"
+msgstr ""
+
+#: .\meditation\models.py:272
+msgid "HEX color code (e.g. #FFFFFF)"
+msgstr ""
+
+#: .\meditation\models.py:275
+msgid "Background Opacity"
+msgstr ""
+
+#: .\meditation\models.py:283
+msgid "Page Background"
+msgstr ""
+
+#: .\meditation\models.py:284
+msgid "Page Backgrounds"
+msgstr ""
+
+#: .\meditation\templates\meditation\base.html:9
+#: .\meditation\templates\meditation\base.html:247
+msgid "Meditation App"
+msgstr ""
+
+#: .\meditation\templates\meditation\base.html:12
+msgid "Meditation App - Your daily meditation companion"
+msgstr ""
+
+#: .\meditation\templates\meditation\base.html:254
+msgid "Tracks"
+msgstr ""
+
+#: .\meditation\templates\meditation\base.html:271
+msgid "Favorites"
+msgstr ""
+
+#: .\meditation\templates\meditation\base.html:289
+msgid "Admin Panel"
+msgstr ""
+
+#: .\meditation\templates\meditation\base.html:296
+msgid "Logout"
+msgstr ""
+
+#: .\meditation\templates\meditation\base.html:304
+#: .\meditation\templates\meditation\login.html:4
+#: .\meditation\templates\meditation\login.html:12
+#: .\meditation\templates\meditation\login.html:45
+msgid "Login"
+msgstr ""
+
+#: .\meditation\templates\meditation\base.html:307
+#: .\meditation\templates\meditation\register.html:4
+#: .\meditation\templates\meditation\register.html:12
+#: .\meditation\templates\meditation\register.html:70
+msgid "Register"
+msgstr ""
+
+#: .\meditation\templates\meditation\base.html:313
 msgid "Language"
-msgstr "Мова"
+msgstr ""
 
-msgid "Ukrainian"
-msgstr "Українська"
+#: .\meditation\templates\meditation\base.html:366
+msgid "Technical Support"
+msgstr ""
 
-msgid "English"
-msgstr "Англійська"
+#: .\meditation\templates\meditation\base.html:369
+msgid "Rules"
+msgstr ""
 
-msgid "French"
-msgstr "Французька" 
+#: .\meditation\templates\meditation\base.html:374
+msgid "All rights reserved"
+msgstr ""
+
+#: .\meditation\templates\meditation\course_form.html:6
+msgid "Edit Course"
+msgstr ""
+
+#: .\meditation\templates\meditation\course_form.html:8
+msgid "Create New Course"
+msgstr ""
+
+#: .\meditation\templates\meditation\course_list.html:24
+msgid "weeks"
+msgstr ""
+
+#: .\meditation\templates\meditation\course_list.html:47
+#: .\meditation\templates\meditation\workshop_list.html:57
+msgid "Watch Preview"
+msgstr ""
+
+#: .\meditation\templates\meditation\course_list.html:57
+msgid "No courses available at the moment."
+msgstr ""
+
+#: .\meditation\templates\meditation\event_form.html:6
+msgid "Edit Event"
+msgstr ""
+
+#: .\meditation\templates\meditation\event_form.html:8
+msgid "Create New Event"
+msgstr ""
+
+#: .\meditation\templates\meditation\event_list.html:36
+msgid "Online"
+msgstr ""
+
+#: .\meditation\templates\meditation\event_list.html:38
+msgid "Offline"
+msgstr ""
+
+#: .\meditation\templates\meditation\event_list.html:51
+#: .\meditation\templates\meditation\track_list.html:127
+msgid "Max"
+msgstr ""
+
+#: .\meditation\templates\meditation\event_list.html:64
+msgid "Join Event"
+msgstr ""
+
+#: .\meditation\templates\meditation\event_list.html:72
+msgid "No events available at the moment."
+msgstr ""
+
+#: .\meditation\templates\meditation\favorite_tracks.html:10
+msgid "My Favorite Meditations"
+msgstr ""
+
+#: .\meditation\templates\meditation\favorite_tracks.html:24
+msgid "Date Added"
+msgstr ""
+
+#: .\meditation\templates\meditation\favorite_tracks.html:43
+msgid "Search favorites..."
+msgstr ""
+
+#: .\meditation\templates\meditation\favorite_tracks.html:64
+#: .\meditation\templates\meditation\meditation_list.html:52
+#: .\meditation\templates\meditation\track_list.html:67
+msgid "min."
+msgstr ""
+
+#: .\meditation\templates\meditation\favorite_tracks.html:76
+#: .\meditation\templates\meditation\meditation_list.html:66
+#: .\meditation\templates\meditation\track_list.html:81
+msgid "MEDITATION"
+msgstr ""
+
+#: .\meditation\templates\meditation\favorite_tracks.html:88
+#: .\meditation\templates\meditation\meditation_detail.html:86
+#: .\meditation\templates\meditation\track_list.html:93
+msgid "Your browser does not support the audio element."
+msgstr ""
+
+#: .\meditation\templates\meditation\favorite_tracks.html:94
+#: .\meditation\templates\meditation\track_list.html:99
+msgid "Start Meditation"
+msgstr ""
+
+#: .\meditation\templates\meditation\favorite_tracks.html:102
+msgid "You haven't added any meditations to favorites yet."
+msgstr ""
+
+#: .\meditation\templates\meditation\form_base.html:11
+msgid "Edit Content"
+msgstr ""
+
+#: .\meditation\templates\meditation\form_base.html:47
+msgid "Save"
+msgstr ""
+
+#: .\meditation\templates\meditation\form_base.html:50
+msgid "Cancel"
+msgstr ""
+
+#: .\meditation\templates\meditation\group_form.html:6
+msgid "Edit Group"
+msgstr ""
+
+#: .\meditation\templates\meditation\group_form.html:8
+msgid "Create New Group"
+msgstr ""
+
+#: .\meditation\templates\meditation\group_list.html:26
+msgid "Private"
+msgstr ""
+
+#: .\meditation\templates\meditation\group_list.html:28
+msgid "Public"
+msgstr ""
+
+#: .\meditation\templates\meditation\group_list.html:58
+msgid "Join Group"
+msgstr ""
+
+#: .\meditation\templates\meditation\group_list.html:66
+msgid "No groups available at the moment."
+msgstr ""
+
+#: .\meditation\templates\meditation\login.html:19
+#: .\meditation\templates\meditation\register.html:19
+msgid "Please correct the errors below:"
+msgstr ""
+
+#: .\meditation\templates\meditation\login.html:50
+msgid "Don't have an account?"
+msgstr ""
+
+#: .\meditation\templates\meditation\login.html:50
+msgid "Register here"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_detail.html:73
+msgid "minutes"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_detail.html:75
+#: .\meditation\templates\meditation\top_content_detail.html:37
+msgid "Created"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_detail.html:83
+msgid "Audio Track"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_detail.html:93
+msgid "Video"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_detail.html:104
+#: .\meditation\templates\meditation\meditation_detail.html:458
+msgid "Remove from Favorites"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_detail.html:106
+#: .\meditation\templates\meditation\meditation_detail.html:460
+msgid "Add to Favorites"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_detail.html:116
+#: .\meditation\templates\meditation\top_content_detail.html:53
+msgid "Comments"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_detail.html:120
+msgid "Write your comment here..."
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_detail.html:122
+#: .\meditation\templates\meditation\top_content_detail.html:60
+msgid "Post Comment"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_detail.html:135
+#: .\venv\Lib\site-packages\django\forms\formsets.py:499
+msgid "Delete"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_detail.html:143
+msgid "No comments yet."
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_form.html:6
+msgid "Edit Meditation Track"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_form.html:8
+msgid "Create New Meditation Track"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_list.html:5
+msgid "Meditations"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_list.html:13
+msgid "Featured Content"
+msgstr ""
+
+#: .\meditation\templates\meditation\meditation_list.html:76
+msgid "No meditations available at the moment."
+msgstr ""
+
+#: .\meditation\templates\meditation\register.html:75
+msgid "Already have an account?"
+msgstr ""
+
+#: .\meditation\templates\meditation\register.html:75
+msgid "Login here"
+msgstr ""
+
+#: .\meditation\templates\meditation\rules.html:4
+#: .\meditation\templates\meditation\rules.html:12
+msgid "Rules and Terms of Use"
+msgstr ""
+
+#: .\meditation\templates\meditation\rules.html:15
+msgid "1. General Provisions"
+msgstr ""
+
+#: .\meditation\templates\meditation\rules.html:16
+msgid ""
+"These rules govern the use of the Meditation App platform and establish the "
+"rights and obligations of users."
+msgstr ""
+
+#: .\meditation\templates\meditation\rules.html:20
+msgid "2. User Rights and Responsibilities"
+msgstr ""
+
+#: .\meditation\templates\meditation\rules.html:22
+msgid "Users must be at least 13 years old"
+msgstr ""
+
+#: .\meditation\templates\meditation\rules.html:23
+msgid ""
+"Users are responsible for maintaining the confidentiality of their account"
+msgstr ""
+
+#: .\meditation\templates\meditation\rules.html:24
+msgid "Users must not share inappropriate or harmful content"
+msgstr ""
+
+#: .\meditation\templates\meditation\rules.html:29
+msgid "3. Privacy Policy"
+msgstr ""
+
+#: .\meditation\templates\meditation\rules.html:30
+msgid ""
+"We respect your privacy and protect your personal data according to GDPR and "
+"other applicable laws."
+msgstr ""
+
+#: .\meditation\templates\meditation\rules.html:34
+msgid "4. Content Usage"
+msgstr ""
+
+#: .\meditation\templates\meditation\rules.html:35
+msgid ""
+"All content on the platform is protected by copyright and may not be used "
+"without permission."
+msgstr ""
+
+#: .\meditation\templates\meditation\rules.html:39
+msgid "5. Technical Support"
+msgstr ""
+
+#: .\meditation\templates\meditation\rules.html:40
+msgid "For technical support, please contact us at:"
+msgstr ""
+
+#: .\meditation\templates\meditation\top_content_detail.html:40
+msgid "Like"
+msgstr ""
+
+#: .\meditation\templates\meditation\top_content_detail.html:43
+msgid "Share"
+msgstr ""
+
+#: .\meditation\templates\meditation\top_content_detail.html:58
+msgid "Add a comment..."
+msgstr ""
+
+#: .\meditation\templates\meditation\top_content_detail.html:70
+msgid "User Name"
+msgstr ""
+
+#: .\meditation\templates\meditation\top_content_detail.html:71
+msgid "This is a sample comment."
+msgstr ""
+
+#: .\meditation\templates\meditation\top_content_detail.html:72
+msgid "hours ago"
+msgstr ""
+
+#: .\meditation\templates\meditation\top_content_list.html:39
+msgid "Watch Video"
+msgstr ""
+
+#: .\meditation\templates\meditation\top_content_list.html:48
+msgid "No top content available at the moment."
+msgstr ""
+
+#: .\meditation\templates\meditation\track_list.html:24
+msgid "Date"
+msgstr ""
+
+#: .\meditation\templates\meditation\track_list.html:43
+msgid "Search tracks..."
+msgstr ""
+
+#: .\meditation\templates\meditation\track_list.html:46
+msgid "Filters"
+msgstr ""
+
+#: .\meditation\templates\meditation\track_list.html:107
+msgid "No meditation tracks available at the moment."
+msgstr ""
+
+#: .\meditation\templates\meditation\track_list.html:119
+msgid "Filter Tracks"
+msgstr ""
+
+#: .\meditation\templates\meditation\track_list.html:126
+msgid "Min"
+msgstr ""
+
+#: .\meditation\templates\meditation\track_list.html:133
+msgid "All"
+msgstr ""
+
+#: .\meditation\templates\meditation\track_list.html:141
+msgid "Close"
+msgstr ""
+
+#: .\meditation\templates\meditation\track_list.html:142
+msgid "Apply"
+msgstr ""
+
+#: .\meditation\templates\meditation\workshop_form.html:6
+msgid "Edit Workshop"
+msgstr ""
+
+#: .\meditation\templates\meditation\workshop_form.html:8
+msgid "Create New Workshop"
+msgstr ""
+
+#: .\meditation\templates\meditation\workshop_list.html:45
+msgid "Max participants"
+msgstr ""
+
+#: .\meditation\templates\meditation\workshop_list.html:67
+msgid "No workshops available at the moment."
+msgstr ""
+
+#: .\meditation\views.py:193
+msgid "Meditation track was created successfully"
+msgstr ""
+
+#: .\meditation\views.py:202
+msgid "Meditation track was updated successfully"
+msgstr ""
+
+#: .\meditation\views.py:211
+msgid "Course was created successfully"
+msgstr ""
+
+#: .\meditation\views.py:220
+msgid "Course was updated successfully"
+msgstr ""
+
+#: .\meditation\views.py:229
+msgid "Workshop was created successfully"
+msgstr ""
+
+#: .\meditation\views.py:238
+msgid "Workshop was updated successfully"
+msgstr ""
+
+#: .\meditation\views.py:247
+msgid "Group was created successfully"
+msgstr ""
+
+#: .\meditation\views.py:256
+msgid "Group was updated successfully"
+msgstr ""
+
+#: .\meditation\views.py:265
+msgid "Event was created successfully"
+msgstr ""
+
+#: .\meditation\views.py:274
+msgid "Event was updated successfully"
+msgstr ""
+
+#: .\meditation\views.py:291
+msgid "Successfully logged in!"
+msgstr ""
+
+#: .\meditation\views.py:295
+msgid "Invalid username or password."
+msgstr ""
+
+#: .\meditation\views.py:320
+msgid "Successfully registered!"
+msgstr ""
+
+#: .\meditation\views.py:323
+msgid "Registration failed. Please try again."
+msgstr ""
+
+#: .\meditation\views.py:391
+msgid "Meditation track not found"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\contrib\messages\apps.py:16
+msgid "Messages"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\contrib\sitemaps\apps.py:8
+msgid "Site Maps"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\contrib\staticfiles\apps.py:9
+msgid "Static Files"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\contrib\syndication\apps.py:7
+msgid "Syndication"
+msgstr ""
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+#: .\venv\Lib\site-packages\django\core\paginator.py:30
+msgid "…"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\paginator.py:32
+msgid "That page number is not an integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\paginator.py:33
+msgid "That page number is less than 1"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\paginator.py:34
+msgid "That page contains no results"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:22
+msgid "Enter a valid value."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:104
+#: .\venv\Lib\site-packages\django\forms\fields.py:760
+msgid "Enter a valid URL."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:165
+msgid "Enter a valid integer."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:176
+msgid "Enter a valid email address."
+msgstr ""
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: .\venv\Lib\site-packages\django\core\validators.py:259
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:267
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:279
+#: .\venv\Lib\site-packages\django\core\validators.py:306
+msgid "Enter a valid IPv4 address."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:286
+#: .\venv\Lib\site-packages\django\core\validators.py:307
+msgid "Enter a valid IPv6 address."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:298
+#: .\venv\Lib\site-packages\django\core\validators.py:305
+msgid "Enter a valid IPv4 or IPv6 address."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:341
+msgid "Enter only digits separated by commas."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:347
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:382
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:391
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:400
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:407
+#, python-format
+msgid ""
+"Ensure this value is a multiple of step size %(limit_value)s, starting from "
+"%(offset)s, e.g. %(offset)s, %(valid_value1)s, %(valid_value2)s, and so on."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:439
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:457
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:480
+#: .\venv\Lib\site-packages\django\forms\fields.py:355
+#: .\venv\Lib\site-packages\django\forms\fields.py:394
+msgid "Enter a number."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:482
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:487
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:492
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:563
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:624
+msgid "Null characters are not allowed."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\base.py:1473
+#: .\venv\Lib\site-packages\django\forms\models.py:906
+msgid "and"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\base.py:1475
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\constraints.py:20
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:133
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:134
+msgid "This field cannot be null."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:135
+msgid "This field cannot be blank."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:136
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:140
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:179
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1155
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1156
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1158
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1208
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1210
+msgid "String (unlimited)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1314
+msgid "Comma-separated integers"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1415
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1419
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1554
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1423
+msgid "Date (without time)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1550
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ] format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1558
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1563
+msgid "Date (with time)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1690
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1692
+msgid "Decimal number"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1853
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] "
+"[[HH:]MM:]ss[.uuuuuu] format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1909
+msgid "Email address"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1934
+msgid "File path"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2012
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2014
+msgid "Floating point number"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2054
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2056
+msgid "Integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2152
+msgid "Big (8 byte) integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2169
+msgid "Small integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2177
+msgid "IPv4 address"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2208
+msgid "IP address"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2301
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2302
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2304
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2355
+msgid "Positive big integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2370
+msgid "Positive integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2385
+msgid "Positive small integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2401
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2437
+msgid "Text"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2512
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2516
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2520
+msgid "Time"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2628
+msgid "URL"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2652
+msgid "Raw binary data"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2717
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2719
+msgid "Universally unique identifier"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\files.py:232
+msgid "File"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\json.py:26
+msgid "A JSON object"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\json.py:28
+msgid "Value must be valid JSON."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:939
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:941
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1235
+msgid "One-to-one relationship"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1292
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1294
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1342
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the label
+#: .\venv\Lib\site-packages\django\forms\boundfield.py:185
+msgid ":?.!"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:95
+msgid "This field is required."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:304
+msgid "Enter a whole number."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:475
+#: .\venv\Lib\site-packages\django\forms\fields.py:1252
+msgid "Enter a valid date."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:498
+#: .\venv\Lib\site-packages\django\forms\fields.py:1253
+msgid "Enter a valid time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:525
+msgid "Enter a valid date/time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:559
+msgid "Enter a valid duration."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:560
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:629
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:630
+msgid "No file was submitted."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:631
+msgid "The submitted file is empty."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:633
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:638
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:702
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:874
+#: .\venv\Lib\site-packages\django\forms\fields.py:960
+#: .\venv\Lib\site-packages\django\forms\models.py:1585
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:962
+#: .\venv\Lib\site-packages\django\forms\fields.py:1081
+#: .\venv\Lib\site-packages\django\forms\models.py:1583
+msgid "Enter a list of values."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:1082
+msgid "Enter a complete value."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:1321
+msgid "Enter a valid UUID."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:1351
+msgid "Enter a valid JSON."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+#: .\venv\Lib\site-packages\django\forms\forms.py:94
+msgid ":"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\forms.py:231
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:61
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:65
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:70
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:484
+#: .\venv\Lib\site-packages\django\forms\formsets.py:491
+msgid "Order"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:899
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:904
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:911
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:920
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:1357
+msgid "The inline value did not match the parent instance."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:1448
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:1587
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\utils.py:227
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:461
+msgid "Clear"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:462
+msgid "Currently"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:463
+msgid "Change"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:800
+msgid "Unknown"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:801
+msgid "Yes"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:802
+msgid "No"
+msgstr ""
+
+#. Translators: Please do not add spaces around commas.
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:876
+msgid "yes,no,maybe"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:906
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:923
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:925
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:927
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:929
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:931
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:933
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:74
+msgid "p.m."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:75
+msgid "a.m."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:80
+msgid "PM"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:81
+msgid "AM"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:153
+msgid "midnight"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:155
+msgid "noon"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:7
+msgid "Monday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:8
+msgid "Tuesday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:9
+msgid "Wednesday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:10
+msgid "Thursday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:11
+msgid "Friday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:12
+msgid "Saturday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:13
+msgid "Sunday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:16
+msgid "Mon"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:17
+msgid "Tue"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:18
+msgid "Wed"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:19
+msgid "Thu"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:20
+msgid "Fri"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:21
+msgid "Sat"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:22
+msgid "Sun"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:25
+msgid "January"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:26
+msgid "February"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:27
+msgid "March"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:28
+msgid "April"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:29
+msgid "May"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:30
+msgid "June"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:31
+msgid "July"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:32
+msgid "August"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:33
+msgid "September"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:34
+msgid "October"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:35
+msgid "November"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:36
+msgid "December"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:39
+msgid "jan"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:40
+msgid "feb"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:41
+msgid "mar"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:42
+msgid "apr"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:43
+msgid "may"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:44
+msgid "jun"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:45
+msgid "jul"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:46
+msgid "aug"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:47
+msgid "sep"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:48
+msgid "oct"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:49
+msgid "nov"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:50
+msgid "dec"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:53
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:54
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:55
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:56
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:57
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:58
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:59
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:60
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:61
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:62
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:63
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:64
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:67
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:68
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:69
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:70
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:71
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:72
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:73
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:74
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:75
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:76
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:77
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:78
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\ipv6.py:8
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\text.py:70
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\text.py:270
+msgid "or"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+#: .\venv\Lib\site-packages\django\utils\text.py:289
+#: .\venv\Lib\site-packages\django\utils\timesince.py:135
+msgid ", "
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:8
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:9
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:10
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:11
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:12
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:13
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:29
+msgid "Forbidden"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:30
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:34
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:40
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:45
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the “Referrer-Policy: no-referrer” header, please remove them. The "
+"CSRF protection requires the “Referer” header to do strict referer checking. "
+"If you’re concerned about privacy, use alternatives like <a "
+"rel=\"noreferrer\" …> for links to third-party sites."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:54
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:60
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:66
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:44
+msgid "No year specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:64
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:115
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:214
+msgid "Date out of range"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:94
+msgid "No month specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:147
+msgid "No day specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:194
+msgid "No week specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:349
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:380
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:652
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because "
+"%(class_name)s.allow_future is False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:692
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\detail.py:56
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\list.py:70
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\list.py:77
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\list.py:169
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\static.py:49
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\static.py:51
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\static.py:68
+#: .\venv\Lib\site-packages\django\views\templates\directory_index.html:8
+#: .\venv\Lib\site-packages\django\views\templates\directory_index.html:11
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:7
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:220
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:206
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:221
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
+"configured any URLs."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:229
+msgid "Django Documentation"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:230
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:238
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:239
+msgid "Get started with Django"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:247
+msgid "Django Community"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:248
+msgid "Connect, get help, or contribute"
+msgstr ""

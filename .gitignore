@@ -42,10 +42,6 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Translations
-*.mo
-*.pot
-
 # Coverage
 .coverage
 htmlcov/
