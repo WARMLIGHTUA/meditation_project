@@ -12,11 +12,17 @@ chdir = '/app'
 
 # Таймаути та ліміти
 timeout = 120
-graceful_timeout = 30
-keepalive = 2
+graceful_timeout = 60
+keepalive = 5
 limit_request_line = 4094
 limit_request_fields = 100
 limit_request_field_size = 8190
+
+# Налаштування для кращої обробки сигналів
+worker_abort_on_error = False
+worker_shutdown_timeout = 60
+worker_int = True
+worker_term = True
 
 # Системні налаштування
 umask = 0
@@ -91,4 +97,7 @@ def on_starting(server):
 def worker_exit(server, worker):
     from django.db import connections
     for conn in connections.all():
-        conn.close() 
+        conn.close()
+
+def worker_abort(worker):
+    worker.log.warning('Worker received SIGABRT signal') 

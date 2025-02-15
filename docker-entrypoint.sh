@@ -5,17 +5,20 @@ cleanup() {
     echo "Отримано сигнал завершення..."
     echo "Закриваю з'єднання з базою даних..."
     python manage.py dbshell <<< "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = current_database() AND pid <> pg_backend_pid();"
-    echo "Очікування завершення активних з'єднань..."
-    sleep 5
-    echo "Завершую Gunicorn..."
+    echo "Очікування завершення активних з'єднань (10 секунд)..."
+    sleep 10
+    echo "Перевірка активних процесів..."
+    ps aux | grep gunicorn
+    echo "Завершую Gunicorn (PID: $child)..."
     kill -TERM "$child" 2>/dev/null
+    echo "Очікування завершення Gunicorn..."
     wait "$child"
     echo "Додаток успішно завершено"
     exit 0
 }
 
 # Встановлення обробника сигналів
-trap cleanup SIGTERM SIGINT SIGQUIT
+trap cleanup SIGTERM SIGINT SIGQUIT SIGHUP
 
 echo "Starting application setup..."
 
@@ -101,7 +104,8 @@ python manage.py collectstatic --noinput
 # Запуск Gunicorn
 echo "Starting Gunicorn..."
 echo "Using log level: ${GUNICORN_LOG_LEVEL:-info}"
-exec gunicorn meditation_app.wsgi:application -c ./gunicorn.conf.py
-
+gunicorn meditation_app.wsgi:application -c ./gunicorn.conf.py &
 child=$!
+
+# Очікування завершення процесу
 wait "$child" 
