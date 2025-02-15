@@ -4,7 +4,18 @@
 cleanup() {
     echo "Отримано сигнал завершення..."
     echo "Закриваю з'єднання з базою даних..."
-    python manage.py dbshell <<< "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = current_database() AND pid <> pg_backend_pid();"
+    
+    # Використовуємо Python замість psql для закриття з'єднань
+    python << END
+import os
+import django
+from django.db import connections
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'meditation_app.settings')
+django.setup()
+for conn in connections.all():
+    conn.close()
+END
+    
     echo "Очікування завершення активних з'єднань (10 секунд)..."
     sleep 10
     echo "Перевірка активних процесів..."
