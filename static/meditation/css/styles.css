@@ -1,8 +1,13 @@
-/* Base styles */
+/* Global styles */
 :root {
-    /* Light theme */
     --primary-color: #007bff;
     --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
     --background-color: #ffffff;
     --text-color: #212529;
     --nav-bg: #343a40;
@@ -21,41 +26,11 @@
     --section-bg: #f8f9fa;
 }
 
-[data-theme="dark"] {
-    /* Dark theme */
-    --primary-color: #0d6efd;
-    --secondary-color: #adb5bd;
-    --background-color: #121212;
-    --text-color: #f8f9fa;
-    --nav-bg: #1a1a1a;
-    --nav-text: #ffffff;
-    --card-bg: #2d2d2d;
-    --border-color: #404040;
-    --hover-bg: #343434;
-    --content-bg-rgb: 18, 18, 18;
-    --bg-opacity: 0.95;
-    --shadow-color: rgba(0,0,0,0.3);
-    --heading-color: #ffffff;
-    --link-color: #64b5f6;
-    --link-hover-color: #90caf9;
-    --hero-bg: #1a1a1a;
-    --hero-text: #ffffff;
-    --section-bg: #1a1a1a;
-}
-
-/* Global transitions */
-* {
-    transition: background-color 0.3s ease,
-                color 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
-}
-
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--background-color);
+    color: var(--dark-color);
+    background-color: var(--light-color);
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -66,7 +41,7 @@ body {
 /* Navigation */
 .navbar {
     background-color: var(--nav-bg) !important;
-    box-shadow: 0 2px 4px var(--shadow-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .navbar .nav-link,
@@ -79,6 +54,10 @@ body {
 .navbar .navbar-brand:hover,
 .navbar .dropdown-toggle:hover {
     color: var(--primary-color) !important;
+}
+
+.navbar-brand {
+    font-weight: bold;
 }
 
 /* Theme-specific styles */
@@ -124,43 +103,50 @@ body {
 /* Cards */
 .card {
     background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     color: var(--text-color);
-    transition: transform 0.2s;
+    transition: transform 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-5px);
 }
 
+.card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
 /* Buttons */
-.btn-theme {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
+.btn {
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.btn-theme:hover {
-    background-color: var(--hover-bg);
-    color: var(--text-color);
-}
-
-.btn-theme.active {
+.btn-primary {
     background-color: var(--primary-color);
-    color: white;
     border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: darken(var(--primary-color), 10%);
+    border-color: darken(var(--primary-color), 10%);
 }
 
 /* Forms */
 .form-control {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border-color: var(--border-color);
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
 }
 
 .form-control:focus {
-    background-color: var(--card-bg);
-    color: var(--text-color);
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+    border-color: var(--primary-color);
 }
 
 /* Dropdowns */
@@ -192,19 +178,15 @@ body {
 /* Responsive design */
 @media (max-width: 768px) {
     .container {
-        padding: 0.5rem;
+        padding: 0 15px;
     }
+    
     .card {
         margin-bottom: 1rem;
     }
-    .btn-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    .btn-group .btn {
-        width: 100%;
-        margin: 0;
+    
+    .meditation-timer {
+        font-size: 2rem;
     }
 }
 
@@ -220,7 +202,7 @@ body {
 
 /* Main content styles */
 .main-content {
-    background-color: var(--content-bg);
+    background-color: var(--content-bg-rgb);
     color: var(--text-color);
     padding: 2rem 0;
 }
@@ -407,4 +389,46 @@ body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class
 /* Adjust card transparency */
 .card {
     background-color: rgba(var(--card-bg-rgb), 0.9);
-} 
+}
+
+/* Meditation specific styles */
+.meditation-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.meditation-timer {
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--primary-color);
+}
+
+.meditation-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+    --primary-color: #0d6efd;
+    --text-color: #f8f9fa;
+    --background-color: #121212;
+    --card-bg: #1e1e1e;
+    --border-color: #2d2d2d;
+}
+
+[data-theme="dark"] body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+/* Utility classes */
+.text-primary { color: var(--primary-color) !important; }
+.bg-primary { background-color: var(--primary-color) !important; }
+.border-primary { border-color: var(--primary-color) !important; } 
