@@ -148,7 +148,7 @@ LANGUAGE_COOKIE_SAMESITE = None
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = os.environ.get('APP_STATIC_URL', '/static/') + '/'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
@@ -217,9 +217,8 @@ ENVIRONMENT_NAME = os.environ.get('ENVIRONMENT_NAME', 'development')
 
 # CSRF settings
 CSRF_TRUSTED_ORIGINS = [
-    'https://*.up.railway.app',
-    'http://*.up.railway.app',
     'https://meditationproject-production.up.railway.app',
+    'http://meditationproject-production.up.railway.app',
 ]
 
 # Performance optimizations
@@ -234,9 +233,14 @@ if not DEBUG:
 SECURE_REFERRER_POLICY = 'same-origin'
 X_FRAME_OPTIONS = 'DENY'
 
-# Security settings
+# Security settings for production
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
