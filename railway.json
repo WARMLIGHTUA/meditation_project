@@ -5,20 +5,6 @@
     },
     "deploy": {
         "startCommand": "./docker-entrypoint.sh",
-        "restartPolicyType": "ON_FAILURE",
-        "restartPolicyMaxRetries": 10,
-        "healthcheckPath": "/",
-        "healthcheckTimeout": 300
-    },
-    "variables": {
-        "DJANGO_DEBUG": "False",
-        "DJANGO_SETTINGS_MODULE": "meditation_app.settings",
-        "ALLOWED_HOSTS": "meditationproject-production.up.railway.app,localhost,127.0.0.1",
-        "CSRF_TRUSTED_ORIGINS": "https://meditationproject-production.up.railway.app",
-        "PORT": "8080",
-        "ENVIRONMENT_NAME": "production",
-        "GUNICORN_LOG_LEVEL": "debug",
-        "PYTHONUNBUFFERED": "1",
-        "APP_STATIC_URL": "/static/"
+        "numReplicas": 1
     }
 } 
