@@ -12,16 +12,13 @@
     },
     "variables": {
         "DJANGO_DEBUG": "False",
-        "DJANGO_SECRET_KEY": "your-secret-key-here",
         "DJANGO_SETTINGS_MODULE": "meditation_app.settings",
-        "ALLOWED_HOSTS": "meditationproject-production.up.railway.app",
+        "ALLOWED_HOSTS": "meditationproject-production.up.railway.app,localhost,127.0.0.1",
         "CSRF_TRUSTED_ORIGINS": "https://meditationproject-production.up.railway.app",
         "PORT": "8080",
         "ENVIRONMENT_NAME": "production",
         "GUNICORN_LOG_LEVEL": "debug",
         "PYTHONUNBUFFERED": "1",
-        "DJANGO_SUPERUSER_USERNAME": "admin",
-        "DJANGO_SUPERUSER_EMAIL": "admin@example.com",
-        "APP_STATIC_URL": "static"
+        "APP_STATIC_URL": "/static/"
     }
 } 
