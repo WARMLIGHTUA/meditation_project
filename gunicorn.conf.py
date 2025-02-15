@@ -24,12 +24,30 @@ worker_shutdown_timeout = 60
 
 # Функції для обробки сигналів
 def worker_int(worker):
-    worker.log.info("worker received INT or QUIT signal")
+    worker.log.info(f"Воркер {worker.pid} отримав сигнал INT/QUIT")
     return True
 
 def worker_term(worker):
-    worker.log.info("worker received TERM signal")
+    worker.log.info(f"Воркер {worker.pid} отримав сигнал TERM")
     return True
+
+def worker_abort(worker):
+    worker.log.warning(f"Воркер {worker.pid} отримав сигнал ABORT")
+
+def worker_exit(server, worker):
+    from django.db import connections
+    server.log.info(f"Воркер {worker.pid} завершує роботу")
+    for conn in connections.all():
+        try:
+            conn.close()
+            server.log.info(f"З'єднання {conn} закрито")
+        except Exception as e:
+            server.log.error(f"Помилка при закритті з'єднання {conn}: {e}")
+
+def on_starting(server):
+    server.log.info(f"Запуск Gunicorn сервера в середовищі {os.getenv('RAILWAY_ENVIRONMENT', 'development')}")
+    server.log.info(f"Версія Python: {os.getenv('PYTHON_VERSION', 'unknown')}")
+    server.log.info(f"Домен: {os.getenv('RAILWAY_PUBLIC_DOMAIN', 'unknown')}")
 
 # Системні налаштування
 umask = 0
@@ -44,7 +62,7 @@ secure_scheme_headers = {
     'X-FORWARDED-SSL': 'on'
 }
 forwarded_allow_ips = '*'
-proxy_allow_ips = '127.0.0.1'
+proxy_allow_ips = '*'
 proxy_protocol = False
 
 # Логування
@@ -96,15 +114,4 @@ statsd_prefix = ''
 sendfile = None
 reuse_port = False
 spew = False
-raw_paste_global_conf = []
-
-def on_starting(server):
-    server.log.info("Starting gunicorn 20.1.0")
-
-def worker_exit(server, worker):
-    from django.db import connections
-    for conn in connections.all():
-        conn.close()
-
-def worker_abort(worker):
-    worker.log.warning('Worker received SIGABRT signal') 
+raw_paste_global_conf = [] 
