@@ -3,27 +3,58 @@
 # Функція для правильного завершення процесів
 cleanup() {
     echo "Отримано сигнал завершення..."
-    echo "Закриваю з'єднання з базою даних..."
     
-    # Використовуємо Python замість psql для закриття з'єднань
-    python << END
+    # Створюємо тимчасовий Python-скрипт для закриття з'єднань
+    cat > cleanup.py << 'EOF'
 import os
+import sys
 import django
 from django.db import connections
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'meditation_app.settings')
-django.setup()
-for conn in connections.all():
-    conn.close()
-END
+
+try:
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'meditation_app.settings')
+    django.setup()
     
-    echo "Очікування завершення активних з'єднань (10 секунд)..."
-    sleep 10
-    echo "Перевірка активних процесів..."
-    ps aux | grep gunicorn
-    echo "Завершую Gunicorn (PID: $child)..."
-    kill -TERM "$child" 2>/dev/null
-    echo "Очікування завершення Gunicorn..."
-    wait "$child"
+    # Закриваємо всі з'єднання з базою даних
+    for conn in connections.all():
+        try:
+            conn.close()
+            print(f"Закрито з'єднання: {conn}")
+        except Exception as e:
+            print(f"Помилка при закритті з'єднання: {e}")
+    
+    print("Всі з'єднання з базою даних успішно закриті")
+    sys.exit(0)
+except Exception as e:
+    print(f"Помилка при закритті з'єднань: {e}")
+    sys.exit(1)
+EOF
+
+    # Виконуємо скрипт закриття з'єднань
+    echo "Закриваю з'єднання з базою даних..."
+    python cleanup.py
+    
+    echo "Очікування завершення активних з'єднань (5 секунд)..."
+    sleep 5
+    
+    # Завершуємо процес Gunicorn
+    if [ -n "$child" ]; then
+        echo "Завершую Gunicorn (PID: $child)..."
+        kill -TERM "$child" 2>/dev/null
+        
+        # Очікуємо завершення процесу
+        wait "$child" 2>/dev/null
+        
+        # Перевіряємо, чи процес все ще існує
+        if kill -0 "$child" 2>/dev/null; then
+            echo "Примусово завершую процес..."
+            kill -9 "$child" 2>/dev/null
+        fi
+    fi
+    
+    # Видаляємо тимчасовий файл
+    rm -f cleanup.py
+    
     echo "Додаток успішно завершено"
     exit 0
 }
