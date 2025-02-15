@@ -141,6 +141,9 @@ fi
 # Виконання міграцій
 echo "Running migrations..."
 python manage.py migrate --noinput
+# Створення суперкористувача
+echo "Creating superuser..."
+python manage.py createsuperuser --noinput || echo "Superuser already exists or creation failed."
 
 # Збір статичних файлів
 echo "Collecting static files..."
