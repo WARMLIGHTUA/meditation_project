@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'meditation.apps.MeditationConfig',
     'crispy_forms',
     'crispy_bootstrap4',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -246,3 +247,34 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+
+# AWS S3 налаштування для медіафайлів
+if not DEBUG:
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME', 'eu-central-1')
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_DEFAULT_ACL = 'public-read'
+    AWS_S3_VERIFY = True
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    
+    # Налаштування для медіафайлів
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+    
+    # Додаткові налаштування безпеки
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
+    
+    # Налаштування для CORS
+    AWS_S3_CORS_RULES = [
+        {
+            'AllowedHeaders': ['*'],
+            'AllowedMethods': ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
+            'AllowedOrigins': [f'https://{host}' for host in ALLOWED_HOSTS],
+            'ExposeHeaders': ['ETag'],
+            'MaxAgeSeconds': 3000
+        }
+    ]

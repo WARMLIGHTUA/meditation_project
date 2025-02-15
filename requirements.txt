@@ -8,4 +8,6 @@ psycopg2-binary==2.9.6
 whitenoise==6.4.0
 dj-database-url==1.2.0
 setuptools>=65.5.1
-wheel>=0.38.0 
+wheel>=0.38.0
+django-storages==1.14.5
+boto3==1.36.21 

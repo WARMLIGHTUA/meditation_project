@@ -55,4 +55,7 @@ coverage.xml
 *.cover
 
 # Django
-mediafiles/ 
+mediafiles/
+
+# Environment variables
+.env 
