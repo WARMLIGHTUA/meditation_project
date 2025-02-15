@@ -212,7 +212,6 @@ USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
 
 # Railway specific settings
-APP_STATIC_URL = os.environ.get('APP_STATIC_URL', '/static/')
 ENVIRONMENT_NAME = os.environ.get('ENVIRONMENT_NAME', 'development')
 
 # CSRF settings

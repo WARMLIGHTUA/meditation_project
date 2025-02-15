@@ -13,6 +13,7 @@
         "ENVIRONMENT_NAME": "production",
         "DJANGO_SETTINGS_MODULE": "meditation_app.settings",
         "ALLOWED_HOSTS": "meditationproject-production.up.railway.app",
-        "CSRF_TRUSTED_ORIGINS": "https://meditationproject-production.up.railway.app"
+        "CSRF_TRUSTED_ORIGINS": "https://meditationproject-production.up.railway.app",
+        "PORT": "8000"
     }
 } 
