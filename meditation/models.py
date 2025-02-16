@@ -221,6 +221,33 @@ class FavoriteMeditation(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.meditation.title}"
 
+class Comment(models.Model):
+    """
+    Модель для коментарів до медитацій
+    """
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='comments',
+        verbose_name=_('User')
+    )
+    meditation = models.ForeignKey(
+        MeditationTrack,
+        on_delete=models.CASCADE,
+        related_name='comments',
+        verbose_name=_('Meditation')
+    )
+    text = models.TextField(_('Comment text'))
+    created_at = models.DateTimeField(_('Created at'), auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('Comment')
+        verbose_name_plural = _('Comments')
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.user.username} - {self.meditation.title} - {self.created_at}"
+
 class PageBackground(models.Model):
     """
     Модель для налаштування фону сторінок

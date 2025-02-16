@@ -17,6 +17,10 @@ urlpatterns = [
     path('track/<int:track_id>/favorite/', views.toggle_favorite, name='toggle_favorite'),
     path('favorites/', views.FavoriteTracksView.as_view(), name='favorite_tracks'),
     
+    # Comments
+    path('track/<int:track_id>/comment/', views.add_comment, name='add_comment'),
+    path('comment/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
+    
     # Rules page
     path('rules/', views.RulesView.as_view(), name='rules'),
     

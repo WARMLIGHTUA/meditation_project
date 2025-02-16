@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models import Q
 from django.core.exceptions import PermissionDenied
 from django.utils import timezone
-from .models import MeditationTrack, TopContent, Course, Workshop, Group, Event, FavoriteMeditation
+from .models import MeditationTrack, TopContent, Course, Workshop, Group, Event, FavoriteMeditation, Comment
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, UserProfileForm
 from django.http import HttpResponseNotAllowed, JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -78,12 +78,13 @@ class MeditationDetailView(BaseDetailView):
     """
     model = MeditationTrack
     template_name = 'meditation/meditation_detail.html'
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['similar_tracks'] = MeditationTrack.objects.filter(
             duration=self.object.duration
         ).exclude(id=self.object.id)[:3]
+        context['comments'] = self.object.comments.select_related('user').all()
         return context
 
 class TopContentListView(BaseListView):
@@ -403,3 +404,47 @@ class FavoriteTracksView(LoginRequiredMixin, ListView):
         return MeditationTrack.objects.filter(
             favorited_by__user=self.request.user
         ).order_by('-favorited_by__added_at')
+
+@login_required
+def add_comment(request, track_id):
+    """
+    Додає новий коментар до медитації
+    """
+    if request.method != 'POST':
+        return HttpResponseNotAllowed(['POST'])
+        
+    meditation = get_object_or_404(MeditationTrack, id=track_id)
+    comment_text = request.POST.get('comment', '').strip()
+    
+    if not comment_text:
+        messages.error(request, _('Comment text cannot be empty'))
+        return redirect('meditation:track_detail', pk=track_id)
+        
+    Comment.objects.create(
+        user=request.user,
+        meditation=meditation,
+        text=comment_text
+    )
+    
+    messages.success(request, _('Comment added successfully'))
+    return redirect('meditation:track_detail', pk=track_id)
+
+@login_required
+def delete_comment(request, comment_id):
+    """
+    Видаляє коментар
+    """
+    if request.method != 'POST':
+        return HttpResponseNotAllowed(['POST'])
+        
+    comment = get_object_or_404(Comment, id=comment_id)
+    
+    # Перевіряємо чи користувач має право видалити коментар
+    if request.user != comment.user and not request.user.is_staff:
+        raise PermissionDenied
+        
+    meditation_id = comment.meditation.id
+    comment.delete()
+    
+    messages.success(request, _('Comment deleted successfully'))
+    return redirect('meditation:track_detail', pk=meditation_id)
