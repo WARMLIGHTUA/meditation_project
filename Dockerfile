@@ -13,6 +13,9 @@ WORKDIR /app
 # Оновлення pip та встановлення базових інструментів
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel
 
+# Створення необхідних директорій
+RUN mkdir -p /app/static /app/staticfiles /app/mediafiles
+
 # Копіювання та встановлення залежностей
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
@@ -24,7 +27,9 @@ COPY . .
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     DJANGO_SETTINGS_MODULE=meditation_app.settings \
-    PORT=8080
+    PORT=8080 \
+    DJANGO_SECRET_KEY=GHBXteRsYpaQiTlDUJbAjVhpNpXTqZIY \
+    DJANGO_DEBUG=False
 
 # Створення та налаштування entrypoint
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
@@ -37,4 +42,4 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 8080
 
 # Запуск додатку
-ENTRYPOINT ["/docker-entrypoint.sh"] 
+ENTRYPOINT ["/docker-entrypoint.sh"]
