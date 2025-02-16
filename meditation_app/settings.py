@@ -22,12 +22,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-ols!gw9ehg01b!v0@6#481__uljl9*+4a0rw68r80a_o^!b_n5')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = os.environ.get('DJANGO_DEBUG', '').lower() in ['true', '1', 't']
 
-ALLOWED_HOSTS = ['meditationproject-production.up.railway.app', 'localhost', '127.0.0.1']
+if not SECRET_KEY and not DEBUG:
+    raise ValueError("No DJANGO_SECRET_KEY set in environment variables!")
+
+ALLOWED_HOSTS = [
+    'meditationproject-production.up.railway.app',
+    'localhost',
+    '127.0.0.1'
+]
+
+if 'ALLOWED_HOSTS' in os.environ:
+    ALLOWED_HOSTS.extend(os.environ['ALLOWED_HOSTS'].split(','))
 
 
 # Application definition
@@ -221,8 +231,12 @@ ENVIRONMENT_NAME = os.environ.get('ENVIRONMENT_NAME', 'development')
 # CSRF settings
 CSRF_TRUSTED_ORIGINS = [
     'https://meditationproject-production.up.railway.app',
-    'http://meditationproject-production.up.railway.app',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000'
 ]
+
+if 'CSRF_TRUSTED_ORIGINS' in os.environ:
+    CSRF_TRUSTED_ORIGINS.extend(os.environ['CSRF_TRUSTED_ORIGINS'].split(','))
 
 # Performance optimizations
 if not DEBUG:
@@ -248,33 +262,34 @@ if not DEBUG:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
 
-# AWS S3 налаштування для медіафайлів
+# Налаштування сесій
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 1209600  # 2 weeks
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_NAME = 'sessionid'
+SESSION_COOKIE_SAMESITE = 'Lax'
+
+# Налаштування CSRF
+CSRF_COOKIE_NAME = 'csrftoken'
+CSRF_COOKIE_AGE = None
+CSRF_USE_SESSIONS = False
+CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_SAMESITE = 'Lax'
+
+# Налаштування для медіафайлів в AWS S3
 if not DEBUG:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+    
+    if not all([AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME]):
+        raise ValueError("AWS credentials are not properly configured in environment variables")
+        
     AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME', 'eu-north-1')
     AWS_S3_FILE_OVERWRITE = False
     AWS_DEFAULT_ACL = 'public-read'
     AWS_S3_VERIFY = True
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     
-    # Налаштування для медіафайлів
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
-    
-    # Додаткові налаштування безпеки
-    AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',
-    }
-    
-    # Налаштування для CORS
-    AWS_S3_CORS_RULES = [
-        {
-            'AllowedHeaders': ['*'],
-            'AllowedMethods': ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
-            'AllowedOrigins': [f'https://{host}' for host in ALLOWED_HOSTS],
-            'ExposeHeaders': ['ETag'],
-            'MaxAgeSeconds': 3000
-        }
-    ]

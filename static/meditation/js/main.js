@@ -4,15 +4,22 @@
 document.addEventListener('DOMContentLoaded', function() {
     const html = document.documentElement;
     const themeSwitch = document.querySelector('.theme-switcher');
-    const themeIcon = document.querySelector('.theme-icon');
+    const themeIcon = document.querySelector('.theme-icon i');
 
     // Function to set theme
     function setTheme(isDark) {
         html.setAttribute('data-theme', isDark ? 'dark' : 'light');
         document.body.classList.toggle('dark-theme', isDark);
         document.body.classList.toggle('light-theme', !isDark);
-        themeIcon.textContent = isDark ? '☀️' : '🌙';
+        
+        // Оновлення іконки
+        if (themeIcon) {
+            themeIcon.classList.remove('fa-sun', 'fa-moon');
+            themeIcon.classList.add(isDark ? 'fa-sun' : 'fa-moon');
+        }
+        
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        console.log('Theme changed to:', isDark ? 'dark' : 'light');
     }
 
     // Check for saved theme preference or use system preference
@@ -26,10 +33,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Theme switch handler
-    themeSwitch.addEventListener('click', () => {
-        const isDark = html.getAttribute('data-theme') === 'light';
-        setTheme(isDark);
-    });
+    if (themeSwitch) {
+        themeSwitch.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const isDark = currentTheme === 'light';
+            setTheme(isDark);
+            console.log('Theme switch clicked, new theme:', isDark ? 'dark' : 'light');
+        });
+    }
 
     // Listen for system theme changes if no saved preference
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {

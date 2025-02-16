@@ -91,23 +91,31 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: var(--page-bg-opacity, 1);
+            opacity: 1;
         }
         
         .page-background-color {
             width: 100%;
             height: 100%;
             background-color: var(--page-bg-color, var(--background-color));
-            opacity: var(--page-bg-opacity, 1);
+            opacity: 1;
         }
         
         .content-wrapper {
             position: relative;
             min-height: calc(100vh - var(--nav-height));
-            background-color: rgba(var(--content-bg-rgb), var(--page-bg-opacity, 0.95));
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(var(--content-bg-rgb), 0.3);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
             z-index: 1;
+        }
+
+        [data-theme="dark"] .content-wrapper {
+            background-color: rgba(18, 18, 18, 0.3);
+        }
+
+        [data-theme="light"] .content-wrapper {
+            background-color: rgba(255, 255, 255, 0.3);
         }
         
         /* Navigation styles */
@@ -276,7 +284,9 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <button class="theme-switcher nav-link" aria-label="Toggle theme">
-                            <span class="theme-icon">🌙</span>
+                            <span class="theme-icon">
+                                <i class="fas fa-moon"></i>
+                            </span>
                         </button>
                     </li>
                     {% if user.is_authenticated %}
@@ -399,23 +409,42 @@
     <!-- Theme Switcher Script -->
     <script>
         function toggleTheme() {
+            console.log('toggleTheme called');
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
+            console.log('Current theme:', currentTheme);
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            console.log('New theme:', newTheme);
+            
+            // Встановлюємо нову тему
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             
-            const themeIcon = document.querySelector('.theme-icon');
-            themeIcon.classList.toggle('fa-moon');
-            themeIcon.classList.toggle('fa-sun');
+            // Оновлюємо іконку
+            const themeIcon = document.querySelector('.theme-icon i');
+            if (newTheme === 'dark') {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
         }
 
-        // Set initial theme
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        if (savedTheme === 'dark') {
-            document.querySelector('.theme-icon').classList.replace('fa-moon', 'fa-sun');
-        }
+        // Встановлення початкової теми при завантаженні
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            const themeIcon = document.querySelector('.theme-icon i');
+            if (savedTheme === 'dark') {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        });
     </script>
     
     {% block extra_js %}{% endblock %}
