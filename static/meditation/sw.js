@@ -5,7 +5,8 @@ const STATIC_CACHE_URLS = [
     '/static/meditation/manifest.json',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
+    '/manifest.json'
 ];
 
 self.addEventListener('install', event => {
@@ -39,24 +40,34 @@ self.addEventListener('fetch', event => {
     }
 
     // Перевіряємо, чи це запит на статичні файли
-    if (event.request.url.includes('/static/')) {
+    if (event.request.url.includes('/static/') || event.request.url.includes('/manifest.json')) {
         event.respondWith(
             caches.match(event.request)
                 .then(response => {
+                    // Повертаємо з кешу, якщо є
                     if (response) {
                         return response;
                     }
+                    
+                    // Якщо немає в кеші, завантажуємо з мережі
                     return fetch(event.request)
-                        .then(response => {
-                            if (!response || response.status !== 200) {
-                                return response;
+                        .then(networkResponse => {
+                            if (!networkResponse || networkResponse.status !== 200) {
+                                return networkResponse;
                             }
-                            const responseToCache = response.clone();
+                            
+                            // Кешуємо новий ресурс
+                            const responseToCache = networkResponse.clone();
                             caches.open(CACHE_NAME)
                                 .then(cache => {
                                     cache.put(event.request, responseToCache);
                                 });
-                            return response;
+                                
+                            return networkResponse;
+                        })
+                        .catch(() => {
+                            // Якщо немає з'єднання, повертаємо offline fallback
+                            return caches.match('/static/meditation/offline.html');
                         });
                 })
         );
