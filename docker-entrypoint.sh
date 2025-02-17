@@ -138,7 +138,12 @@ gunicorn meditation_app.wsgi:application \
     --max-requests-jitter ${GUNICORN_MAX_REQUESTS_JITTER:-50} \
     --log-level ${GUNICORN_LOG_LEVEL:-debug} \
     --access-logfile - \
-    --error-logfile - &
+    --error-logfile - \
+    --capture-output \
+    --enable-stdio-inheritance \
+    --worker-class=gthread \
+    --worker-tmp-dir /dev/shm \
+    --preload &
 
 child=$!
 

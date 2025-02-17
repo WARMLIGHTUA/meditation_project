@@ -151,20 +151,29 @@ if database_url:
             default=database_url,
             conn_max_age=600,
             conn_health_checks=True,
-            ssl_require=True
+            ssl_require=True,
+            engine='django.db.backends.postgresql'
         )
     }
 else:
     # Якщо DATABASE_URL не встановлено, використовуємо окремі змінні
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('PGDATABASE', 'railway'),
+            'USER': os.environ.get('PGUSER', 'postgres'),
+            'PASSWORD': os.environ.get('PGPASSWORD', ''),
+            'HOST': os.environ.get('PGHOST', 'localhost'),
+            'PORT': os.environ.get('PGPORT', '5432'),
+            'OPTIONS': {
+                'sslmode': 'require'
+            }
         }
     }
 
 # Додаємо налаштування для автоматичного закриття з'єднань
 CONN_MAX_AGE = 60
+CONN_HEALTH_CHECKS = True
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -201,7 +210,7 @@ LOCALE_PATHS = [
 ]
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = os.environ.get('APP_STATIC_URL', 'static/') + '/' if not os.environ.get('APP_STATIC_URL', 'static/').endswith('/') else os.environ.get('APP_STATIC_URL', 'static/')
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -217,6 +226,7 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
     AWS_DEFAULT_ACL = None
     AWS_S3_SIGNATURE_VERSION = 's3v4'
     AWS_S3_ADDRESSING_STYLE = 'virtual'
+    AWS_S3_VERIFY = True
     
     # Налаштування для статичних файлів
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
