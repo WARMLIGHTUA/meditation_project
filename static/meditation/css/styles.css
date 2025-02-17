@@ -392,6 +392,7 @@ body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class
     height: 100vh;
     z-index: -1;
     overflow: hidden;
+    transition: background-color 0.3s ease;
 }
 
 body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .page-background-image,
@@ -399,23 +400,27 @@ body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 1;
+    opacity: var(--page-bg-opacity, 1);
+    transition: opacity 0.3s ease;
 }
 
 body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .page-background-color {
     width: 100%;
     height: 100%;
-    background-color: var(--background-color);
+    background-color: var(--page-bg-color, var(--background-color));
+    opacity: var(--page-bg-opacity, 1);
+    transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
 body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .content-wrapper {
     position: relative;
     z-index: 1;
     min-height: calc(100vh - 60px);
-    background-color: transparent;
+    background-color: rgba(var(--content-bg-rgb), 0.3);
     padding: 20px 0;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transition: background-color 0.3s ease;
 }
 
 /* Alert styles */

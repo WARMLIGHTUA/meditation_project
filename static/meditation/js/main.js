@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to set theme
     function setTheme(isDark) {
-        html.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        const theme = isDark ? 'dark' : 'light';
+        html.setAttribute('data-theme', theme);
         document.body.classList.toggle('dark-theme', isDark);
         document.body.classList.toggle('light-theme', !isDark);
         
@@ -18,8 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
             themeIcon.classList.add(isDark ? 'fa-sun' : 'fa-moon');
         }
         
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        console.log('Theme changed to:', isDark ? 'dark' : 'light');
+        // Зберігаємо тему в localStorage та cookies
+        localStorage.setItem('theme', theme);
+        document.cookie = `theme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
+        
+        // Перезавантажуємо сторінку для оновлення фону
+        window.location.reload();
+        
+        console.log('Theme changed to:', theme);
     }
 
     // Check for saved theme preference or use system preference
