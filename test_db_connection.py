@@ -30,83 +30,73 @@ def get_db_connection(params):
             conn.close()
 
 def test_connection():
-    # Перевірка наявності змінних середовища
+    # Отримуємо дані з .env
     db_url = os.getenv('DATABASE_URL')
     if not db_url:
         print("✗ Помилка: DATABASE_URL не встановлено")
-        return
+        return False
 
-    # Тестування підключення через DATABASE_URL
-    print(f"\nТестування підключення через DATABASE_URL: {db_url}")
+    print(f"\nСпроба підключення через DATABASE_URL...")
     try:
-        params = get_connection_params(db_url)
-        with get_db_connection(params) as conn:
-            print("✓ Підключення через DATABASE_URL успішне!")
+        # Парсимо URL
+        url = urlparse(db_url)
+        conn = psycopg2.connect(
+            dbname=url.path[1:],
+            user=url.username,
+            password=url.password,
+            host=url.hostname,
+            port=url.port,
+            sslmode='require'
+        )
+        
+        # Перевіряємо з'єднання
+        with conn.cursor() as cur:
+            cur.execute('SELECT version();')
+            version = cur.fetchone()[0]
+            print(f"✓ Підключення успішне!")
+            print(f"✓ Версія PostgreSQL: {version}")
             
-            # Перевіряємо версію PostgreSQL
+            # Перевіряємо список таблиць
+            cur.execute("""
+                SELECT table_name 
+                FROM information_schema.tables 
+                WHERE table_schema = 'public'
+            """)
+            tables = cur.fetchall()
+            print("\nСписок таблиць в базі даних:")
+            for table in tables:
+                print(f"- {table[0]}")
+                
+        conn.close()
+        return True
+        
+    except psycopg2.OperationalError as e:
+        print(f"✗ Помилка підключення: {str(e)}")
+        print("\nСпробуємо через окремі змінні...")
+        
+        # Спробуємо через окремі змінні
+        try:
+            conn = psycopg2.connect(
+                dbname=os.getenv('PGDATABASE'),
+                user=os.getenv('PGUSER'),
+                password=os.getenv('PGPASSWORD'),
+                host=os.getenv('PGHOST'),
+                port=os.getenv('PGPORT'),
+                sslmode='require'
+            )
+            
             with conn.cursor() as cur:
                 cur.execute('SELECT version();')
                 version = cur.fetchone()[0]
-                print(f"\nВерсія PostgreSQL: {version}")
+                print(f"✓ Підключення через окремі змінні успішне!")
+                print(f"✓ Версія PostgreSQL: {version}")
                 
-                # Перевіряємо список таблиць
-                cur.execute("""
-                    SELECT table_name 
-                    FROM information_schema.tables 
-                    WHERE table_schema = 'public'
-                """)
-                tables = cur.fetchall()
-                print("\nСписок таблиць в базі даних:")
-                for table in tables:
-                    print(f"- {table[0]}")
-    except psycopg2.OperationalError as e:
-        print(f"✗ Помилка підключення: {str(e)}")
-        print("\nМожливі причини:")
-        print("1. Неправильні credentials")
-        print("2. Сервер бази даних не доступний")
-        print("3. Проблеми з мережею або брандмауером")
-        print("4. SSL сертифікат не валідний")
-        print("\nПоточні налаштування:")
-        print(f"Host: {params['host']}")
-        print(f"Port: {params['port']}")
-        print(f"Database: {params['dbname']}")
-        print(f"User: {params['user']}")
-        print(f"SSL Mode: {params['sslmode']}")
-    except Exception as e:
-        print(f"✗ Неочікувана помилка: {str(e)}")
-
-    # Тестування підключення через окремі змінні
-    print("\nТестування підключення через окремі змінні...")
-    required_vars = ['PGDATABASE', 'PGUSER', 'PGPASSWORD', 'PGHOST', 'PGPORT']
-    missing_vars = [var for var in required_vars if not os.getenv(var)]
-    
-    if missing_vars:
-        print(f"✗ Відсутні необхідні змінні середовища: {', '.join(missing_vars)}")
-        return
-
-    try:
-        params = {
-            'dbname': os.getenv('PGDATABASE'),
-            'user': os.getenv('PGUSER'),
-            'password': os.getenv('PGPASSWORD'),
-            'host': os.getenv('PGHOST'),
-            'port': os.getenv('PGPORT'),
-            'sslmode': 'require',
-            'connect_timeout': 10
-        }
-        
-        with get_db_connection(params) as conn:
-            print("✓ Підключення через окремі змінні успішне!")
+            conn.close()
+            return True
             
-            # Перевіряємо з'єднання
-            with conn.cursor() as cur:
-                cur.execute('SELECT 1;')
-                if cur.fetchone()[0] == 1:
-                    print("✓ З'єднання працює коректно")
-    except psycopg2.OperationalError as e:
-        print(f"✗ Помилка підключення: {str(e)}")
-    except Exception as e:
-        print(f"✗ Неочікувана помилка: {str(e)}")
+        except psycopg2.OperationalError as e:
+            print(f"✗ Помилка підключення через окремі змінні: {str(e)}")
+            return False
 
 if __name__ == "__main__":
     test_connection() 

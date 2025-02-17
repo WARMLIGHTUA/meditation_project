@@ -1,0 +1,71 @@
+[33mbca2e3c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m HEAD@{0}: reset: moving to bca2e3c034529dae517d320a445ce2b25684b3fd
+[33mf359326[m HEAD@{1}: reset: moving to f359326f11d275292b1b94a2198aeea0586d2857
+[33mb902935[m HEAD@{2}: reset: moving to b9029356a90934df85964dd8faabcb0b6503f495
+[33m43ab700[m HEAD@{3}: commit: одано скрипти для діагностики та виправлення проблем в базі даних
+[33m87093b1[m HEAD@{4}: commit: новлено налаштування для статичних та медіа файлів
+[33m27f7fc4[m HEAD@{5}: commit: новлено налаштування інтернаціоналізації
+[33meb2ab3f[m HEAD@{6}: commit: одано redis для інтеграції з Sentry
+[33mb103250[m HEAD@{7}: commit: Спрощено requirements.txt для вирішення конфліктів залежностей
+[33mb902935[m HEAD@{8}: commit: иправлено конфлікт версій boto3 та botocore
+[33mf359326[m HEAD@{9}: commit: одано покращення: валідація файлів, пагінація коментарів, кешування улюблених та CORS для S3
+[33mbca2e3c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m HEAD@{10}: commit: иправлено помилку NoReverseMatch в шаблоні meditation_detail.html та оновлено конфігураційні файли
+[33m9b1ac2c[m HEAD@{11}: commit: Виправлено відсутність змінної середовища DJANGO_SECRET_KEY в Dockerfile
+[33mf6c69fd[m HEAD@{12}: commit: Підключення бекапу, виправлення проблем інтерфейсу
+[33m08f2829[m[33m ([m[1;31morigin/theme-switcher-fix[m[33m, [m[1;32mtheme-switcher-fix[m[33m)[m HEAD@{13}: merge theme-switcher-fix: Fast-forward
+[33ma2ccba8[m HEAD@{14}: checkout: moving from theme-switcher-fix to master
+[33m08f2829[m[33m ([m[1;31morigin/theme-switcher-fix[m[33m, [m[1;32mtheme-switcher-fix[m[33m)[m HEAD@{15}: checkout: moving from master to theme-switcher-fix
+[33ma2ccba8[m HEAD@{16}: checkout: moving from master to master
+[33ma2ccba8[m HEAD@{17}: checkout: moving from theme-switcher-fix to master
+[33m08f2829[m[33m ([m[1;31morigin/theme-switcher-fix[m[33m, [m[1;32mtheme-switcher-fix[m[33m)[m HEAD@{18}: commit: Fix theme switcher functionality and styling
+[33ma2ccba8[m HEAD@{19}: checkout: moving from master to theme-switcher-fix
+[33ma2ccba8[m HEAD@{20}: commit: одано систему коментарів до медитацій
+[33m828ee2d[m HEAD@{21}: commit: новлено налаштування AWS S3: змінено ACL на public-read та додано параметри кешування
+[33mf3224c3[m HEAD@{22}: commit: Fixed S3 ACL settings
+[33m9d3b5a3[m HEAD@{23}: commit: Added AWS S3 configuration for media files
+[33m0272d77[m HEAD@{24}: commit: Added superuser creation to entrypoint
+[33me6fab0a[m HEAD@{25}: commit: одано налаштування AWS S3 для зберігання медіафайлів
+[33mc423a41[m HEAD@{26}: commit: иправлено дублювання функцій в gunicorn.conf.py
+[33ma51a420[m HEAD@{27}: reset: moving to a51a42098aa1e82db22bcb44c303938f29f26ee9
+[33m3bf11b0[m HEAD@{28}: commit: птимізовано налаштування Gunicorn для Railway
+[33mc5c6cd9[m HEAD@{29}: commit: птимізовано налаштування Gunicorn для кращої обробки сигналів завершення
+[33ma51a420[m HEAD@{30}: commit: окращено процес завершення роботи в docker-entrypoint.sh
+[33m04bda97[m HEAD@{31}: commit: новлено docker-entrypoint.sh для коректного завершення роботи без psql
+[33m033528d[m HEAD@{32}: commit: птимізовано Service Worker для запобігання зайвих перенаправлень
+[33m43069a7[m HEAD@{33}: commit: одано міграцію для зміни поля page в моделі PageBackground
+[33m7049903[m HEAD@{34}: commit: иправлено налаштування worker_int та worker_term в gunicorn.conf.py
+[33mb2938fd[m HEAD@{35}: commit: одано права на виконання для docker-entrypoint.sh
+[33ma3e27eb[m HEAD@{36}: commit: Спрощено конфігурацію railway.json до базових налаштувань
+[33m21115ea[m HEAD@{37}: commit: новлено APP_STATIC_URL в railway.json
+[33m8c1fa75[m HEAD@{38}: commit: одано APP_STATIC_URL для налаштування статичних файлів в Railway
+[33mfc027a5[m HEAD@{39}: commit: Changed port from 8000 to 8080
+[33mce86c15[m HEAD@{40}: commit: алаштовано WhiteNoise та зібрано статичні файли
+[33meb8cd42[m HEAD@{41}: commit: покращено обробку сигналів та завершення роботи контейнера
+[33me45498f[m HEAD@{42}: commit: покращено обробку завершення контейнера
+[33m98b3756[m HEAD@{43}: commit: оновлено посилання на статичні файли
+[33mdf88d6f[m HEAD@{44}: commit: виправлено налаштування статичних файлів
+[33m5ec14f9[m HEAD@{45}: commit: оновлено налаштування для Railway та статичних файлів
+[33m1b957d2[m HEAD@{46}: commit: додано налаштування Railway та APP_STATIC_URL
+[33m39e7042[m HEAD@{47}: commit: додано main.js та оновлено service worker
+[33m7d3be36[m HEAD@{48}: commit: оновлено переклади для української мови
+[33mc6dd464[m HEAD@{49}: commit: додано файли стилів та маніфест PWA
+[33md17af0c[m HEAD@{50}: commit: оновлено переклади для української та французької мов
+[33m89c2e3f[m HEAD@{51}: commit: новлено переклади для української та французької мов
+[33m1d56f6c[m HEAD@{52}: commit: одано переклади та оновлено шаблони
+[33mf9b3f9a[m HEAD@{53}: commit: иправлено STATIC_URL та налаштування Gunicorn forwarded_allow_ips
+[33m8d3173f[m HEAD@{54}: commit: одано очікування DATABASE_URL при запуску
+[33mc1d2422[m HEAD@{55}: commit: овернуто порт 8080
+[33m38f02a6[m HEAD@{56}: commit: мінено порт з 8080 на 8000 для відповідності налаштуванням Railway
+[33mdae7fd4[m HEAD@{57}: commit: одано розширену діагностику змінних середовища
+[33m2bab0e2[m HEAD@{58}: commit: Спрощено Dockerfile, прибрано спроби передачі змінних середовища
+[33m1b08fc8[m HEAD@{59}: commit: одано передачу змінних середовища з Railway в контейнер
+[33mb606d98[m HEAD@{60}: commit: мінено підхід до підключення бази даних на використання DATABASE_URL
+[33m340db38[m HEAD@{61}: commit: окращено обробку змінних середовища PostgreSQL та діагностику
+[33m03d631c[m HEAD@{62}: commit: Improve container startup and shutdown handling
+[33m6a4eefa[m HEAD@{63}: commit: Simplify Gunicorn startup to use config file
+[33m131c48d[m HEAD@{64}: commit: Add all Gunicorn settings from logs
+[33m930d242[m HEAD@{65}: commit: Match Gunicorn config exactly with logs
+[33m4902a4d[m HEAD@{66}: commit: Final configuration cleanup
+[33m2d46c2f[m HEAD@{67}: commit: Fix configuration issues and improve security
+[33m96ec21d[m HEAD@{68}: commit: Match Gunicorn config with working settings
+[33mf420230[m HEAD@{69}: commit: Simplify configuration for Railway
+[33m6068703[m HEAD@{70}: commit: птимізація 
