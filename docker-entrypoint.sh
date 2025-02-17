@@ -64,10 +64,6 @@ trap cleanup SIGTERM SIGINT SIGQUIT SIGHUP
 
 echo "Starting application setup..."
 
-# Виведення всіх змінних середовища
-echo "All environment variables:"
-env | sort
-
 # Виведення діагностичної інформації
 echo "Environment information:"
 echo "PORT: $PORT"
@@ -78,28 +74,6 @@ echo "Django settings module: ${DJANGO_SETTINGS_MODULE:-Not set}"
 echo "Environment name: ${ENVIRONMENT_NAME:-Not set}"
 echo "Django debug mode: ${DJANGO_DEBUG:-Not set}"
 echo "Gunicorn log level: ${GUNICORN_LOG_LEVEL:-info}"
-echo "Gunicorn config file exists: $(test -f ./gunicorn.conf.py && echo 'Yes' || echo 'No')"
-echo "Gunicorn config contents:"
-cat ./gunicorn.conf.py
-
-# Очікування DATABASE_URL
-max_attempts=5
-attempt=1
-while [ -z "$DATABASE_URL" ] && [ $attempt -le $max_attempts ]; do
-    echo "Attempt $attempt: Waiting for DATABASE_URL to be set..."
-    env | grep -i "database\|db\|pg"
-    sleep 5
-    attempt=$((attempt + 1))
-done
-
-if [ -z "$DATABASE_URL" ]; then
-    echo "ERROR: DATABASE_URL is not set after $max_attempts attempts!"
-    echo "Available database-related variables:"
-    env | grep -i "database\|db\|pg"
-    exit 1
-fi
-
-echo "Database URL type: $(echo $DATABASE_URL | cut -d: -f1)"
 
 # Перевірка доступності бази даних
 echo "Checking database connection..."
@@ -111,6 +85,10 @@ from urllib.parse import urlparse
 import psycopg2
 
 db_url = os.getenv('DATABASE_URL')
+if not db_url:
+    print("ERROR: DATABASE_URL is not set!")
+    sys.exit(1)
+
 url = urlparse(db_url)
 
 for i in range(5):
@@ -134,13 +112,13 @@ END
 
 if [ $? -ne 0 ]; then
     echo "Failed to connect to database after 5 attempts"
-    echo "Check if the database service is properly configured in Railway"
     exit 1
 fi
 
 # Виконання міграцій
 echo "Running migrations..."
 python manage.py migrate --noinput
+
 # Створення суперкористувача
 echo "Creating superuser..."
 python manage.py createsuperuser --noinput || echo "Superuser already exists or creation failed."
@@ -149,11 +127,20 @@ python manage.py createsuperuser --noinput || echo "Superuser already exists or 
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
 
-# Запуск Gunicorn з розширеним логуванням
-echo "Starting Gunicorn with config from ./gunicorn.conf.py..."
-echo "Gunicorn command: gunicorn meditation_app.wsgi:application -c ./gunicorn.conf.py"
-gunicorn meditation_app.wsgi:application -c ./gunicorn.conf.py --log-level=debug --access-logfile=- --error-logfile=- &
+# Запуск Gunicorn
+echo "Starting Gunicorn..."
+gunicorn meditation_app.wsgi:application \
+    --bind 0.0.0.0:${PORT:-8080} \
+    --workers ${GUNICORN_WORKERS:-2} \
+    --threads ${GUNICORN_THREADS:-4} \
+    --timeout ${GUNICORN_TIMEOUT:-120} \
+    --max-requests ${GUNICORN_MAX_REQUESTS:-1000} \
+    --max-requests-jitter ${GUNICORN_MAX_REQUESTS_JITTER:-50} \
+    --log-level ${GUNICORN_LOG_LEVEL:-debug} \
+    --access-logfile - \
+    --error-logfile - &
+
 child=$!
 
 # Очікування завершення процесу
-wait "$child" 
+wait "$child"

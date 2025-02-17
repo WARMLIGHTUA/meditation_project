@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-8080}:${PORT:-8080}"
+    environment:
+      # Django налаштування
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-True}
+      DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE:-meditation_app.settings}
+      DJANGO_LOG_LEVEL: ${DJANGO_LOG_LEVEL:-DEBUG}
+      DJANGO_ADMIN_ENABLED: ${DJANGO_ADMIN_ENABLED:-True}
+      
+      # Налаштування хостів
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1}
+      CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS:-http://localhost,http://127.0.0.1}
+      
+      # База даних
+      PGDATABASE: ${PGDATABASE:-railway}
+      PGUSER: ${PGUSER:-postgres}
+      PGPASSWORD: ${PGPASSWORD:-postgres}
+      PGHOST: ${PGHOST:-db}
+      PGPORT: ${PGPORT:-5432}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:postgres@db:5432/railway?sslmode=require}
+      
+      # AWS налаштування
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_STORAGE_BUCKET_NAME: ${AWS_STORAGE_BUCKET_NAME:-meditation-app-storage}
+      AWS_S3_REGION_NAME: ${AWS_S3_REGION_NAME:-eu-north-1}
+      
+      # Sentry налаштування
+      SENTRY_DSN: ${SENTRY_DSN:-''}
+      SENTRY_TRACES_SAMPLE_RATE: ${SENTRY_TRACES_SAMPLE_RATE:-0.1}
+      SENTRY_PROFILES_SAMPLE_RATE: ${SENTRY_PROFILES_SAMPLE_RATE:-0.1}
+      RAILWAY_GIT_COMMIT_SHA: ${RAILWAY_GIT_COMMIT_SHA:-development}
+      RAILWAY_PRIVATE_DOMAIN: ${RAILWAY_PRIVATE_DOMAIN:-local}
+      
+      # Інші налаштування
+      ENVIRONMENT_NAME: ${ENVIRONMENT_NAME:-development}
+      PYTHONUNBUFFERED: ${PYTHONUNBUFFERED:-1}
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+      - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
+    networks:
+      - app_network
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ${PGDATABASE:-railway}
+      POSTGRES_USER: ${PGUSER:-postgres}
+      POSTGRES_PASSWORD: ${PGPASSWORD:-postgres}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+    ports:
+      - "${PGPORT:-5432}:5432"
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
+
+networks:
+  app_network:
+    driver: bridge

@@ -78,6 +78,7 @@ class MeditationDetailView(BaseDetailView):
     """
     model = MeditationTrack
     template_name = 'meditation/meditation_detail.html'
+    context_object_name = 'meditation'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
