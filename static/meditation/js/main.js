@@ -191,12 +191,17 @@ function showNotification(message, type = 'info') {
 // Register service worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/static/meditation/sw.js')
-            .then(registration => {
-                console.log('ServiceWorker registration successful');
-            })
-            .catch(err => {
-                console.log('ServiceWorker registration failed: ', err);
-            });
+        // Використовуємо поточний домен
+        const swUrl = `${window.location.origin}/static/meditation/sw.js`;
+        
+        navigator.serviceWorker.register(swUrl, {
+            scope: '/' // Область дії - весь сайт
+        })
+        .then(registration => {
+            console.log('ServiceWorker registration successful with scope:', registration.scope);
+        })
+        .catch(err => {
+            console.log('ServiceWorker registration failed:', err);
+        });
     });
-} 
+}
