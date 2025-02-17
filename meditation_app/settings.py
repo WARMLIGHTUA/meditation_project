@@ -260,6 +260,10 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
         file_overwrite = True
         querystring_auth = False
         custom_domain = AWS_S3_CUSTOM_DOMAIN
+        object_parameters = {
+            'CacheControl': 'max-age=86400,public,immutable',
+            'ContentEncoding': 'gzip'
+        }
     
     class MediaStorage(S3Boto3Storage):
         location = 'media'
@@ -267,6 +271,9 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
         file_overwrite = False
         querystring_auth = False
         custom_domain = AWS_S3_CUSTOM_DOMAIN
+        object_parameters = {
+            'CacheControl': 'max-age=86400,public'
+        }
     
     # Використовуємо окремі класи для зберігання
     STATICFILES_STORAGE = 'meditation_app.settings.StaticStorage'

@@ -40,7 +40,9 @@ self.addEventListener('fetch', event => {
     }
 
     // Перевіряємо, чи це запит на статичні файли
-    if (event.request.url.includes('/static/') || event.request.url.includes('/manifest.json')) {
+    if (event.request.url.includes('/static/') || 
+        event.request.url.includes('/manifest.json') ||
+        event.request.url.includes('s3.eu-north-1.amazonaws.com')) {
         event.respondWith(
             caches.match(event.request)
                 .then(response => {
@@ -50,7 +52,7 @@ self.addEventListener('fetch', event => {
                     }
                     
                     // Якщо немає в кеші, завантажуємо з мережі
-                    return fetch(event.request)
+                    return fetch(event.request.clone())
                         .then(networkResponse => {
                             if (!networkResponse || networkResponse.status !== 200) {
                                 return networkResponse;
@@ -60,7 +62,16 @@ self.addEventListener('fetch', event => {
                             const responseToCache = networkResponse.clone();
                             caches.open(CACHE_NAME)
                                 .then(cache => {
-                                    cache.put(event.request, responseToCache);
+                                    const headers = new Headers(responseToCache.headers);
+                                    headers.append('sw-fetched-on', new Date().toISOString());
+                                    return cache.put(event.request, new Response(
+                                        responseToCache.body,
+                                        {
+                                            status: responseToCache.status,
+                                            statusText: responseToCache.statusText,
+                                            headers: headers
+                                        }
+                                    ));
                                 });
                                 
                             return networkResponse;
