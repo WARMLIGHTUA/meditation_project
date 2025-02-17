@@ -1,0 +1,17 @@
+[33mcommit 0ba85c60b33e1be705396deb87140af6b07da292[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: WARMLIGHTUA <meditaciya4@gmail.com>
+Date:   Mon Feb 17 23:22:24 2025 +0200
+
+    новлено dj-database-url до версії 2.3.0 та додано розширені налаштування бази даних
+
+[33mcommit bacdb69b045d027afcd4cb88735440e74b96d05c[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: WARMLIGHTUA <meditaciya4@gmail.com>
+Date:   Mon Feb 17 23:14:34 2025 +0200
+
+    овернуто сумісні налаштування бази даних для dj-database-url 2.1.0
+
+[33mcommit d4409c63e6261289d87196664c764cbe2f1e3c99[m
+Author: WARMLIGHTUA <meditaciya4@gmail.com>
+Date:   Mon Feb 17 23:05:35 2025 +0200
+
+    иправлено проблеми з міграціями, кодуванням та з'єднаннями з базою даних
