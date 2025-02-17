@@ -117,11 +117,42 @@ fi
 
 # Виконання міграцій
 echo "Running migrations..."
+export PYTHONIOENCODING=utf-8
+export LANG=uk_UA.UTF-8
+
+# Створення міграцій
+echo "Making migrations..."
+python manage.py makemigrations meditation
+
+# Застосування міграцій
+echo "Applying migrations..."
 python manage.py migrate --noinput
 
 # Створення суперкористувача
 echo "Creating superuser..."
-python manage.py createsuperuser --noinput || echo "Superuser already exists or creation failed."
+python << END
+import os
+import django
+from django.contrib.auth import get_user_model
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'meditation_app.settings')
+django.setup()
+
+User = get_user_model()
+
+try:
+    if not User.objects.filter(username=os.environ.get('DJANGO_SUPERUSER_USERNAME')).exists():
+        User.objects.create_superuser(
+            username=os.environ.get('DJANGO_SUPERUSER_USERNAME'),
+            email=os.environ.get('DJANGO_SUPERUSER_EMAIL'),
+            password=os.environ.get('DJANGO_SUPERUSER_PASSWORD')
+        )
+        print('Superuser created successfully')
+    else:
+        print('Superuser already exists')
+except Exception as e:
+    print(f'Failed to create superuser: {str(e)}')
+END
 
 # Збір статичних файлів
 echo "Collecting static files..."
