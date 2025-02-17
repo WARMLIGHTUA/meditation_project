@@ -151,7 +151,17 @@ if database_url:
             default=database_url,
             conn_max_age=60,
             conn_health_checks=True,
-            ssl_require=True
+            ssl_require=True,
+            engine='django.db.backends.postgresql',
+            options={
+                'client_encoding': 'UTF8',
+                'application_name': 'meditation_app',
+                'sslmode': 'require',
+                'keepalives': 1,
+                'keepalives_idle': 30,
+                'keepalives_interval': 10,
+                'keepalives_count': 5
+            }
         )
     }
 else:
@@ -165,7 +175,13 @@ else:
             'HOST': os.environ.get('PGHOST', 'localhost'),
             'PORT': os.environ.get('PGPORT', '5432'),
             'OPTIONS': {
-                'sslmode': 'require'
+                'client_encoding': 'UTF8',
+                'application_name': 'meditation_app',
+                'sslmode': 'require',
+                'keepalives': 1,
+                'keepalives_idle': 30,
+                'keepalives_interval': 10,
+                'keepalives_count': 5
             }
         }
     }
