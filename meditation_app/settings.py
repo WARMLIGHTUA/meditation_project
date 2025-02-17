@@ -18,6 +18,7 @@ from sentry_sdk.integrations.logging import LoggingIntegration
 from sentry_sdk.integrations.redis import RedisIntegration
 import logging
 import dj_database_url
+from storages.backends.s3boto3 import S3Boto3Storage
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -243,15 +244,32 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
     AWS_S3_SIGNATURE_VERSION = 's3v4'
     AWS_S3_ADDRESSING_STYLE = 'virtual'
     AWS_S3_VERIFY = True
+    AWS_QUERYSTRING_AUTH = False
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
     
-    # Налаштування для статичних файлів
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    
-    # Налаштування для медіа файлів
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    
-    # Публічний доступ до файлів
+    # Налаштування для статичних та медіа файлів
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
+    
+    # Окремі класи для статичних та медіа файлів
+    class StaticStorage(S3Boto3Storage):
+        location = 'static'
+        default_acl = 'public-read'
+        file_overwrite = True
+        querystring_auth = False
+    
+    class MediaStorage(S3Boto3Storage):
+        location = 'media'
+        default_acl = 'public-read'
+        file_overwrite = False
+        querystring_auth = False
+    
+    # Використовуємо окремі класи для зберігання
+    STATICFILES_STORAGE = 'meditation_app.settings.StaticStorage'
+    DEFAULT_FILE_STORAGE = 'meditation_app.settings.MediaStorage'
+    
+    # URL для статичних та медіа файлів
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 else:
