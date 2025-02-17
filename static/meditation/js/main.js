@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to set theme
     function setTheme(isDark) {
         const theme = isDark ? 'dark' : 'light';
+        
+        // Встановлюємо тему без перезавантаження
         html.setAttribute('data-theme', theme);
         document.body.classList.toggle('dark-theme', isDark);
         document.body.classList.toggle('light-theme', !isDark);
@@ -23,23 +25,17 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('theme', theme);
         document.cookie = `theme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
         
-        // Оновлюємо фон без перезавантаження
+        // Оновлюємо CSS змінні для фону
         const root = document.documentElement;
         root.style.setProperty('--page-bg-color', isDark ? '#121212' : '#ffffff');
         root.style.setProperty('--content-bg-rgb', isDark ? '18, 18, 18' : '255, 255, 255');
         
-        // Плавна анімація зміни фону
+        // Оновлюємо фон без анімації
         const backgrounds = document.querySelectorAll('.page-background');
         backgrounds.forEach(bg => {
-            bg.style.transition = 'opacity 0.3s ease-in-out';
-            bg.style.opacity = '0';
-            
-            setTimeout(() => {
-                if (bg.classList.contains('page-background-color')) {
-                    bg.style.backgroundColor = isDark ? '#121212' : '#ffffff';
-                }
-                bg.style.opacity = '1';
-            }, 300);
+            if (bg.classList.contains('page-background-color')) {
+                bg.style.backgroundColor = isDark ? '#121212' : '#ffffff';
+            }
         });
         
         console.log('Theme changed to:', theme);
@@ -61,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const currentTheme = html.getAttribute('data-theme');
             const isDark = currentTheme === 'light';
             setTheme(isDark);
-            console.log('Theme switch clicked, new theme:', isDark ? 'dark' : 'light');
         });
     }
 
