@@ -51,45 +51,32 @@ sentry_logging = LoggingIntegration(
     event_level=logging.ERROR
 )
 
+# Підготовка інтеграцій для Sentry
+sentry_integrations = [
+    DjangoIntegration(),
+    sentry_logging,
+]
+
+# Додаємо Redis інтеграцію тільки якщо Redis доступний
+try:
+    import redis
+    from sentry_sdk.integrations.redis import RedisIntegration
+    sentry_integrations.append(RedisIntegration())
+except ImportError:
+    pass
+
 sentry_sdk.init(
     dsn=os.environ.get('SENTRY_DSN'),
-    integrations=[
-        DjangoIntegration(),
-        sentry_logging,
-        RedisIntegration(),
-    ],
-    
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
+    integrations=sentry_integrations,
     traces_sample_rate=float(os.environ.get('SENTRY_TRACES_SAMPLE_RATE', '0.1')),
-    
-    # Set profiles_sample_rate to 1.0 to profile 100%
-    # of sampled transactions.
-    # We recommend adjusting this value in production.
     profiles_sample_rate=float(os.environ.get('SENTRY_PROFILES_SAMPLE_RATE', '0.1')),
-    
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
     send_default_pii=True,
-    
-    # By default the SDK will try to use the SENTRY_RELEASE
-    # environment variable, or infer a git commit
-    # SHA as release, however you may want to set
-    # something more human-readable.
     release=os.environ.get('RAILWAY_GIT_COMMIT_SHA', 'development'),
-    
-    # The environment name
     environment=os.environ.get('ENVIRONMENT_NAME', 'development'),
-    
-    # Configure the sampling rates
     traces_sampler=traces_sampler,
-    
-    # Configure which errors to ignore
     ignore_errors=[
         'django.exceptions.DisallowedHost',
     ],
-    
-    # Configure the maximum length of the message
     max_breadcrumbs=50,
 )
 
