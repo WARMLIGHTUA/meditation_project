@@ -23,10 +23,27 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('theme', theme);
         document.cookie = `theme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
         
-        // Перезавантажуємо сторінку для оновлення фону
-        window.location.reload();
+        // Оновлюємо фон без перезавантаження
+        updateBackground(theme);
         
         console.log('Theme changed to:', theme);
+    }
+
+    // Функція для оновлення фону
+    function updateBackground(theme) {
+        const pageBackground = document.querySelector('.page-background');
+        if (pageBackground) {
+            // Плавно змінюємо прозорість для анімації
+            pageBackground.style.opacity = '0';
+            setTimeout(() => {
+                // Оновлюємо CSS змінні для фону
+                document.documentElement.style.setProperty('--page-bg-color', theme === 'dark' ? '#121212' : '#ffffff');
+                document.documentElement.style.setProperty('--content-bg-rgb', theme === 'dark' ? '18, 18, 18' : '255, 255, 255');
+                
+                // Повертаємо прозорість
+                pageBackground.style.opacity = '1';
+            }, 300);
+        }
     }
 
     // Check for saved theme preference or use system preference

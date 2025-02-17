@@ -36,12 +36,14 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 /* Navigation */
 .navbar {
     background-color: var(--nav-bg) !important;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease-in-out;
 }
 
 .navbar .nav-link,
@@ -152,7 +154,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     color: var(--text-primary);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease-in-out;
 }
 
 .card:hover {
@@ -279,6 +281,7 @@ body {
     position: relative;
     z-index: 2;
     margin-top: auto;
+    transition: all 0.3s ease-in-out;
 }
 
 .footer-links {
@@ -392,7 +395,7 @@ body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class
     height: 100vh;
     z-index: -1;
     overflow: hidden;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease-in-out;
 }
 
 body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .page-background-image,
@@ -401,7 +404,7 @@ body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class
     height: 100%;
     object-fit: cover;
     opacity: var(--page-bg-opacity, 1);
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease-in-out;
 }
 
 body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .page-background-color {
@@ -409,7 +412,7 @@ body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class
     height: 100%;
     background-color: var(--page-bg-color, var(--background-color));
     opacity: var(--page-bg-opacity, 1);
-    transition: background-color 0.3s ease, opacity 0.3s ease;
+    transition: all 0.3s ease-in-out;
 }
 
 body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .content-wrapper {
@@ -420,7 +423,7 @@ body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class
     padding: 20px 0;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease-in-out;
 }
 
 /* Alert styles */
