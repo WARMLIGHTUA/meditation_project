@@ -258,12 +258,14 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
         default_acl = 'public-read'
         file_overwrite = True
         querystring_auth = False
+        custom_domain = AWS_S3_CUSTOM_DOMAIN
     
     class MediaStorage(S3Boto3Storage):
         location = 'media'
         default_acl = 'public-read'
         file_overwrite = False
         querystring_auth = False
+        custom_domain = AWS_S3_CUSTOM_DOMAIN
     
     # Використовуємо окремі класи для зберігання
     STATICFILES_STORAGE = 'meditation_app.settings.StaticStorage'
