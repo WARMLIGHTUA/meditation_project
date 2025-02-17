@@ -24,26 +24,25 @@ document.addEventListener('DOMContentLoaded', function() {
         document.cookie = `theme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
         
         // Оновлюємо фон без перезавантаження
-        updateBackground(theme);
+        const root = document.documentElement;
+        root.style.setProperty('--page-bg-color', isDark ? '#121212' : '#ffffff');
+        root.style.setProperty('--content-bg-rgb', isDark ? '18, 18, 18' : '255, 255, 255');
+        
+        // Плавна анімація зміни фону
+        const backgrounds = document.querySelectorAll('.page-background');
+        backgrounds.forEach(bg => {
+            bg.style.transition = 'opacity 0.3s ease-in-out';
+            bg.style.opacity = '0';
+            
+            setTimeout(() => {
+                if (bg.classList.contains('page-background-color')) {
+                    bg.style.backgroundColor = isDark ? '#121212' : '#ffffff';
+                }
+                bg.style.opacity = '1';
+            }, 300);
+        });
         
         console.log('Theme changed to:', theme);
-    }
-
-    // Функція для оновлення фону
-    function updateBackground(theme) {
-        const pageBackground = document.querySelector('.page-background');
-        if (pageBackground) {
-            // Плавно змінюємо прозорість для анімації
-            pageBackground.style.opacity = '0';
-            setTimeout(() => {
-                // Оновлюємо CSS змінні для фону
-                document.documentElement.style.setProperty('--page-bg-color', theme === 'dark' ? '#121212' : '#ffffff');
-                document.documentElement.style.setProperty('--content-bg-rgb', theme === 'dark' ? '18, 18, 18' : '255, 255, 255');
-                
-                // Повертаємо прозорість
-                pageBackground.style.opacity = '1';
-            }, 300);
-        }
     }
 
     // Check for saved theme preference or use system preference
