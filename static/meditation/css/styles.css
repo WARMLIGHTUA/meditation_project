@@ -28,6 +28,7 @@
     --app-height: 100%;
     --transition-speed: 0.3s;
     --transition-timing: ease-in-out;
+    --page-bg-opacity: 0.7;
 }
 
 html, body {
@@ -126,6 +127,8 @@ body {
     --card-bg: #ffffff;
     --border-color: #dee2e6;
     --shadow-color: rgba(0,0,0,0.1);
+    --content-bg-rgb: 255, 255, 255;
+    --page-bg-opacity: 0.7;
 }
 
 [data-theme="dark"] {
@@ -136,6 +139,8 @@ body {
     --card-bg: #454d55;
     --border-color: #495057;
     --shadow-color: rgba(0,0,0,0.3);
+    --content-bg-rgb: 34, 34, 34;
+    --page-bg-opacity: 0.7;
 }
 
 /* Apply text colors */
@@ -236,6 +241,80 @@ body {
 
 /* Mobile optimizations */
 @media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .meditation-timer {
+        font-size: 2rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+    
+    .hero-section {
+        padding: 1.5rem 0;
+    }
+    
+    .hero-section h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-section p {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .feature-card {
+        padding: 1rem;
+    }
+    
+    .meditation-card .card-img-top {
+        height: 120px;
+    }
+    
+    .meditation-card .card-body {
+        padding: 0.75rem;
+    }
+    
+    .meditation-card .card-title {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .footer {
+        padding: 1rem 0;
+        margin-top: auto;
+    }
+    
+    .footer-links {
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .social-links {
+        gap: 0.75rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .form-control {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
     .page-background {
         position: fixed !important;
         top: 0;
@@ -246,117 +325,43 @@ body {
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        opacity: 1;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
+        opacity: var(--page-bg-opacity);
     }
 
     .content-wrapper {
         position: relative;
         z-index: 1;
         min-height: 100vh;
-        background-color: rgba(var(--content-bg-rgb), 0.98);
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
+        background-color: rgba(var(--content-bg-rgb), 0.7);
     }
 
     .card, 
     .meditation-card {
         background-color: var(--card-bg);
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
         opacity: 1;
+        box-shadow: 0 4px 6px var(--shadow-color);
     }
-}
 
-/* Mobile background fixes */
-@media (max-width: 768px) {
-    body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .page-background {
-        position: fixed !important;
-        height: 100vh;
-        background-attachment: scroll;
-        opacity: 1;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-    }
-    
-    .content-wrapper {
-        position: relative;
-        z-index: 1;
-        min-height: 100vh;
-        background-color: rgba(var(--content-bg-rgb), 0.98);
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-    }
-    
-    .meditation-card {
+    [data-theme="dark"] .card,
+    [data-theme="dark"] .meditation-card {
         background-color: var(--card-bg);
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        opacity: 1;
-    }
-}
-
-/* Mobile height fixes */
-@media (max-width: 768px) {
-    .page-background,
-    .content-wrapper {
-        min-height: 100vh;
-        min-height: calc(var(--vh, 1vh) * 100);
-    }
-    
-    .mobile-background {
-        position: fixed !important;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        background-color: var(--page-bg-color);
-        opacity: 1;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-    }
-    
-    .content-wrapper {
-        position: relative;
-        z-index: 1;
-        background-color: rgba(var(--content-bg-rgb), 0.98);
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
+        border: 1px solid var(--border-color);
     }
 
-    .card, 
-    .meditation-card {
-        background-color: var(--card-bg);
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        opacity: 1;
-    }
-}
-
-/* Mobile viewport height fix */
-@media (max-width: 768px) {
-    .page-background {
-        position: fixed !important;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-attachment: fixed;
-        background-size: cover;
-        opacity: 1;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        -webkit-transform: translate3d(0,0,0);
-        transform: translate3d(0,0,0);
+    [data-theme="dark"] .content-wrapper {
+        background-color: rgba(var(--content-bg-rgb), 0.7);
     }
 
-    .content-wrapper {
-        min-height: 100vh;
-        background-color: rgba(var(--content-bg-rgb), 0.98);
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
+    [data-theme="light"] .content-wrapper {
+        background-color: rgba(var(--content-bg-rgb), 0.7);
+    }
+
+    .navbar {
+        background-color: rgba(var(--content-bg-rgb), 0.95) !important;
+    }
+
+    [data-theme="dark"] .navbar {
+        border-bottom: 1px solid var(--border-color);
     }
 }
 
@@ -761,6 +766,108 @@ body {
 .text-primary { color: var(--primary-color) !important; }
 .bg-primary { background-color: var(--primary-color) !important; }
 .border-primary { border-color: var(--primary-color) !important; }
+
+/* Mobile background fixes */
+@media (max-width: 768px) {
+    body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .page-background {
+        position: fixed !important;
+        height: 100vh;
+        background-attachment: scroll;
+        opacity: var(--page-bg-opacity);
+    }
+    
+    .content-wrapper {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        background-color: rgba(var(--content-bg-rgb), 0.7);
+    }
+    
+    .meditation-card {
+        background-color: var(--card-bg);
+        opacity: 1;
+        box-shadow: 0 4px 6px var(--shadow-color);
+    }
+}
+
+/* Mobile height fixes */
+@supports (-webkit-touch-callout: none) {
+    .page-background,
+    .content-wrapper {
+        height: -webkit-fill-available;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-background,
+    .content-wrapper {
+        min-height: 100vh;
+        min-height: calc(var(--vh, 1vh) * 100);
+    }
+    
+    .mobile-background {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: var(--background-color);
+        opacity: var(--page-bg-opacity);
+    }
+    
+    .content-wrapper {
+        position: relative;
+        z-index: 1;
+        background-color: rgba(var(--content-bg-rgb), 0.7);
+    }
+}
+
+/* Mobile viewport height fix */
+@media (max-width: 768px) {
+    .page-background {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-attachment: fixed;
+        background-size: cover;
+        opacity: var(--page-bg-opacity);
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+    }
+
+    .content-wrapper {
+        min-height: 100vh;
+        background-color: rgba(var(--content-bg-rgb), 0.7);
+    }
+
+    /* Додаткові стилі для тем */
+    [data-theme="dark"] body {
+        color: var(--text-primary);
+    }
+
+    [data-theme="dark"] .btn-outline-light {
+        color: var(--text-primary);
+        border-color: var(--text-primary);
+    }
+
+    [data-theme="dark"] .btn-outline-light:hover {
+        background-color: var(--text-primary);
+        color: var(--background-color);
+    }
+
+    [data-theme="light"] .btn-outline-light {
+        color: var(--text-primary);
+        border-color: var(--text-primary);
+    }
+
+    [data-theme="light"] .btn-outline-light:hover {
+        background-color: var(--text-primary);
+        color: var(--background-color);
+    }
+}
 
 /* iOS specific fixes */
 @supports (-webkit-touch-callout: none) {
