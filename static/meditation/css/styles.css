@@ -24,6 +24,16 @@
     --hero-bg: #ffffff;
     --hero-text: #2c3e50;
     --section-bg: #f8f9fa;
+    --vh: 1vh;
+    --app-height: 100%;
+}
+
+html, body {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 body {
@@ -31,9 +41,6 @@ body {
     line-height: 1.6;
     color: var(--text-primary);
     background-color: var(--light-color);
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
@@ -523,44 +530,29 @@ body {
 }
 
 /* Background styles */
-body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .page-background {
+.page-background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    height: calc(var(--vh, 1vh) * 100);
+    min-height: -webkit-fill-available;
     z-index: -1;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    background-color: var(--page-bg-color, var(--background-color));
+    background-color: var(--page-bg-color);
+    transition: background-color var(--transition-speed) var(--transition-timing);
 }
 
-body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .page-background-image,
-body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .page-background-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: var(--page-bg-opacity, 1);
-    transition: all 0.3s ease-in-out;
-}
-
-body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .page-background-color {
-    width: 100%;
-    height: 100%;
-    background-color: var(--page-bg-color, var(--background-color));
-    opacity: var(--page-bg-opacity, 1);
-    transition: all 0.3s ease-in-out;
-}
-
-body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .content-wrapper {
+.content-wrapper {
     position: relative;
     z-index: 1;
-    min-height: calc(100vh - 60px);
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+    min-height: -webkit-fill-available;
     background-color: rgba(var(--content-bg-rgb), 0.3);
-    padding: 20px 0;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    transition: all 0.3s ease-in-out;
+    transition: background-color var(--transition-speed) var(--transition-timing);
 }
 
 /* Alert styles */
@@ -774,5 +766,80 @@ body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class
         position: relative;
         z-index: 1;
         background-color: rgba(var(--content-bg-rgb), 0.95);
+    }
+}
+
+/* Mobile viewport height fix */
+@media (max-width: 768px) {
+    .page-background {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        height: calc(var(--vh, 1vh) * 100);
+        min-height: -webkit-fill-available;
+        background-attachment: fixed;
+        background-size: cover;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+    }
+
+    .content-wrapper {
+        min-height: 100vh;
+        min-height: calc(var(--vh, 1vh) * 100);
+        min-height: -webkit-fill-available;
+        background-color: rgba(var(--content-bg-rgb), 0.95);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-top: env(safe-area-inset-top);
+    }
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+    .page-background,
+    .content-wrapper {
+        height: -webkit-fill-available;
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Landscape mode fixes */
+@media (max-width: 932px) and (orientation: landscape) {
+    .page-background,
+    .content-wrapper {
+        min-height: 100vw;
+    }
+}
+
+/* Foldable devices */
+@media (max-width: 884px) and (orientation: portrait) {
+    .page-background,
+    .content-wrapper {
+        min-height: calc(var(--vh, 1vh) * 100);
+    }
+}
+
+/* Small devices */
+@media (max-width: 576px) {
+    .page-background {
+        height: 100%;
+        height: calc(var(--vh, 1vh) * 100);
+    }
+}
+
+/* Medium devices */
+@media (max-width: 768px) {
+    .page-background {
+        height: 100%;
+        height: calc(var(--vh, 1vh) * 100);
+    }
+}
+
+/* Large devices */
+@media (max-width: 992px) {
+    .page-background {
+        height: 100%;
+        height: calc(var(--vh, 1vh) * 100);
     }
 } 

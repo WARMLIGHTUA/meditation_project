@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE }}">
+<html lang="{{ LANGUAGE_CODE }}" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#000000">
     <meta name="description" content="{% block meta_description %}Медитація для душевного спокою{% endblock %}">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Медитація">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-tap-highlight" content="no">
     
+    <!-- iOS specific -->
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- PWA specific -->
+    <link rel="manifest" href="{% static 'meditation/manifest.json' %}">
+    <link rel="apple-touch-icon" href="{% static 'meditation/images/icon-192x192.png' %}">
+    <link rel="apple-touch-startup-image" href="{% static 'meditation/images/splash.png' %}">
+    
+    <!-- Preload resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="{% static 'meditation/css/styles.css' %}" as="style">
@@ -18,14 +32,11 @@
     
     <title>{% block title %}Медитація{% endblock %}</title>
     
-    <link rel="manifest" href="{% static 'meditation/manifest.json' %}">
-    <link rel="apple-touch-icon" href="{% static 'meditation/images/icon-192x192.png' %}">
-    
     {% block css %}
     <link rel="stylesheet" href="{% static 'meditation/css/styles.css' %}">
     {% endblock %}
 </head>
-<body class="{% block body_class %}{% endblock %}">
+<body class="{% block body_class %}{% endblock %}" data-theme="light">
     <div class="page-background"></div>
     
     <nav class="navbar navbar-expand-lg">

@@ -10,12 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function setTheme(isDark) {
         const theme = isDark ? 'dark' : 'light';
         
-        // Встановлюємо тему без перезавантаження
+        // Встановлюємо тему
         html.setAttribute('data-theme', theme);
-        document.body.classList.toggle('dark-theme', isDark);
-        document.body.classList.toggle('light-theme', !isDark);
         
-        // Оновлення іконки
+        // Оновлюємо класи для body
+        document.body.classList.remove('dark-theme', 'light-theme');
+        document.body.classList.add(`${theme}-theme`);
+        
+        // Оновлюємо іконку
         if (themeIcon) {
             themeIcon.classList.remove('fa-sun', 'fa-moon');
             themeIcon.classList.add(isDark ? 'fa-sun' : 'fa-moon');
@@ -30,28 +32,23 @@ document.addEventListener('DOMContentLoaded', function() {
         const backgroundColor = isDark ? '#121212' : '#ffffff';
         const contentBgRgb = isDark ? '18, 18, 18' : '255, 255, 255';
         
-        root.style.setProperty('--page-bg-color', backgroundColor);
-        root.style.setProperty('--content-bg-rgb', contentBgRgb);
-        
-        // Оновлюємо фон
+        // Плавно змінюємо фон
         const background = document.querySelector('.page-background');
         if (background) {
+            background.style.transition = 'background-color 0.3s ease-in-out';
             background.style.backgroundColor = backgroundColor;
             
-            // Додаємо клас для мобільних пристроїв
+            // Додаємо специфічні стилі для мобільних пристроїв
             if (window.innerWidth <= 768) {
-                background.classList.add('mobile-background');
+                background.style.position = 'fixed';
+                background.style.height = `${window.innerHeight}px`;
+                background.style.minHeight = '-webkit-fill-available';
             }
         }
         
-        // Створюємо або оновлюємо елемент фону з кольором
-        let backgroundColorElement = document.querySelector('.page-background-color');
-        if (!backgroundColorElement) {
-            backgroundColorElement = document.createElement('div');
-            backgroundColorElement.className = 'page-background-color';
-            background?.appendChild(backgroundColorElement);
-        }
-        backgroundColorElement.style.backgroundColor = backgroundColor;
+        // Оновлюємо CSS змінні
+        root.style.setProperty('--page-bg-color', backgroundColor);
+        root.style.setProperty('--content-bg-rgb', contentBgRgb);
         
         console.log('Theme changed to:', theme);
     }
@@ -346,5 +343,33 @@ window.addEventListener('resize', () => {
     if (document.documentElement.style.getPropertyValue('--vh')) {
         const vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+});
+
+// Mobile viewport height fix
+function setAppHeight() {
+    const doc = document.documentElement;
+    const vh = window.innerHeight * 0.01;
+    doc.style.setProperty('--vh', `${vh}px`);
+    doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+}
+
+// Call the function on first load
+setAppHeight();
+
+// Call the function on resize and orientation change
+['resize', 'orientationchange'].forEach(event => {
+    window.addEventListener(event, () => {
+        setAppHeight();
+        
+        // Додаткова затримка для iOS
+        setTimeout(setAppHeight, 100);
+    });
+});
+
+// Call on page visibility change (for foldable devices)
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        setAppHeight();
     }
 });
