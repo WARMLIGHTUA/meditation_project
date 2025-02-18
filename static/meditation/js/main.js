@@ -27,16 +27,31 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Оновлюємо CSS змінні для фону
         const root = document.documentElement;
-        root.style.setProperty('--page-bg-color', isDark ? '#121212' : '#ffffff');
-        root.style.setProperty('--content-bg-rgb', isDark ? '18, 18, 18' : '255, 255, 255');
+        const backgroundColor = isDark ? '#121212' : '#ffffff';
+        const contentBgRgb = isDark ? '18, 18, 18' : '255, 255, 255';
         
-        // Оновлюємо фон без анімації
-        const backgrounds = document.querySelectorAll('.page-background');
-        backgrounds.forEach(bg => {
-            if (bg.classList.contains('page-background-color')) {
-                bg.style.backgroundColor = isDark ? '#121212' : '#ffffff';
+        root.style.setProperty('--page-bg-color', backgroundColor);
+        root.style.setProperty('--content-bg-rgb', contentBgRgb);
+        
+        // Оновлюємо фон
+        const background = document.querySelector('.page-background');
+        if (background) {
+            background.style.backgroundColor = backgroundColor;
+            
+            // Додаємо клас для мобільних пристроїв
+            if (window.innerWidth <= 768) {
+                background.classList.add('mobile-background');
             }
-        });
+        }
+        
+        // Створюємо або оновлюємо елемент фону з кольором
+        let backgroundColorElement = document.querySelector('.page-background-color');
+        if (!backgroundColorElement) {
+            backgroundColorElement = document.createElement('div');
+            backgroundColorElement.className = 'page-background-color';
+            background?.appendChild(backgroundColorElement);
+        }
+        backgroundColorElement.style.backgroundColor = backgroundColor;
         
         console.log('Theme changed to:', theme);
     }
@@ -306,3 +321,30 @@ if (audioPlayer) {
         }
     }, { passive: true });
 }
+
+// Mobile background handling
+function handleMobileBackground() {
+    const background = document.querySelector('.page-background');
+    if (background) {
+        const isMobile = window.innerWidth <= 768;
+        background.classList.toggle('mobile-background', isMobile);
+        
+        // Встановлюємо правильну висоту для мобільних пристроїв
+        if (isMobile) {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+    }
+}
+
+// Викликаємо функцію при завантаженні та зміні розміру вікна
+window.addEventListener('load', handleMobileBackground);
+window.addEventListener('resize', handleMobileBackground);
+
+// Виправлення для iOS
+window.addEventListener('resize', () => {
+    if (document.documentElement.style.getPropertyValue('--vh')) {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+});
