@@ -28,7 +28,6 @@
     --app-height: 100%;
     --transition-speed: 0.3s;
     --transition-timing: ease-in-out;
-    --page-bg-opacity: 0.7;
 }
 
 html, body {
@@ -127,8 +126,6 @@ body {
     --card-bg: #ffffff;
     --border-color: #dee2e6;
     --shadow-color: rgba(0,0,0,0.1);
-    --content-bg-rgb: 255, 255, 255;
-    --page-bg-opacity: 0.7;
 }
 
 [data-theme="dark"] {
@@ -139,8 +136,6 @@ body {
     --card-bg: #454d55;
     --border-color: #495057;
     --shadow-color: rgba(0,0,0,0.3);
-    --content-bg-rgb: 34, 34, 34;
-    --page-bg-opacity: 0.7;
 }
 
 /* Apply text colors */
@@ -316,52 +311,66 @@ body {
     }
 
     .page-background {
-        position: fixed !important;
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         z-index: -1;
+        opacity: 1;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        opacity: var(--page-bg-opacity);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
 
     .content-wrapper {
-        position: relative;
-        z-index: 1;
-        min-height: 100vh;
-        background-color: rgba(var(--content-bg-rgb), 0.7);
+        background-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        min-height: calc(100vh - var(--safe-area-inset-top, 0px));
     }
 
-    .card, 
-    .meditation-card {
-        background-color: var(--card-bg);
-        opacity: 1;
-        box-shadow: 0 4px 6px var(--shadow-color);
+    .card {
+        background-color: rgba(0, 0, 0, 0.75);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+
+    .card-title {
+        color: white;
+    }
+
+    .card-text {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .text-muted {
+        color: rgba(255, 255, 255, 0.6) !important;
     }
 
     [data-theme="dark"] .card,
-    [data-theme="dark"] .meditation-card {
-        background-color: var(--card-bg);
-        border: 1px solid var(--border-color);
+    [data-theme="light"] .card {
+        background-color: rgba(0, 0, 0, 0.75);
+        color: white;
     }
 
-    [data-theme="dark"] .content-wrapper {
-        background-color: rgba(var(--content-bg-rgb), 0.7);
-    }
-
+    [data-theme="dark"] .content-wrapper,
     [data-theme="light"] .content-wrapper {
-        background-color: rgba(var(--content-bg-rgb), 0.7);
+        background-color: transparent;
     }
 
-    .navbar {
-        background-color: rgba(var(--content-bg-rgb), 0.95) !important;
+    .btn-outline-light {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
     }
 
-    [data-theme="dark"] .navbar {
-        border-bottom: 1px solid var(--border-color);
+    .btn-outline-light:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
     }
 }
 
@@ -770,23 +779,36 @@ body {
 /* Mobile background fixes */
 @media (max-width: 768px) {
     body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .page-background {
-        position: fixed !important;
+        position: fixed;
         height: 100vh;
+        height: -webkit-fill-available;
         background-attachment: scroll;
-        opacity: var(--page-bg-opacity);
+    }
+    
+    body:not(.admin-interface):not([class*="add"]):not([class*="change"]):not([class*="upload"]) .page-background-color {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--page-bg-color, var(--background-color));
+        opacity: 1;
     }
     
     .content-wrapper {
         position: relative;
         z-index: 1;
         min-height: 100vh;
-        background-color: rgba(var(--content-bg-rgb), 0.7);
+        min-height: -webkit-fill-available;
+        background-color: rgba(var(--content-bg-rgb), 0.95);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
     
     .meditation-card {
         background-color: var(--card-bg);
-        opacity: 1;
-        box-shadow: 0 4px 6px var(--shadow-color);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
 }
 
@@ -811,15 +833,15 @@ body {
         left: 0;
         width: 100%;
         height: 100%;
+        height: -webkit-fill-available;
         z-index: -1;
-        background-color: var(--background-color);
-        opacity: var(--page-bg-opacity);
+        background-color: var(--page-bg-color);
     }
     
     .content-wrapper {
         position: relative;
         z-index: 1;
-        background-color: rgba(var(--content-bg-rgb), 0.7);
+        background-color: rgba(var(--content-bg-rgb), 0.95);
     }
 }
 
@@ -831,41 +853,21 @@ body {
         left: 0;
         width: 100%;
         height: 100%;
+        height: calc(var(--vh, 1vh) * 100);
+        min-height: -webkit-fill-available;
         background-attachment: fixed;
         background-size: cover;
-        opacity: var(--page-bg-opacity);
         -webkit-transform: translate3d(0,0,0);
         transform: translate3d(0,0,0);
     }
 
     .content-wrapper {
         min-height: 100vh;
-        background-color: rgba(var(--content-bg-rgb), 0.7);
-    }
-
-    /* Додаткові стилі для тем */
-    [data-theme="dark"] body {
-        color: var(--text-primary);
-    }
-
-    [data-theme="dark"] .btn-outline-light {
-        color: var(--text-primary);
-        border-color: var(--text-primary);
-    }
-
-    [data-theme="dark"] .btn-outline-light:hover {
-        background-color: var(--text-primary);
-        color: var(--background-color);
-    }
-
-    [data-theme="light"] .btn-outline-light {
-        color: var(--text-primary);
-        border-color: var(--text-primary);
-    }
-
-    [data-theme="light"] .btn-outline-light:hover {
-        background-color: var(--text-primary);
-        color: var(--background-color);
+        min-height: calc(var(--vh, 1vh) * 100);
+        min-height: -webkit-fill-available;
+        background-color: rgba(var(--content-bg-rgb), 0.95);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-top: env(safe-area-inset-top);
     }
 }
 
