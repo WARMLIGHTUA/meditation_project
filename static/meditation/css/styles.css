@@ -26,6 +26,8 @@
     --section-bg: #f8f9fa;
     --vh: 1vh;
     --app-height: 100%;
+    --transition-speed: 0.3s;
+    --transition-timing: ease-in-out;
 }
 
 html, body {
@@ -34,6 +36,7 @@ html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -43,7 +46,9 @@ body {
     background-color: var(--light-color);
     display: flex;
     flex-direction: column;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    min-height: -webkit-fill-available;
+    transition: background-color var(--transition-speed) var(--transition-timing),
+                color var(--transition-speed) var(--transition-timing);
 }
 
 /* Navigation */
@@ -232,69 +237,105 @@ body {
 /* Mobile optimizations */
 @media (max-width: 768px) {
     .container {
-        padding: 0 10px;
+        padding: 0 15px;
+        width: 100%;
+        max-width: 100%;
     }
     
     .card {
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
     }
     
     .meditation-timer {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
     
     .navbar-brand {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     
     .hero-section {
-        padding: 2rem 0;
+        padding: 1.5rem 0;
     }
     
     .hero-section h1 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
     }
     
     .hero-section p {
-        font-size: 1rem;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
     }
     
     .feature-card {
-        padding: 1.5rem;
-    }
-    
-    .meditation-card .card-img-top {
-        height: 150px;
-    }
-    
-    .meditation-card .card-body {
         padding: 1rem;
     }
     
+    .meditation-card .card-img-top {
+        height: 120px;
+    }
+    
+    .meditation-card .card-body {
+        padding: 0.75rem;
+    }
+    
     .meditation-card .card-title {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
     }
     
     .footer {
         padding: 1rem 0;
+        margin-top: auto;
     }
     
     .footer-links {
-        gap: 1rem;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     
     .social-links {
-        gap: 1rem;
+        gap: 0.75rem;
     }
     
     .btn {
-        padding: 6px 15px;
-        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
     }
     
     .form-control {
-        padding: 8px 12px;
-        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
+    .page-background {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        height: calc(var(--vh, 1vh) * 100);
+        min-height: -webkit-fill-available;
+        background-attachment: scroll;
+        background-size: cover;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        z-index: -1;
+    }
+
+    .content-wrapper {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        min-height: calc(var(--vh, 1vh) * 100);
+        min-height: -webkit-fill-available;
+        background-color: rgba(var(--content-bg-rgb), 0.95);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-top: env(safe-area-inset-top);
     }
 }
 
@@ -801,6 +842,11 @@ body {
     .content-wrapper {
         height: -webkit-fill-available;
         min-height: -webkit-fill-available;
+        position: relative;
+    }
+
+    body {
+        min-height: -webkit-fill-available;
     }
 }
 
@@ -809,6 +855,11 @@ body {
     .page-background,
     .content-wrapper {
         min-height: 100vw;
+    }
+
+    .container {
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-top: env(safe-area-inset-top);
     }
 }
 
@@ -822,24 +873,24 @@ body {
 
 /* Small devices */
 @media (max-width: 576px) {
-    .page-background {
-        height: 100%;
-        height: calc(var(--vh, 1vh) * 100);
+    .container {
+        padding: 0 10px;
     }
-}
 
-/* Medium devices */
-@media (max-width: 768px) {
-    .page-background {
-        height: 100%;
-        height: calc(var(--vh, 1vh) * 100);
+    .card {
+        margin: 0.5rem 0;
     }
-}
 
-/* Large devices */
-@media (max-width: 992px) {
-    .page-background {
-        height: 100%;
-        height: calc(var(--vh, 1vh) * 100);
+    .navbar {
+        padding: 0.5rem 0;
+    }
+
+    .navbar-brand {
+        font-size: 1rem;
+    }
+
+    .btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
     }
 } 

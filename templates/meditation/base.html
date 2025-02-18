@@ -2,7 +2,7 @@
 <html lang="{{ LANGUAGE_CODE }}" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, minimal-ui">
     <meta name="theme-color" content="#000000">
     <meta name="description" content="{% block meta_description %}Медитація для душевного спокою{% endblock %}">
     <meta name="mobile-web-app-capable" content="yes">
@@ -12,15 +12,21 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-TileColor" content="#000000">
     <meta name="msapplication-tap-highlight" content="no">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
     
     <!-- iOS specific -->
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-startup-image" href="{% static 'meditation/images/splash.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'meditation/images/apple-touch-icon.png' %}">
     
     <!-- PWA specific -->
     <link rel="manifest" href="{% static 'meditation/manifest.json' %}">
-    <link rel="apple-touch-icon" href="{% static 'meditation/images/icon-192x192.png' %}">
-    <link rel="apple-touch-startup-image" href="{% static 'meditation/images/splash.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'meditation/images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'meditation/images/favicon-16x16.png' %}">
+    <link rel="mask-icon" href="{% static 'meditation/images/safari-pinned-tab.svg' %}" color="#5bbad5">
     
     <!-- Preload resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,6 +41,13 @@
     {% block css %}
     <link rel="stylesheet" href="{% static 'meditation/css/styles.css' %}">
     {% endblock %}
+    
+    <!-- Prevent FOIT -->
+    <style>
+        .fonts-loaded {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
 </head>
 <body class="{% block body_class %}{% endblock %}" data-theme="light">
     <div class="page-background"></div>
@@ -65,17 +78,39 @@
     {% endblock %}
     
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('{% static "meditation/sw.js" %}')
-                    .then(function(registration) {
-                        console.log('ServiceWorker registration successful');
-                    })
-                    .catch(function(err) {
-                        console.log('ServiceWorker registration failed: ', err);
-                    });
+        // Завантаження шрифтів
+        if ("fonts" in document) {
+            Promise.all([
+                document.fonts.load("1em Segoe UI"),
+                document.fonts.load("1em Tahoma")
+            ]).then(() => {
+                document.documentElement.classList.add("fonts-loaded");
             });
         }
+        
+        // Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('{% static "meditation/sw.js" %}', {
+                    scope: '/',
+                    updateViaCache: 'none'
+                })
+                .then(function(registration) {
+                    console.log('ServiceWorker registration successful');
+                    registration.update();
+                })
+                .catch(function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+        
+        // Перевірка підтримки PWA
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            // Зберігаємо подію для показу пізніше
+            window.deferredPrompt = e;
+        });
     </script>
 </body>
 </html> 

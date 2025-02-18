@@ -218,17 +218,95 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// Register service worker
+// Mobile viewport height fix
+function setAppHeight() {
+    const doc = document.documentElement;
+    const vh = window.innerHeight * 0.01;
+    doc.style.setProperty('--vh', `${vh}px`);
+    doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+    
+    // Додаткова перевірка для iOS
+    if (/iPhone|iPad|iPod/.test(navigator.platform)) {
+        doc.style.setProperty('--safe-area-inset-top', `${window.screen.height - window.innerHeight}px`);
+    }
+}
+
+// Викликаємо функцію при завантаженні
+window.addEventListener('load', () => {
+    setAppHeight();
+    handleMobileBackground();
+});
+
+// Викликаємо функцію при зміні розміру та орієнтації
+['resize', 'orientationchange'].forEach(event => {
+    window.addEventListener(event, () => {
+        // Затримка для iOS
+        setTimeout(() => {
+            setAppHeight();
+            handleMobileBackground();
+        }, 100);
+    });
+});
+
+// Обробка видимості для складних пристроїв
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        setAppHeight();
+        handleMobileBackground();
+    }
+});
+
+// Обробка фону для мобільних пристроїв
+function handleMobileBackground() {
+    const background = document.querySelector('.page-background');
+    if (background) {
+        const isMobile = window.innerWidth <= 768;
+        background.classList.toggle('mobile-background', isMobile);
+        
+        if (isMobile) {
+            // Встановлюємо правильну висоту для мобільних пристроїв
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
+            // Оптимізація для iOS
+            if (/iPhone|iPad|iPod/.test(navigator.platform)) {
+                background.style.height = `${window.innerHeight}px`;
+                background.style.minHeight = '-webkit-fill-available';
+            }
+            
+            // Оптимізація для Android
+            if (/Android/.test(navigator.userAgent)) {
+                background.style.height = `${window.innerHeight}px`;
+                background.style.position = 'fixed';
+            }
+        } else {
+            // Скидаємо стилі для десктопу
+            background.style.height = '';
+            background.style.minHeight = '';
+            background.style.position = '';
+        }
+    }
+}
+
+// Оптимізація для мобільних пристроїв
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        // Використовуємо поточний домен
         const swUrl = `${window.location.origin}/static/meditation/sw.js`;
         
         navigator.serviceWorker.register(swUrl, {
-            scope: '/' // Область дії - весь сайт
+            scope: '/',
+            updateViaCache: 'none'
         })
         .then(registration => {
             console.log('ServiceWorker registration successful with scope:', registration.scope);
+            
+            // Оновлення Service Worker
+            registration.update();
+            
+            // Періодичне оновлення
+            setInterval(() => {
+                registration.update();
+            }, 3600000); // Кожну годину
         })
         .catch(err => {
             console.log('ServiceWorker registration failed:', err);
@@ -318,58 +396,3 @@ if (audioPlayer) {
         }
     }, { passive: true });
 }
-
-// Mobile background handling
-function handleMobileBackground() {
-    const background = document.querySelector('.page-background');
-    if (background) {
-        const isMobile = window.innerWidth <= 768;
-        background.classList.toggle('mobile-background', isMobile);
-        
-        // Встановлюємо правильну висоту для мобільних пристроїв
-        if (isMobile) {
-            const vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
-    }
-}
-
-// Викликаємо функцію при завантаженні та зміні розміру вікна
-window.addEventListener('load', handleMobileBackground);
-window.addEventListener('resize', handleMobileBackground);
-
-// Виправлення для iOS
-window.addEventListener('resize', () => {
-    if (document.documentElement.style.getPropertyValue('--vh')) {
-        const vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-});
-
-// Mobile viewport height fix
-function setAppHeight() {
-    const doc = document.documentElement;
-    const vh = window.innerHeight * 0.01;
-    doc.style.setProperty('--vh', `${vh}px`);
-    doc.style.setProperty('--app-height', `${window.innerHeight}px`);
-}
-
-// Call the function on first load
-setAppHeight();
-
-// Call the function on resize and orientation change
-['resize', 'orientationchange'].forEach(event => {
-    window.addEventListener(event, () => {
-        setAppHeight();
-        
-        // Додаткова затримка для iOS
-        setTimeout(setAppHeight, 100);
-    });
-});
-
-// Call on page visibility change (for foldable devices)
-document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) {
-        setAppHeight();
-    }
-});
