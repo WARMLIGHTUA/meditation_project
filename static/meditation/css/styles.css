@@ -29,8 +29,10 @@
     --transition-speed: 0.3s;
     --transition-timing: ease-in-out;
     --mobile-bg-opacity: 1;
-    --mobile-card-bg-light: rgba(255, 255, 255, 0.98);
-    --mobile-card-bg-dark: rgba(0, 0, 0, 0.98);
+    --mobile-card-bg-light: rgba(255, 255, 255, 0.95);
+    --mobile-card-bg-dark: rgba(0, 0, 0, 0.95);
+    --mobile-text-light: #000000;
+    --mobile-text-dark: #ffffff;
 }
 
 html, body {
@@ -237,82 +239,9 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Mobile optimizations */
+/* Mobile styles */
 @media (max-width: 768px) {
-    .container {
-        padding: 0 15px;
-        width: 100%;
-        max-width: 100%;
-    }
-    
-    .card {
-        margin-bottom: 1.5rem;
-    }
-    
-    .meditation-timer {
-        font-size: 2rem;
-    }
-    
-    .navbar-brand {
-        font-size: 1.1rem;
-    }
-    
-    .hero-section {
-        padding: 1.5rem 0;
-    }
-    
-    .hero-section h1 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-    }
-    
-    .hero-section p {
-        font-size: 0.9rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .feature-card {
-        padding: 1rem;
-    }
-    
-    .meditation-card .card-img-top {
-        height: 120px;
-    }
-    
-    .meditation-card .card-body {
-        padding: 0.75rem;
-    }
-    
-    .meditation-card .card-title {
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .footer {
-        padding: 1rem 0;
-        margin-top: auto;
-    }
-    
-    .footer-links {
-        gap: 0.75rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .social-links {
-        gap: 0.75rem;
-    }
-    
-    .btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.875rem;
-    }
-    
-    .form-control {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.875rem;
-    }
-
+    /* Remove all conflicting mobile styles */
     .page-background {
         position: fixed !important;
         top: 0;
@@ -320,7 +249,7 @@ body {
         width: 100%;
         height: 100%;
         z-index: -1;
-        opacity: var(--mobile-bg-opacity);
+        opacity: 1;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -332,56 +261,65 @@ body {
         min-height: 100vh;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
-        padding-bottom: env(safe-area-inset-bottom);
-        padding-top: env(safe-area-inset-top);
     }
 
+    /* Light theme */
     [data-theme="light"] .card,
-    [data-theme="light"] .meditation-card {
+    [data-theme="light"] .meditation-card,
+    [data-theme="light"] .course-card {
         background-color: var(--mobile-card-bg-light) !important;
-        color: #000000 !important;
-    }
-
-    [data-theme="dark"] .card,
-    [data-theme="dark"] .meditation-card {
-        background-color: var(--mobile-card-bg-dark) !important;
-        color: #ffffff !important;
+        color: var(--mobile-text-light) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     [data-theme="light"] .card-title,
     [data-theme="light"] .card-text {
-        color: #000000 !important;
-    }
-
-    [data-theme="dark"] .card-title,
-    [data-theme="dark"] .card-text {
-        color: #ffffff !important;
+        color: var(--mobile-text-light) !important;
     }
 
     [data-theme="light"] .text-muted {
         color: rgba(0, 0, 0, 0.6) !important;
     }
 
+    /* Dark theme */
+    [data-theme="dark"] .card,
+    [data-theme="dark"] .meditation-card,
+    [data-theme="dark"] .course-card {
+        background-color: var(--mobile-card-bg-dark) !important;
+        color: var(--mobile-text-dark) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    [data-theme="dark"] .card-title,
+    [data-theme="dark"] .card-text {
+        color: var(--mobile-text-dark) !important;
+    }
+
     [data-theme="dark"] .text-muted {
         color: rgba(255, 255, 255, 0.6) !important;
     }
 
+    /* Common card styles */
     .card,
-    .meditation-card {
-        border: 1px solid rgba(255, 255, 255, 0.1);
+    .meditation-card,
+    .course-card {
+        margin-bottom: 1rem;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
-        margin-bottom: 1rem;
+        box-shadow: none !important;
     }
 
-    .btn-outline-light {
-        background-color: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.2);
+    /* Remove all transform effects on mobile */
+    .card:hover,
+    .meditation-card:hover,
+    .course-card:hover {
+        transform: none !important;
     }
 
-    .btn-outline-light:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.3);
+    /* Container padding */
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
     }
 }
 
