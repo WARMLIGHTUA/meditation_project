@@ -222,10 +222,10 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Responsive design */
+/* Mobile optimizations */
 @media (max-width: 768px) {
     .container {
-        padding: 0 15px;
+        padding: 0 10px;
     }
     
     .card {
@@ -233,7 +233,143 @@ body {
     }
     
     .meditation-timer {
-        font-size: 2rem;
+        font-size: 2.5rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    .hero-section {
+        padding: 2rem 0;
+    }
+    
+    .hero-section h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-section p {
+        font-size: 1rem;
+    }
+    
+    .feature-card {
+        padding: 1.5rem;
+    }
+    
+    .meditation-card .card-img-top {
+        height: 150px;
+    }
+    
+    .meditation-card .card-body {
+        padding: 1rem;
+    }
+    
+    .meditation-card .card-title {
+        font-size: 1.1rem;
+    }
+    
+    .footer {
+        padding: 1rem 0;
+    }
+    
+    .footer-links {
+        gap: 1rem;
+    }
+    
+    .social-links {
+        gap: 1rem;
+    }
+    
+    .btn {
+        padding: 6px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .form-control {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+    .card:hover {
+        transform: none;
+    }
+    
+    .feature-card:hover {
+        transform: none;
+    }
+    
+    .meditation-card:hover {
+        transform: none;
+    }
+    
+    .btn:active,
+    .theme-switcher:active,
+    .favorite-btn:active {
+        transform: scale(0.95);
+    }
+}
+
+/* Improved touch targets */
+@media (max-width: 768px) {
+    .nav-link,
+    .navbar-toggler,
+    .theme-switcher,
+    .favorite-btn {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .form-control,
+    .btn {
+        min-height: 44px;
+    }
+    
+    .audio-player controls {
+        height: 44px;
+    }
+}
+
+/* Performance optimizations */
+@media (max-width: 768px) {
+    .page-background {
+        background-attachment: scroll;
+    }
+    
+    .content-wrapper {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background-color: rgba(var(--content-bg-rgb), 0.95);
+    }
+    
+    .meditation-card {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+}
+
+/* Loading optimizations */
+.lazy-image {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.lazy-image.loaded {
+    opacity: 1;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
 

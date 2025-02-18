@@ -1,1 +1,70 @@
- 
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="{% block meta_description %}Медитація для душевного спокою{% endblock %}">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="{% static 'meditation/css/styles.css' %}" as="style">
+    <link rel="preload" href="{% static 'meditation/js/main.js' %}" as="script">
+    
+    {% block meta %}{% endblock %}
+    
+    <title>{% block title %}Медитація{% endblock %}</title>
+    
+    <link rel="manifest" href="{% static 'meditation/manifest.json' %}">
+    <link rel="apple-touch-icon" href="{% static 'meditation/images/icon-192x192.png' %}">
+    
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'meditation/css/styles.css' %}">
+    {% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    <div class="page-background"></div>
+    
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'meditation/images/logo.svg' %}" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                Медитація
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            {% include "meditation/includes/navigation.html" %}
+        </div>
+    </nav>
+
+    <main class="content-wrapper">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    {% include "meditation/includes/footer.html" %}
+
+    {% block js %}
+    <script src="{% static 'meditation/js/main.js' %}" defer></script>
+    {% endblock %}
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('{% static "meditation/sw.js" %}')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html> 

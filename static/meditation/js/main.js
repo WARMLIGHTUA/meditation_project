@@ -223,3 +223,86 @@ if ('serviceWorker' in navigator) {
         });
     });
 }
+
+// Lazy loading for images
+document.addEventListener('DOMContentLoaded', function() {
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.add('loaded');
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    lazyImages.forEach(img => imageObserver.observe(img));
+});
+
+// Touch event optimizations
+document.addEventListener('DOMContentLoaded', function() {
+    const touchElements = document.querySelectorAll('.btn, .card, .feature-card, .meditation-card');
+    
+    touchElements.forEach(element => {
+        element.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.98)';
+        }, { passive: true });
+        
+        element.addEventListener('touchend', function() {
+            this.style.transform = 'none';
+        }, { passive: true });
+    });
+});
+
+// Optimize scroll performance
+let ticking = false;
+window.addEventListener('scroll', function() {
+    if (!ticking) {
+        window.requestAnimationFrame(function() {
+            // Update scroll-based animations here
+            ticking = false;
+        });
+        ticking = true;
+    }
+}, { passive: true });
+
+// Detect network conditions
+function updateForNetworkCondition() {
+    if (navigator.connection) {
+        const connection = navigator.connection;
+        if (connection.saveData || connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+            // Disable animations and effects for slow connections
+            document.body.classList.add('reduced-motion');
+            document.body.classList.add('save-data');
+        }
+    }
+}
+
+// Check network conditions on load and when they change
+if (navigator.connection) {
+    updateForNetworkCondition();
+    navigator.connection.addEventListener('change', updateForNetworkCondition);
+}
+
+// Optimize audio player for mobile
+const audioPlayer = document.querySelector('audio');
+if (audioPlayer) {
+    audioPlayer.addEventListener('play', function() {
+        // Request wake lock to prevent screen from sleeping during meditation
+        if ('wakeLock' in navigator) {
+            navigator.wakeLock.request('screen')
+                .catch(err => console.log('Wake Lock error:', err));
+        }
+    }, { passive: true });
+    
+    audioPlayer.addEventListener('pause', function() {
+        // Release wake lock when audio is paused
+        if ('wakeLock' in navigator && navigator.wakeLock) {
+            navigator.wakeLock.release()
+                .catch(err => console.log('Wake Lock release error:', err));
+        }
+    }, { passive: true });
+}
