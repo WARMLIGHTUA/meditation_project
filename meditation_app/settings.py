@@ -261,14 +261,13 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
         querystring_auth = False
         custom_domain = AWS_S3_CUSTOM_DOMAIN
         object_parameters = {
-            'CacheControl': 'max-age=86400,public,immutable',
-            'ContentEncoding': 'gzip'
+            'CacheControl': 'max-age=86400,public,immutable'
         }
     
     class MediaStorage(S3Boto3Storage):
         location = 'media'
         default_acl = 'public-read'
-        file_overwrite = False
+        file_overwrite = True
         querystring_auth = False
         custom_domain = AWS_S3_CUSTOM_DOMAIN
         object_parameters = {
