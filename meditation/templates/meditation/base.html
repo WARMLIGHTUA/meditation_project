@@ -11,6 +11,7 @@
     <!-- PWA Meta Tags -->
     <meta name="description" content="{% trans 'Meditation App - Your daily meditation companion' %}">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="{% trans 'Meditation' %}">
     
@@ -470,7 +471,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                navigator.serviceWorker.register("{% static 'meditation/sw.js' %}")
+                navigator.serviceWorker.register("{% static 'meditation/sw.js' %}", { scope: '/static/meditation/' })
                     .then(function(registration) {
                         console.log('ServiceWorker registration successful');
                     })

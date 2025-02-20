@@ -265,7 +265,8 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
         querystring_auth = False
         custom_domain = AWS_S3_CUSTOM_DOMAIN
         object_parameters = {
-            'CacheControl': 'max-age=86400,public,immutable'
+            'CacheControl': 'max-age=86400,public,immutable',
+            'Service-Worker-Allowed': '/'
         }
     
     class MediaStorage(S3Boto3Storage):
