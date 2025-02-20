@@ -7,8 +7,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-20 12:00+0000\n"
 "PO-Revision-Date: 2024-03-20 12:00+0000\n"
-"Last-Translator: Your Name <your.email@example.com>\n"
-"Language-Team: French <fr@li.org>\n"
+"Last-Translator: \n"
+"Language-Team: French\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgid "Created at"
 msgstr "Créé le"
 
 msgid "Rating"
-msgstr "Note"
+msgstr "Évaluation"
 
 msgid "Author"
 msgstr "Auteur"
@@ -171,7 +171,9 @@ msgid "Confirm Password"
 msgstr "Confirmez le mot de passe"
 
 msgid "Username can only contain letters, numbers, and @/./+/-/_ characters."
-msgstr "Le nom d'utilisateur ne peut contenir que des lettres, des chiffres et les caractères @/./+/-/_"
+msgstr ""
+"Le nom d'utilisateur ne peut contenir que des lettres, des chiffres et les "
+"caractères @/./+/-/_"
 
 msgid "This username is already taken."
 msgstr "Ce nom d'utilisateur est déjà pris."
@@ -234,7 +236,7 @@ msgid "Profile Information"
 msgstr "Informations du profil"
 
 msgid "Meditation App"
-msgstr "Application de Méditation"
+msgstr "Application de méditation"
 
 msgid "Tracks"
 msgstr "Méditations"
@@ -402,7 +404,7 @@ msgid "Search tracks..."
 msgstr "Rechercher des pistes..."
 
 msgid "Your browser does not support the audio element."
-msgstr "Votre navigateur ne prend pas en charge l'élément audio."
+msgstr "Votre navigateur ne supporte pas l'élément audio."
 
 msgid "Filter Tracks"
 msgstr "Filtrer les pistes"
@@ -413,8 +415,13 @@ msgstr "Min"
 msgid "Max"
 msgstr "Max"
 
+#, fuzzy
 msgid "All"
-msgstr "Tout"
+msgstr ""
+"#-#-#-#-#  django.po (1.0)  #-#-#-#-#\n"
+"Tout\n"
+"#-#-#-#-#  django.po (1.0)  #-#-#-#-#\n"
+"Tous"
 
 msgid "Close"
 msgstr "Fermer"
@@ -464,8 +471,12 @@ msgstr "Règles et conditions d'utilisation"
 msgid "1. General Provisions"
 msgstr "1. Dispositions générales"
 
-msgid "These rules govern the use of the Meditation App platform and establish the rights and obligations of users."
-msgstr "Ces règles régissent l'utilisation de la plateforme Meditation App et établissent les droits et obligations des utilisateurs."
+msgid ""
+"These rules govern the use of the Meditation App platform and establish the "
+"rights and obligations of users."
+msgstr ""
+"Ces règles régissent l'utilisation de la plateforme Meditation App et "
+"établissent les droits et obligations des utilisateurs."
 
 msgid "2. User Rights and Responsibilities"
 msgstr "2. Droits et responsabilités des utilisateurs"
@@ -473,23 +484,34 @@ msgstr "2. Droits et responsabilités des utilisateurs"
 msgid "Users must be at least 13 years old"
 msgstr "Les utilisateurs doivent avoir au moins 13 ans"
 
-msgid "Users are responsible for maintaining the confidentiality of their account"
-msgstr "Les utilisateurs sont responsables de la confidentialité de leur compte"
+msgid ""
+"Users are responsible for maintaining the confidentiality of their account"
+msgstr ""
+"Les utilisateurs sont responsables de la confidentialité de leur compte"
 
 msgid "Users must not share inappropriate or harmful content"
-msgstr "Les utilisateurs ne doivent pas partager de contenu inapproprié ou nuisible"
+msgstr ""
+"Les utilisateurs ne doivent pas partager de contenu inapproprié ou nuisible"
 
 msgid "3. Privacy Policy"
 msgstr "3. Politique de confidentialité"
 
-msgid "We respect your privacy and protect your personal data according to GDPR and other applicable laws."
-msgstr "Nous respectons votre vie privée et protégeons vos données personnelles conformément au RGPD et aux autres lois applicables."
+msgid ""
+"We respect your privacy and protect your personal data according to GDPR and "
+"other applicable laws."
+msgstr ""
+"Nous respectons votre vie privée et protégeons vos données personnelles "
+"conformément au RGPD et aux autres lois applicables."
 
 msgid "4. Content Usage"
 msgstr "4. Utilisation du contenu"
 
-msgid "All content on the platform is protected by copyright and may not be used without permission."
-msgstr "Tout le contenu de la plateforme est protégé par des droits d'auteur et ne peut être utilisé sans autorisation."
+msgid ""
+"All content on the platform is protected by copyright and may not be used "
+"without permission."
+msgstr ""
+"Tout le contenu de la plateforme est protégé par des droits d'auteur et ne "
+"peut être utilisé sans autorisation."
 
 msgid "5. Technical Support"
 msgstr "5. Support technique"
@@ -498,7 +520,7 @@ msgid "For technical support, please contact us at:"
 msgstr "Pour le support technique, veuillez nous contacter à :"
 
 msgid "Featured Content"
-msgstr "Contenu en Vedette"
+msgstr "Contenu en vedette"
 
 msgid "Edit Meditation Track"
 msgstr "Modifier la piste de méditation"
@@ -513,16 +535,16 @@ msgid "Public"
 msgstr "Public"
 
 msgid "Join Group"
-msgstr "Rejoindre le Groupe"
+msgstr "Rejoindre le groupe"
 
 msgid "No groups available at the moment."
 msgstr "Aucun groupe disponible pour le moment."
 
 msgid "Edit Group"
-msgstr "Modifier le Groupe"
+msgstr "Modifier le groupe"
 
 msgid "Create New Group"
-msgstr "Créer un Nouveau Groupe"
+msgstr "Créer un nouveau groupe"
 
 msgid "Save"
 msgstr "Enregistrer"
@@ -540,7 +562,7 @@ msgid "Date Added"
 msgstr "Date d'ajout"
 
 msgid "Technical Support"
-msgstr "Support Technique"
+msgstr "Assistance technique"
 
 msgid "Rules"
 msgstr "Règles"
@@ -555,16 +577,22 @@ msgid "Successfully registered!"
 msgstr "Inscription réussie !"
 
 msgid "Registration failed. Please check the form for errors."
-msgstr "L'inscription a échoué. Veuillez vérifier le formulaire pour les erreurs."
+msgstr ""
+"L'inscription a échoué. Veuillez vérifier le formulaire pour les erreurs."
 
 msgid "First name can only contain letters, spaces, hyphens and apostrophes."
-msgstr "Le prénom ne peut contenir que des lettres, des espaces, des traits d'union et des apostrophes."
+msgstr ""
+"Le prénom ne peut contenir que des lettres, des espaces, des traits d'union "
+"et des apostrophes."
 
 msgid "Last name can only contain letters, spaces, hyphens and apostrophes."
-msgstr "Le nom ne peut contenir que des lettres, des espaces, des traits d'union et des apostrophes."
+msgstr ""
+"Le nom ne peut contenir que des lettres, des espaces, des traits d'union et "
+"des apostrophes."
 
 msgid "Please enter a valid birth year between 1900 and current year."
-msgstr "Veuillez entrer une année de naissance valide entre 1900 et l'année en cours."
+msgstr ""
+"Veuillez entrer une année de naissance valide entre 1900 et l'année en cours."
 
 msgid "Please select your gender."
 msgstr "Veuillez sélectionner votre genre."
@@ -576,40 +604,17 @@ msgid "Registration failed. Please try again."
 msgstr "L'inscription a échoué. Veuillez réessayer."
 
 msgid "Meditation App - Your daily meditation companion"
-msgstr "Application de Méditation - Votre compagnon quotidien de méditation"
+msgstr ""
+"Application de méditation - Votre compagnon quotidien pour la méditation"
 
 msgid "Language"
 msgstr "Langue"
 
-msgid "Technical Support"
-msgstr "Support Technique"
-
-msgid "Rules"
-msgstr "Règles"
-
-msgid "All rights reserved"
-msgstr "Tous droits réservés"
-
-msgid "Featured Content"
-msgstr "Contenu en Vedette"
-
 msgid "No content available at the moment."
 msgstr "Aucun contenu disponible pour le moment."
 
-msgid "Watch Video"
-msgstr "Regarder la Vidéo"
-
-msgid "Share"
-msgstr "Partager"
-
-msgid "Comments"
-msgstr "Commentaires"
-
 msgid "Write your comment here..."
 msgstr "Écrivez votre commentaire ici..."
-
-msgid "Post Comment"
-msgstr "Publier le Commentaire"
 
 msgid "Delete"
 msgstr "Supprimer"
@@ -618,88 +623,34 @@ msgid "No comments yet."
 msgstr "Pas encore de commentaires."
 
 msgid "Add to Favorites"
-msgstr "Ajouter aux Favoris"
+msgstr "Ajouter aux favoris"
 
 msgid "Remove from Favorites"
-msgstr "Retirer des Favoris"
+msgstr "Retirer des favoris"
 
 msgid "minutes"
 msgstr "minutes"
 
-msgid "Your browser does not support the audio element."
-msgstr "Votre navigateur ne prend pas en charge l'élément audio."
-
 msgid "Audio Track"
-msgstr "Piste Audio"
+msgstr "Piste audio"
 
 msgid "Video"
 msgstr "Vidéo"
 
-msgid "Created"
-msgstr "Créé"
-
-msgid "Rating"
-msgstr "Note"
-
-msgid "Author"
-msgstr "Auteur"
-
-msgid "Duration"
-msgstr "Durée"
-
-msgid "Price"
-msgstr "Prix"
-
-msgid "Location"
-msgstr "Lieu"
-
-msgid "Date and Time"
-msgstr "Date et Heure"
-
-msgid "Maximum Participants"
-msgstr "Nombre Maximum de Participants"
-
-msgid "Join Group"
-msgstr "Rejoindre le Groupe"
-
 msgid "Leave Group"
-msgstr "Quitter le Groupe"
-
-msgid "Private Group"
-msgstr "Groupe Privé"
+msgstr "Quitter le groupe"
 
 msgid "Public Group"
-msgstr "Groupe Public"
+msgstr "Groupe public"
 
 msgid "Group Members"
-msgstr "Membres du Groupe"
-
-msgid "Create New Group"
-msgstr "Créer un Nouveau Groupe"
-
-msgid "Edit Group"
-msgstr "Modifier le Groupe"
+msgstr "Membres du groupe"
 
 msgid "Delete Group"
-msgstr "Supprimer le Groupe"
+msgstr "Supprimer le groupe"
 
 msgid "Confirm Delete"
-msgstr "Confirmer la Suppression"
-
-msgid "Cancel"
-msgstr "Annuler"
-
-msgid "Save"
-msgstr "Enregistrer"
-
-msgid "Apply"
-msgstr "Appliquer"
-
-msgid "Reset"
-msgstr "Réinitialiser"
-
-msgid "Close"
-msgstr "Fermer"
+msgstr "Confirmer la suppression"
 
 msgid "Search..."
 msgstr "Rechercher..."
@@ -711,10 +662,10 @@ msgid "Sort by"
 msgstr "Trier par"
 
 msgid "Ascending"
-msgstr "Croissant"
+msgstr "Ascendant"
 
 msgid "Descending"
-msgstr "Décroissant"
+msgstr "Descendant"
 
 msgid "Date"
 msgstr "Date"
@@ -726,7 +677,4 @@ msgid "Popular"
 msgstr "Populaire"
 
 msgid "Latest"
-msgstr "Plus Récent"
-
-msgid "All"
-msgstr "Tout" 
+msgstr "Les plus récents"

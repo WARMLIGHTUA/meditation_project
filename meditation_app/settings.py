@@ -83,6 +83,7 @@ sentry_sdk.init(
 
 # Application definition
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -221,6 +222,7 @@ USE_TZ = True
 LANGUAGES = [
     ('uk', 'Українська'),
     ('en', 'English'),
+    ('fr', 'Français'),
 ]
 
 LOCALE_PATHS = [
@@ -248,6 +250,8 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': 'max-age=86400',
+        'Access-Control-Allow-Origin': '*',
+        'Service-Worker-Allowed': '/'
     }
     
     # Налаштування для статичних та медіа файлів
