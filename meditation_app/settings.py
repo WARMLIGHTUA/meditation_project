@@ -251,7 +251,6 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': 'max-age=0, no-cache, no-store',
         'Access-Control-Allow-Origin': '*',
-        'Service-Worker-Allowed': '/'
     }
     
     # Налаштування для статичних та медіа файлів
@@ -265,8 +264,7 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
         querystring_auth = False
         custom_domain = AWS_S3_CUSTOM_DOMAIN
         object_parameters = {
-            'CacheControl': 'max-age=86400,public,immutable',
-            'Service-Worker-Allowed': '/'
+            'CacheControl': 'max-age=86400,public,immutable'
         }
     
     class MediaStorage(S3Boto3Storage):
