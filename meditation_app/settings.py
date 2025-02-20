@@ -249,7 +249,7 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
     AWS_S3_VERIFY = True
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',
+        'CacheControl': 'max-age=0, no-cache, no-store',
         'Access-Control-Allow-Origin': '*',
         'Service-Worker-Allowed': '/'
     }
@@ -275,7 +275,7 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
         querystring_auth = False
         custom_domain = AWS_S3_CUSTOM_DOMAIN
         object_parameters = {
-            'CacheControl': 'max-age=86400,public'
+            'CacheControl': 'max-age=0, no-cache, no-store'
         }
     
     # Використовуємо окремі класи для зберігання

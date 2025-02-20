@@ -1,4 +1,5 @@
 from googletrans import Translator
+import logging
 
 translator = Translator()
 
@@ -6,8 +7,12 @@ def translate_text(text, src_lang, dest_lang):
     """Перекладає текст з мови src_lang до dest_lang."""
     if not text:
         return ''
-    result = translator.translate(text, src=src_lang, dest=dest_lang)
-    return result.text
+    try:
+        result = translator.translate(text, src=src_lang, dest=dest_lang)
+        return result.text
+    except Exception as e:
+        logging.error(f"Translation error: {e}")
+        return text
 
 
 def auto_translate_instance(instance, fields, src_lang='uk'):
@@ -18,7 +23,7 @@ def auto_translate_instance(instance, fields, src_lang='uk'):
         for field in fields:
             translated_field = f"{field}_{lang}"
             current_value = getattr(instance, translated_field, None)
-            if not current_value:
+            if not current_value or not current_value.strip():
                 default_value = getattr(instance, field, '')
                 if default_value:
                     translated_value = translate_text(default_value, src_lang, lang)
