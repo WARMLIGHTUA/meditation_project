@@ -103,7 +103,6 @@
         
         .content-wrapper {
             position: relative;
-            min-height: calc(100vh - var(--nav-height));
             background-color: rgba(var(--content-bg-rgb), 0.3);
             backdrop-filter: blur(2px);
             -webkit-backdrop-filter: blur(2px);
@@ -162,7 +161,7 @@
             background-color: var(--nav-bg);
             color: var(--nav-text);
             padding: 1rem 0;
-            position: relative;
+            margin-top: auto;
             z-index: 2;
         }
 
@@ -271,6 +270,26 @@
             background-color: var(--card-bg) !important;
             color: var(--text-color) !important;
             border-color: var(--border-color) !important;
+        }
+
+        /* Sticky footer container setup */
+        html, body {
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-wrapper {
+            flex: 1;
+        }
+        .wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
     </style>
     
@@ -398,52 +417,54 @@
         </div>
     </nav>
 
-    <!-- Content Wrapper -->
-    <div class="content-wrapper">
-        {% if messages %}
-        <div class="container mt-3">
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        </div>
-        {% endif %}
-
-        <div class="container mt-4">
-            {% block content %}
-            {% endblock %}
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-links">
-                <div class="social-links">
-                    <a href="https://instagram.com" target="_blank" title="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://facebook.com" target="_blank" title="Facebook">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="mailto:support@meditation.app" title="{% trans 'Technical Support' %}">
-                        <i class="fas fa-headset"></i>
-                    </a>
-                    <a href="{% url 'meditation:rules' %}" title="{% trans 'Rules' %}">
-                        <i class="fas fa-book"></i>
-                    </a>
-                </div>
+    <div class="wrapper">
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            {% if messages %}
+            <div class="container mt-3">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
             </div>
-            <p class="footer-text">&copy; {% now "Y" %} Meditation App. {% trans "All rights reserved" %}.</p>
+            {% endif %}
+
+            <div class="container mt-4">
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
-    </footer>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-links">
+                    <div class="social-links">
+                        <a href="https://instagram.com" target="_blank" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com" target="_blank" title="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="mailto:support@meditation.app" title="{% trans 'Technical Support' %}">
+                            <i class="fas fa-headset"></i>
+                        </a>
+                        <a href="{% url 'meditation:rules' %}" title="{% trans 'Rules' %}">
+                            <i class="fas fa-book"></i>
+                        </a>
+                    </div>
+                </div>
+                <p class="footer-text">&copy; {% now "Y" %} Meditation App. {% trans "All rights reserved" %}.</p>
+            </div>
+        </footer>
+    </div>
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Custom JS -->
-    <script src="{% static 'meditation/js/main.js' %}?v=1"></script>
+    <script src="{% static 'meditation/js/main.js' %}?v=2"></script>
     
     <!-- Service Worker Registration -->
     <script>
@@ -459,48 +480,5 @@
             });
         }
     </script>
-    
-    <!-- Theme Switcher Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeButton = document.querySelector('.theme-switcher');
-
-            function updateToggleButton() {
-                if (themeButton) {
-                    const currentTheme = document.documentElement.getAttribute('data-theme');
-                    if (currentTheme === 'light') {
-                        // Якщо світла тема, показуємо жовте сонце
-                        themeButton.innerHTML = '<span class="theme-icon"><i class="fas fa-sun" style="color: yellow;"></i></span>';
-                    } else {
-                        // Якщо темна тема, показуємо місяць
-                        themeButton.innerHTML = '<span class="theme-icon"><i class="fas fa-moon"></i></span>';
-                    }
-                }
-            }
-
-            function toggleTheme() {
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                console.log('Current theme:', currentTheme, '-> Switching to:', newTheme);
-                document.documentElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                updateToggleButton();
-            }
-
-            if (themeButton) {
-                themeButton.addEventListener('click', toggleTheme);
-            }
-
-            // При завантаженні сторінки встановлюємо збережену тему, якщо вона є
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            }
-            
-            updateToggleButton();
-        });
-    </script>
-    
-    {% block extra_js %}{% endblock %}
 </body>
 </html> 
