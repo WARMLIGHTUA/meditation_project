@@ -5,8 +5,7 @@
         ],
         "AllowedMethods": [
             "GET",
-            "HEAD",
-            "OPTIONS"
+            "HEAD"
         ],
         "AllowedOrigins": [
             "https://meditationproject-production.up.railway.app"
