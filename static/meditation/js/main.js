@@ -291,9 +291,7 @@ function handleMobileBackground() {
 // Оптимізація для мобільних пристроїв
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        const swUrl = `https://${window.location.hostname}/sw.js`;
-        
-        navigator.serviceWorker.register(swUrl, { 
+        navigator.serviceWorker.register('/sw.js', { 
             scope: '/',
             updateViaCache: 'none'
         })
