@@ -21,15 +21,15 @@ from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from django.views.i18n import set_language
 from django.views.generic.base import RedirectView
-from django.views.generic import TemplateView
+from django.views.static import serve
 
 urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'meditation/images/favicon-32x32.png', permanent=True)),
     path('setlang/', set_language, name='set_language'),
-    path('sw.js', TemplateView.as_view(
-        template_name='sw.js',
-        content_type='application/javascript'
-    ), name='sw.js'),
+    path('sw.js', serve, {
+        'document_root': settings.STATIC_ROOT,
+        'path': 'sw.js'
+    }),
 ]
 
 urlpatterns += i18n_patterns(
