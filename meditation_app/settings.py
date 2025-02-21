@@ -264,7 +264,10 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
         querystring_auth = False
         custom_domain = AWS_S3_CUSTOM_DOMAIN
         object_parameters = {
-            'CacheControl': 'max-age=86400,public,immutable'
+            'CacheControl': 'max-age=86400,public,immutable',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
         }
     
     class MediaStorage(S3Boto3Storage):
@@ -274,12 +277,28 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
         querystring_auth = False
         custom_domain = AWS_S3_CUSTOM_DOMAIN
         object_parameters = {
-            'CacheControl': 'max-age=0, no-cache, no-store'
+            'CacheControl': 'max-age=0, no-cache, no-store',
+            'Access-Control-Allow-Origin': '*'
+        }
+        
+    class ServiceWorkerStorage(S3Boto3Storage):
+        location = ''  # корінь бакета
+        default_acl = 'public-read'
+        file_overwrite = True
+        querystring_auth = False
+        custom_domain = AWS_S3_CUSTOM_DOMAIN
+        object_parameters = {
+            'CacheControl': 'no-cache, no-store, must-revalidate',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+            'Content-Type': 'application/javascript'
         }
     
     # Використовуємо окремі класи для зберігання
     STATICFILES_STORAGE = 'meditation_app.settings.StaticStorage'
     DEFAULT_FILE_STORAGE = 'meditation_app.settings.MediaStorage'
+    SERVICE_WORKER_STORAGE = 'meditation_app.settings.ServiceWorkerStorage'
     
     # URL для статичних та медіа файлів
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'

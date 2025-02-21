@@ -291,9 +291,12 @@ function handleMobileBackground() {
 // Оптимізація для мобільних пристроїв
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        const swUrl = `${window.location.origin}/sw.js`;
+        const swUrl = `https://${window.location.hostname}/sw.js`;
         
-        navigator.serviceWorker.register(swUrl, { scope: '/' })
+        navigator.serviceWorker.register(swUrl, { 
+            scope: '/',
+            updateViaCache: 'none'
+        })
         .then(registration => {
             console.log('ServiceWorker registration successful with scope:', registration.scope);
             
