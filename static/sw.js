@@ -1,5 +1,5 @@
-const CACHE_NAME = 'meditation-app-v1';
-const DYNAMIC_CACHE = 'meditation-dynamic-v1';
+const CACHE_NAME = 'meditation-app-v2';
+const DYNAMIC_CACHE = 'meditation-dynamic-v2';
 
 // Ресурси для попереднього кешування
 const PRECACHE_URLS = [
@@ -20,11 +20,11 @@ self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
-                console.log('Opened cache');
+                console.log('Відкрито кеш для попереднього завантаження');
                 return cache.addAll(PRECACHE_URLS);
             })
             .catch(error => {
-                console.error('Pre-caching failed:', error);
+                console.error('Помилка попереднього кешування:', error);
             })
     );
     self.skipWaiting();
@@ -33,48 +33,87 @@ self.addEventListener('install', event => {
 // Активація Service Worker
 self.addEventListener('activate', event => {
     event.waitUntil(
-        caches.keys().then(cacheNames => {
-            return Promise.all(
-                cacheNames.map(cacheName => {
-                    if (cacheName !== CACHE_NAME && cacheName !== DYNAMIC_CACHE) {
-                        console.log('Deleting old cache:', cacheName);
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        })
+        Promise.all([
+            caches.keys().then(cacheNames => {
+                return Promise.all(
+                    cacheNames.map(cacheName => {
+                        if (cacheName !== CACHE_NAME && cacheName !== DYNAMIC_CACHE) {
+                            console.log('Видалення старого кешу:', cacheName);
+                            return caches.delete(cacheName);
+                        }
+                    })
+                );
+            }),
+            // Очищення динамічного кешу при активації
+            caches.open(DYNAMIC_CACHE).then(cache => {
+                return cache.keys().then(requests => {
+                    return Promise.all(
+                        requests.map(request => {
+                            // Перевіряємо час кешування
+                            return cache.match(request).then(response => {
+                                if (response) {
+                                    const cachedTime = new Date(response.headers.get('sw-cache-time'));
+                                    const now = new Date();
+                                    // Видаляємо кеш старший за 1 годину
+                                    if ((now - cachedTime) > 3600000) {
+                                        return cache.delete(request);
+                                    }
+                                }
+                            });
+                        })
+                    );
+                });
+            })
+        ])
     );
     self.clients.claim();
 });
 
 // Перехоплення запитів
 self.addEventListener('fetch', event => {
+    const request = event.request;
+    const url = new URL(request.url);
+
     // Пропускаємо запити до API та адмін-панелі
-    if (event.request.url.includes('/admin/') || 
-        event.request.url.includes('/api/')) {
+    if (url.pathname.startsWith('/admin/') || 
+        url.pathname.startsWith('/api/')) {
         return;
     }
 
-    // Стратегія для HTML-сторінок: Network First
-    if (event.request.mode === 'navigate' || 
-        (event.request.method === 'GET' && 
-         event.request.headers.get('accept').includes('text/html'))) {
+    // Додаємо перевірку для запитів зміни мови
+    if (request.method === 'POST' && url.pathname.includes('/i18n/setlang/')) {
+        return;
+    }
+
+    // Стратегія для HTML-сторінок: Network First з розумним кешуванням
+    if (request.mode === 'navigate' || 
+        (request.method === 'GET' && 
+         request.headers.get('accept').includes('text/html'))) {
         event.respondWith(
-            fetch(event.request)
+            fetch(request)
                 .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
                     const clonedResponse = response.clone();
                     caches.open(DYNAMIC_CACHE).then(cache => {
-                        cache.put(event.request, clonedResponse);
+                        // Додаємо час кешування
+                        const responseWithTime = new Response(clonedResponse.body, {
+                            headers: new Headers({
+                                ...Object.fromEntries(clonedResponse.headers.entries()),
+                                'sw-cache-time': new Date().toISOString()
+                            })
+                        });
+                        cache.put(request, responseWithTime);
                     });
                     return response;
                 })
                 .catch(() => {
-                    return caches.match(event.request)
+                    return caches.match(request)
                         .then(response => {
                             if (response) {
                                 return response;
                             }
-                            // Якщо сторінка не знайдена в кеші, повертаємо офлайн-сторінку
                             return caches.match('/offline.html');
                         });
                 })
@@ -82,38 +121,53 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    // Стратегія для статичних ресурсів: Cache First
-    if (event.request.url.match(/\.(css|js|png|jpg|jpeg|gif|svg|ico|woff2?)$/)) {
+    // Стратегія для статичних ресурсів: Cache First з оновленням
+    if (request.url.match(/\.(css|js|png|jpg|jpeg|gif|svg|ico|woff2?)$/)) {
         event.respondWith(
-            caches.match(event.request)
-                .then(response => {
-                    if (response) {
-                        return response;
-                    }
-                    return fetch(event.request).then(response => {
-                        const clonedResponse = response.clone();
-                        caches.open(DYNAMIC_CACHE).then(cache => {
-                            cache.put(event.request, clonedResponse);
-                        });
-                        return response;
+            caches.match(request)
+                .then(cachedResponse => {
+                    const fetchPromise = fetch(request).then(networkResponse => {
+                        if (networkResponse.ok) {
+                            const clonedResponse = networkResponse.clone();
+                            caches.open(DYNAMIC_CACHE).then(cache => {
+                                cache.put(request, clonedResponse);
+                            });
+                        }
+                        return networkResponse;
                     });
+
+                    return cachedResponse || fetchPromise;
                 })
         );
         return;
     }
 
-    // Стратегія для інших запитів: Network First
+    // Стратегія для інших запитів: Network First з таймаутом
     event.respondWith(
-        fetch(event.request)
-            .then(response => {
-                const clonedResponse = response.clone();
-                caches.open(DYNAMIC_CACHE).then(cache => {
-                    cache.put(event.request, clonedResponse);
-                });
-                return response;
+        Promise.race([
+            fetch(request)
+                .then(response => {
+                    const clonedResponse = response.clone();
+                    caches.open(DYNAMIC_CACHE).then(cache => {
+                        cache.put(request, clonedResponse);
+                    });
+                    return response;
+                }),
+            new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    caches.match(request)
+                        .then(response => {
+                            if (response) {
+                                resolve(response);
+                            } else {
+                                reject(new Error('No cached response found'));
+                            }
+                        })
+                        .catch(reject);
+                }, 3000); // 3 секунди таймаут
             })
-            .catch(() => {
-                return caches.match(event.request);
-            })
+        ]).catch(() => {
+            return caches.match(request);
+        })
     );
 }); 
