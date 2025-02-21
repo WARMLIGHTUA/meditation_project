@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-title" content="{% trans 'Meditation' %}">
     
     <!-- PWA Manifest -->
-    <link rel="manifest" href="{% static 'meditation/manifest.json' %}">
+    <link rel="manifest" href="/manifest.json">
     
     <!-- PWA Icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://placehold.co/32x32?text=M">
@@ -471,9 +471,9 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                navigator.serviceWorker.register("{% static 'meditation/sw.js' %}", { scope: '/static/meditation/' })
+                navigator.serviceWorker.register('/sw.js')
                     .then(function(registration) {
-                        console.log('ServiceWorker registration successful');
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
                     })
                     .catch(function(err) {
                         console.log('ServiceWorker registration failed: ', err);

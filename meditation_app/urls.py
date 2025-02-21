@@ -42,10 +42,27 @@ def serve_sw(request):
         except ClientError as e:
             return HttpResponse(status=404)
 
+def serve_manifest(request):
+    if settings.DEBUG:
+        return serve(request, 'meditation/manifest.json', document_root=settings.STATIC_ROOT)
+    else:
+        try:
+            s3 = boto3.client('s3',
+                aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+                region_name=settings.AWS_S3_REGION_NAME
+            )
+            response = s3.get_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key='static/meditation/manifest.json')
+            content = response['Body'].read().decode('utf-8')
+            return HttpResponse(content, content_type='application/json')
+        except ClientError as e:
+            return HttpResponse(status=404)
+
 urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'meditation/images/favicon-32x32.png', permanent=True)),
     path('setlang/', set_language, name='set_language'),
     path('sw.js', serve_sw, name='service-worker'),
+    path('manifest.json', serve_manifest, name='manifest'),
 ]
 
 urlpatterns += i18n_patterns(
