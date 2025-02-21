@@ -1,0 +1,22 @@
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "GET",
+            "HEAD",
+            "OPTIONS"
+        ],
+        "AllowedOrigins": [
+            "https://meditationproject-production.up.railway.app"
+        ],
+        "ExposeHeaders": [
+            "ETag",
+            "Content-Length",
+            "Content-Type",
+            "Content-Disposition"
+        ],
+        "MaxAgeSeconds": 3600
+    }
+] 
