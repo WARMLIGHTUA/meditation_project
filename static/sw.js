@@ -1,93 +1,117 @@
 const CACHE_NAME = 'meditation-app-v1';
-const STATIC_CACHE_URLS = [
+const DYNAMIC_CACHE = 'meditation-dynamic-v1';
+
+// Ресурси для попереднього кешування
+const PRECACHE_URLS = [
+    '/',
+    '/uk/',
+    '/en/',
+    '/fr/',
+    '/manifest.json',
     '/static/meditation/css/styles.css',
     '/static/meditation/js/main.js',
-    '/static/meditation/manifest.json',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
-    '/manifest.json'
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'
 ];
 
+// Встановлення Service Worker
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
-            .then(cache => cache.addAll(STATIC_CACHE_URLS))
-            .then(() => self.skipWaiting())
+            .then(cache => {
+                console.log('Opened cache');
+                return cache.addAll(PRECACHE_URLS);
+            })
+            .catch(error => {
+                console.error('Pre-caching failed:', error);
+            })
     );
+    self.skipWaiting();
 });
 
+// Активація Service Worker
 self.addEventListener('activate', event => {
     event.waitUntil(
-        caches.keys()
-            .then(cacheNames => {
-                return Promise.all(
-                    cacheNames
-                        .filter(cacheName => cacheName !== CACHE_NAME)
-                        .map(cacheName => caches.delete(cacheName))
-                );
-            })
-            .then(() => self.clients.claim())
+        caches.keys().then(cacheNames => {
+            return Promise.all(
+                cacheNames.map(cacheName => {
+                    if (cacheName !== CACHE_NAME && cacheName !== DYNAMIC_CACHE) {
+                        console.log('Deleting old cache:', cacheName);
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
+        })
     );
+    self.clients.claim();
 });
 
+// Перехоплення запитів
 self.addEventListener('fetch', event => {
-    // Ігноруємо запити до API та інші динамічні запити
-    if (event.request.url.includes('/api/') || 
-        event.request.url.includes('/admin/') ||
-        event.request.method !== 'GET') {
+    // Пропускаємо запити до API та адмін-панелі
+    if (event.request.url.includes('/admin/') || 
+        event.request.url.includes('/api/')) {
         return;
     }
 
-    // Перевіряємо, чи це запит на статичні файли
-    if (event.request.url.includes('/static/') || 
-        event.request.url.includes('/manifest.json') ||
-        event.request.url.includes('s3.eu-north-1.amazonaws.com')) {
+    // Стратегія для HTML-сторінок: Network First
+    if (event.request.mode === 'navigate' || 
+        (event.request.method === 'GET' && 
+         event.request.headers.get('accept').includes('text/html'))) {
         event.respondWith(
-            caches.match(event.request)
+            fetch(event.request)
                 .then(response => {
-                    // Повертаємо з кешу, якщо є
-                    if (response) {
-                        return response;
-                    }
-                    
-                    // Якщо немає в кеші, завантажуємо з мережі
-                    return fetch(event.request.clone())
-                        .then(networkResponse => {
-                            if (!networkResponse || networkResponse.status !== 200) {
-                                return networkResponse;
+                    const clonedResponse = response.clone();
+                    caches.open(DYNAMIC_CACHE).then(cache => {
+                        cache.put(event.request, clonedResponse);
+                    });
+                    return response;
+                })
+                .catch(() => {
+                    return caches.match(event.request)
+                        .then(response => {
+                            if (response) {
+                                return response;
                             }
-                            
-                            // Кешуємо новий ресурс
-                            const responseToCache = networkResponse.clone();
-                            caches.open(CACHE_NAME)
-                                .then(cache => {
-                                    const headers = new Headers(responseToCache.headers);
-                                    headers.append('sw-fetched-on', new Date().toISOString());
-                                    return cache.put(event.request, new Response(
-                                        responseToCache.body,
-                                        {
-                                            status: responseToCache.status,
-                                            statusText: responseToCache.statusText,
-                                            headers: headers
-                                        }
-                                    ));
-                                });
-                                
-                            return networkResponse;
-                        })
-                        .catch(() => {
-                            // Якщо немає з'єднання, повертаємо offline fallback
-                            return caches.match('/static/meditation/offline.html');
+                            // Якщо сторінка не знайдена в кеші, повертаємо офлайн-сторінку
+                            return caches.match('/offline.html');
                         });
                 })
         );
         return;
     }
 
-    // Для всіх інших запитів використовуємо стратегію "Network First"
+    // Стратегія для статичних ресурсів: Cache First
+    if (event.request.url.match(/\.(css|js|png|jpg|jpeg|gif|svg|ico|woff2?)$/)) {
+        event.respondWith(
+            caches.match(event.request)
+                .then(response => {
+                    if (response) {
+                        return response;
+                    }
+                    return fetch(event.request).then(response => {
+                        const clonedResponse = response.clone();
+                        caches.open(DYNAMIC_CACHE).then(cache => {
+                            cache.put(event.request, clonedResponse);
+                        });
+                        return response;
+                    });
+                })
+        );
+        return;
+    }
+
+    // Стратегія для інших запитів: Network First
     event.respondWith(
         fetch(event.request)
+            .then(response => {
+                const clonedResponse = response.clone();
+                caches.open(DYNAMIC_CACHE).then(cache => {
+                    cache.put(event.request, clonedResponse);
+                });
+                return response;
+            })
             .catch(() => {
                 return caches.match(event.request);
             })
