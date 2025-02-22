@@ -249,8 +249,8 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
     AWS_S3_VERIFY = True
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=0, no-cache, no-store',
-        'Access-Control-Allow-Origin': '*',
+        'CacheControl': 'max-age=86400,public',
+        'ACL': 'public-read'
     }
     
     # Налаштування для статичних та медіа файлів
@@ -264,21 +264,19 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
         querystring_auth = False
         custom_domain = AWS_S3_CUSTOM_DOMAIN
         object_parameters = {
-            'CacheControl': 'max-age=86400,public,immutable',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, OPTIONS',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+            'CacheControl': 'max-age=86400,public',
+            'ACL': 'public-read'
         }
     
     class MediaStorage(S3Boto3Storage):
         location = 'media'
         default_acl = 'public-read'
-        file_overwrite = True
+        file_overwrite = False
         querystring_auth = False
         custom_domain = AWS_S3_CUSTOM_DOMAIN
         object_parameters = {
-            'CacheControl': 'max-age=0, no-cache, no-store',
-            'Access-Control-Allow-Origin': '*'
+            'CacheControl': 'max-age=86400,public',
+            'ACL': 'public-read'
         }
         
     class ServiceWorkerStorage(S3Boto3Storage):
@@ -289,10 +287,8 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
         custom_domain = AWS_S3_CUSTOM_DOMAIN
         object_parameters = {
             'CacheControl': 'no-cache, no-store, must-revalidate',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, OPTIONS',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-            'Content-Type': 'application/javascript'
+            'ACL': 'public-read',
+            'ContentType': 'application/javascript'
         }
     
     # Використовуємо окремі класи для зберігання
