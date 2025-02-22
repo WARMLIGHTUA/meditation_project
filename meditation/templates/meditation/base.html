@@ -43,6 +43,7 @@
     
     <!-- Custom CSS -->
     <link href="{% static 'meditation/css/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'meditation/css/animations.css' %}" rel="stylesheet">
     
     <style>
         :root {
@@ -420,7 +421,7 @@
 
     <div class="wrapper">
         <!-- Content Wrapper -->
-        <div class="content-wrapper">
+        <div class="content-wrapper page-transition">
             {% if messages %}
             <div class="container mt-3">
                 {% for message in messages %}
@@ -465,7 +466,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Custom JS -->
-    <script src="{% static 'meditation/js/main.js' %}?v=2"></script>
+    <script src="{% static 'meditation/js/main.js' %}"></script>
     
     <!-- Service Worker Registration -->
     <script>
@@ -480,6 +481,50 @@
                     });
             });
         }
+    </script>
+    
+    <!-- Custom JS -->
+    <script>
+    // Обробка переходів між сторінками
+    document.addEventListener('DOMContentLoaded', function() {
+        // Додаємо клас для анімації появи сторінки
+        document.querySelector('.content-wrapper').classList.add('page-transition');
+        
+        // Обробка кліків по посиланнях
+        document.querySelectorAll('a:not([target="_blank"]):not([href^="#"]):not([href^="mailto:"])').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.hostname === window.location.hostname) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    
+                    // Додаємо анімацію виходу
+                    document.querySelector('.content-wrapper').classList.add('page-exit');
+                    
+                    // Переходимо на нову сторінку після завершення анімації
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 300);
+                }
+            });
+        });
+        
+        // Обробка кнопок форм
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function() {
+                document.querySelector('.content-wrapper').classList.add('page-exit');
+            });
+        });
+        
+        // Додаємо класи для анімації іконок
+        document.querySelectorAll('.social-links a i').forEach(icon => {
+            icon.classList.add('icon-animate');
+        });
+        
+        // Додаємо класи для анімації зображень
+        document.querySelectorAll('.card img').forEach(img => {
+            img.classList.add('img-hover');
+        });
+    });
     </script>
 </body>
 </html> 
