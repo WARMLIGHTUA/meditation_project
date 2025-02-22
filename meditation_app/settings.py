@@ -113,6 +113,13 @@ MIDDLEWARE = [
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 WHITENOISE_ALLOW_ALL_ORIGINS = True
+WHITENOISE_STATIC_PREFIX = '/static/'
+
+# Налаштування для адмін-панелі
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_SITE_HEADER = "Meditation App Administration"
+ADMIN_SITE_TITLE = "Meditation App Admin"
+ADMIN_INDEX_TITLE = "Welcome to Meditation App Admin"
 
 # Безпека
 if not DEBUG:
@@ -302,14 +309,28 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
             'ACL': 'public-read'
         }
     
+    # Додаємо окремий клас для адмін-файлів
+    class AdminStorage(S3Boto3Storage):
+        location = 'static/admin'
+        default_acl = 'public-read'
+        file_overwrite = True
+        querystring_auth = False
+        custom_domain = AWS_S3_CUSTOM_DOMAIN
+        object_parameters = {
+            'CacheControl': 'max-age=86400,public',
+            'ACL': 'public-read'
+        }
+    
     # Використовуємо окремі класи для зберігання
     STATICFILES_STORAGE = 'meditation_app.settings.StaticStorage'
+    ADMIN_STORAGE = 'meditation_app.settings.AdminStorage'
     DEFAULT_FILE_STORAGE = 'meditation_app.settings.MediaStorage'
     SERVICE_WORKER_STORAGE = 'meditation_app.settings.ServiceWorkerStorage'
     ICON_STORAGE = 'meditation_app.settings.IconStorage'
     
     # URL для статичних та медіа файлів
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+    ADMIN_MEDIA_PREFIX = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/admin/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
     FAVICON_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/meditation/icons/favicon.ico'
 else:
