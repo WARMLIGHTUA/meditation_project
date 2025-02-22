@@ -74,14 +74,27 @@ self.addEventListener('fetch', event => {
     const request = event.request;
     const url = new URL(request.url);
 
-    // Пропускаємо запити до API та адмін-панелі
+    // Пропускаємо всі запити до адмін-панелі
     if (url.pathname.startsWith('/admin/') || 
-        url.pathname.startsWith('/api/')) {
+        url.pathname.includes('/admin/') ||
+        url.pathname.startsWith('/uk/admin/') ||
+        url.pathname.startsWith('/en/admin/') ||
+        url.pathname.startsWith('/fr/admin/')) {
+        return;
+    }
+
+    // Пропускаємо запити до API
+    if (url.pathname.startsWith('/api/')) {
+        return;
+    }
+
+    // Пропускаємо POST-запити
+    if (request.method !== 'GET') {
         return;
     }
 
     // Додаємо перевірку для запитів зміни мови
-    if (request.method === 'POST' && url.pathname.includes('/i18n/setlang/')) {
+    if (url.pathname.includes('/i18n/setlang/')) {
         return;
     }
 
