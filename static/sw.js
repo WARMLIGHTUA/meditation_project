@@ -43,26 +43,6 @@ self.addEventListener('activate', event => {
                         }
                     })
                 );
-            }),
-            // Очищення динамічного кешу при активації
-            caches.open(DYNAMIC_CACHE).then(cache => {
-                return cache.keys().then(requests => {
-                    return Promise.all(
-                        requests.map(request => {
-                            // Перевіряємо час кешування
-                            return cache.match(request).then(response => {
-                                if (response) {
-                                    const cachedTime = new Date(response.headers.get('sw-cache-time'));
-                                    const now = new Date();
-                                    // Видаляємо кеш старший за 1 годину
-                                    if ((now - cachedTime) > 3600000) {
-                                        return cache.delete(request);
-                                    }
-                                }
-                            });
-                        })
-                    );
-                });
             })
         ])
     );
@@ -88,8 +68,13 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    // Пропускаємо POST-запити
+    // Пропускаємо POST-запити та інші не-GET запити
     if (request.method !== 'GET') {
+        return;
+    }
+
+    // Пропускаємо запити для events
+    if (url.pathname.includes('/events/')) {
         return;
     }
 
@@ -98,7 +83,7 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    // Стратегія для HTML-сторінок: Network First з розумним кешуванням
+    // Стратегія для HTML-сторінок: Network First
     if (request.mode === 'navigate' || 
         (request.method === 'GET' && 
          request.headers.get('accept').includes('text/html'))) {
@@ -109,78 +94,85 @@ self.addEventListener('fetch', event => {
                         throw new Error('Network response was not ok');
                     }
                     const clonedResponse = response.clone();
-                    caches.open(DYNAMIC_CACHE).then(cache => {
-                        // Додаємо час кешування
-                        const responseWithTime = new Response(clonedResponse.body, {
-                            headers: new Headers({
-                                ...Object.fromEntries(clonedResponse.headers.entries()),
-                                'sw-cache-time': new Date().toISOString()
-                            })
+                    caches.open(DYNAMIC_CACHE)
+                        .then(cache => {
+                            cache.put(request, clonedResponse);
+                        })
+                        .catch(error => {
+                            console.error('Помилка кешування:', error);
                         });
-                        cache.put(request, responseWithTime);
-                    });
                     return response;
                 })
                 .catch(() => {
                     return caches.match(request)
                         .then(response => {
-                            if (response) {
-                                return response;
-                            }
-                            return caches.match('/offline.html');
+                            return response || caches.match('/offline.html');
                         });
                 })
         );
         return;
     }
 
-    // Стратегія для статичних ресурсів: Cache First з оновленням
+    // Стратегія для статичних ресурсів: Cache First
     if (request.url.match(/\.(css|js|png|jpg|jpeg|gif|svg|ico|woff2?)$/)) {
         event.respondWith(
             caches.match(request)
                 .then(cachedResponse => {
-                    const fetchPromise = fetch(request).then(networkResponse => {
-                        if (networkResponse.ok) {
+                    if (cachedResponse) {
+                        return cachedResponse;
+                    }
+                    return fetch(request)
+                        .then(networkResponse => {
+                            if (!networkResponse.ok) {
+                                throw new Error('Network response was not ok');
+                            }
                             const clonedResponse = networkResponse.clone();
-                            caches.open(DYNAMIC_CACHE).then(cache => {
-                                cache.put(request, clonedResponse);
-                            });
-                        }
-                        return networkResponse;
+                            caches.open(DYNAMIC_CACHE)
+                                .then(cache => {
+                                    cache.put(request, clonedResponse);
+                                })
+                                .catch(error => {
+                                    console.error('Помилка кешування:', error);
+                                });
+                            return networkResponse;
+                        });
+                })
+                .catch(error => {
+                    console.error('Помилка отримання ресурсу:', error);
+                    return new Response('Resource not available', {
+                        status: 404,
+                        statusText: 'Not Found'
                     });
-
-                    return cachedResponse || fetchPromise;
                 })
         );
         return;
     }
 
-    // Стратегія для інших запитів: Network First з таймаутом
+    // Стратегія для інших запитів: Network First
     event.respondWith(
-        Promise.race([
-            fetch(request)
-                .then(response => {
-                    const clonedResponse = response.clone();
-                    caches.open(DYNAMIC_CACHE).then(cache => {
+        fetch(request)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const clonedResponse = response.clone();
+                caches.open(DYNAMIC_CACHE)
+                    .then(cache => {
                         cache.put(request, clonedResponse);
+                    })
+                    .catch(error => {
+                        console.error('Помилка кешування:', error);
                     });
-                    return response;
-                }),
-            new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    caches.match(request)
-                        .then(response => {
-                            if (response) {
-                                resolve(response);
-                            } else {
-                                reject(new Error('No cached response found'));
-                            }
-                        })
-                        .catch(reject);
-                }, 3000); // 3 секунди таймаут
+                return response;
             })
-        ]).catch(() => {
-            return caches.match(request);
-        })
+            .catch(() => {
+                return caches.match(request)
+                    .then(response => {
+                        return response || new Response('Resource not available', {
+                            status: 404,
+                            statusText: 'Not Found'
+                        });
+                    });
+            })
     );
 }); 
