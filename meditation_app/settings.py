@@ -290,15 +290,28 @@ if os.environ.get('ENVIRONMENT_NAME') == 'production':
             'ACL': 'public-read',
             'ContentType': 'application/javascript'
         }
+
+    class IconStorage(S3Boto3Storage):
+        location = 'static/meditation/icons'
+        default_acl = 'public-read'
+        file_overwrite = True
+        querystring_auth = False
+        custom_domain = AWS_S3_CUSTOM_DOMAIN
+        object_parameters = {
+            'CacheControl': 'max-age=31536000,public,immutable',
+            'ACL': 'public-read'
+        }
     
     # Використовуємо окремі класи для зберігання
     STATICFILES_STORAGE = 'meditation_app.settings.StaticStorage'
     DEFAULT_FILE_STORAGE = 'meditation_app.settings.MediaStorage'
     SERVICE_WORKER_STORAGE = 'meditation_app.settings.ServiceWorkerStorage'
+    ICON_STORAGE = 'meditation_app.settings.IconStorage'
     
     # URL для статичних та медіа файлів
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+    FAVICON_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/meditation/icons/favicon.ico'
 else:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'

@@ -59,7 +59,7 @@ def serve_manifest(request):
             return HttpResponse(status=404)
 
 urlpatterns = [
-    path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'meditation/images/favicon-32x32.png', permanent=True)),
+    path('favicon.ico', RedirectView.as_view(url=settings.FAVICON_URL, permanent=True)),
     path('setlang/', set_language, name='set_language'),
     path('sw.js', serve_sw, name='service-worker'),
     path('manifest.json', serve_manifest, name='manifest'),
