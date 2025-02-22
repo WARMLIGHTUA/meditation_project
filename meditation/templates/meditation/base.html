@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-title" content="{% trans 'Meditation' %}">
     
     <!-- PWA Manifest -->
-    <link rel="manifest" href="{% static 'meditation/manifest.json' %}">
+    <link rel="manifest" href="https://{{ request.get_host }}/manifest.json">
     
     <!-- PWA Icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://placehold.co/32x32?text=M">
@@ -471,14 +471,57 @@
     <!-- Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('https://meditationproject-production.up.railway.app/sw.js')
-                    .then(function(registration) {
-                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                    })
-                    .catch(function(err) {
-                        console.log('ServiceWorker registration failed: ', err);
+            let isFirstInstall = false;
+            
+            window.addEventListener('load', async function() {
+                try {
+                    // Перевіряємо чи вже є зареєстрований Service Worker
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    if (registrations.length === 0) {
+                        isFirstInstall = true;
+                    }
+                    
+                    // Реєструємо Service Worker
+                    const registration = await navigator.serviceWorker.register('/sw.js', {
+                        scope: '/',
+                        updateViaCache: 'none'
                     });
+                    
+                    console.log('ServiceWorker registration successful with scope:', registration.scope);
+                    
+                    // Обробка оновлень
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        console.log('Service Worker update found!');
+                        
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // Новий Service Worker встановлено
+                                if (!isFirstInstall) {
+                                    // Показуємо повідомлення про оновлення тільки якщо це не перша установка
+                                    if (confirm('Нова версія додатку доступна. Оновити зараз?')) {
+                                        window.location.reload();
+                                    }
+                                }
+                            }
+                        });
+                    });
+                    
+                    // Перевіряємо оновлення кожні 6 годин
+                    setInterval(() => {
+                        registration.update();
+                    }, 6 * 60 * 60 * 1000);
+                    
+                } catch (error) {
+                    console.error('ServiceWorker registration failed:', error);
+                }
+            });
+            
+            // Обробка повідомлень від Service Worker
+            navigator.serviceWorker.addEventListener('message', (event) => {
+                if (event.data && event.data.type === 'CACHE_UPDATED') {
+                    console.log('Cache updated:', event.data.url);
+                }
             });
         }
     </script>
